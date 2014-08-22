@@ -78,8 +78,8 @@
       openWebPage: function (hiddenFieldId, isNewWindow, isShowLocation)
       {
         var url = document.getElementById( hiddenFieldId ).value;
-        alert('_blank: ' + url);
-        window.open(url, '_blank');
+        alert('_system: ' + url);
+        window.open(url, '_system');
         window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
 
       },
