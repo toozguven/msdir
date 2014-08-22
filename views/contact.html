@@ -1,0 +1,76 @@
+﻿&nbsp;
+<div class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar__item left quarter h100pc">
+    <div class="prevIcnDiv" onclick="javascript:history.go(-1)">
+      <span class="icn prevIcn">&nbsp;</span>
+    </div>
+  </div>
+  <div class="topcoat-navigation-bar__item center half">
+    <h4>Contact Details</h4>
+  </div>
+</div>
+
+<div class="details">
+  <div class="subHeader firstContent contactHeader">
+    <img class="fRight contactImg" ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msimage2.ashx?cid={{contact.id}}" />
+    <h2>{{contact.n}}</h2>
+    <span>{{contact.r}}</span> <br />
+    <span>{{contact.l}}</span>
+  </div>
+
+   <ul class="topcoat-list__container list">
+
+     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.t)">
+      <a href="tel:{{contact.t}}">
+        <div>Call Office</div>
+        <span class="lstSpan">{{contact.t}}</span>
+        <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
+      </a>
+    </li>
+
+
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
+      <a href="tel:{{contact.m}}">
+        <div>Call Mobile</div>
+        <span class="lstSpan">{{contact.m}}</span>
+        <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
+      </a>
+    </li>
+
+     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
+      <a href="sms:{{contact.m}}">
+        <div>SMS / Text</div>
+        <span class="lstSpan">{{contact.m}}</span>
+        <span class="icn smsIcn">&nbsp;&nbsp;&nbsp;</span>
+      </a>
+    </li>
+
+     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.eml)">
+      <a href="mailto:{{contact.eml}}">
+        <div>Email</div>
+        <span class="lstSpan">{{contact.eml}}</span>
+        <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
+      </a>
+    </li>
+
+     <li class="topcoat-list__item chevronLi">
+      <a href="#/f/{{contact.fid}}">
+        <div>Primary Firm</div>
+        <span ng-bind-html="contact.f" class="lstSpan"></span>
+      </a>
+    </li>
+
+     <li class="topcoat-list__item">
+      <a href="javascript:void(0)" ng-click="helpers.openWebPage('hdnContactProfileUrl', true, true);">
+        <div>More Information</div>
+        <span class="lstSpan">View more information about this person on www.moorestephens.com</span>
+        <span class="icn headIcn">&nbsp;&nbsp;&nbsp;</span>
+        <input type="hidden" id="hdnContactProfileUrl" ng-value="helpers.getContactProfileUrl(contact.id)" />
+      </a>
+    </li>
+
+   </ul>
+
+</div>
+
+<div class="bottomSpace"></div>

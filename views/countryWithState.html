@@ -1,0 +1,54 @@
+&nbsp;
+<div class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar__item left quarter h100pc">
+    <div class="prevIcnDiv" ng-click="helpers.g('#')">
+      <span class="icn prevIcn">&nbsp;</span>
+    </div>
+  </div>
+  <div class="topcoat-navigation-bar__item center half">
+    <h4>{{helpers.getCountryName(country.n)}}</h4>
+  </div>
+</div>
+
+<div class="firstContent">
+  <div class="topcoat-tab-bar centAlign" style="margin:auto; padding-top: 10px;">
+    <select id="ddlState" ng-options="state.id as state.n for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()">
+    </select>
+  </div>
+
+  <div class="marg10">
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat" checked="checked">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Member Firms
+    </label>
+    &nbsp;&nbsp;
+    <label class="topcoat-radio-button" ng-click="helpers.g('/countryWithStateContacts/' + country.id + '/' + selectedStateId)">
+      <input type="radio" name="topcoat">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Contacts
+    </label>
+  </div>
+
+  <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the content">
+
+  <div ng-repeat="town in towns | filter:searchDelayed | filter:{sid: state.id}:true | orderBy:'n'" class="topcoat-list">
+      <h2 class="topcoat-list__header town" once-text="town.n"></h2>
+      <ul class="topcoat-list__container list firmList">
+        <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayed | filter:{tid: town.id}:true | orderBy:'n'">
+          <div once-html="firm.n"></div>
+        </li>
+      </ul>
+  </div>
+
+  <p ng-show="(towns|filter:searchDelayed | filter:{sid: state.id}:true).length == 0 && helpers.showLoading == false" class="pad10">
+    No result found mathing the search criteria.
+  </p>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+  </p>
+
+</div>
+
+<div class="bottomSpace">&nbsp;</div>

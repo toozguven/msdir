@@ -1,0 +1,91 @@
+﻿&nbsp;
+ <div class="details">
+    
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" onclick="javascript:history.go(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h4>Firm Details</h4>
+    </div>
+  </div>
+
+  <div class="subHeader firstContent">
+    <h3 ng-bind-html="firm.n"></h3>
+    <h4>{{firm.l}}</h4>
+  </div>
+
+  <ul class="topcoat-list__container list">
+    
+    <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)">
+      <a href="#/c/{{firm.ilid}}">
+        <div>International Liaison</div>
+        <span class="lstItmDesc lstSpan">{{firm.il}}</span>
+      </a>
+    </li>
+
+    <li class="topcoat-list__item chevronLi">
+      <a href="#/fc/{{firm.id}}">
+        <div>Main Contacts</div>
+        <span class="lstItmDesc lstSpan">View the list of partners</span>    
+      </a>
+    </li>
+
+
+    <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.ad)">
+      <a href="#/fa/{{firm.id}}">
+        <div>Address Details</div>
+        <span class="lstItmDesc lstSpan">View address details for this firm</span>     
+      </a>
+    </li>
+        
+
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
+      <a href="tel:{{firm.t}}">
+        <div>Call Office</div>
+        <span class="lstItmDesc lstSpan">{{firm.t}}</span>
+        <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
+      </a>
+    </li>
+
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
+      <a href="mailto:{{firm.eml}}">
+        <div>Email</div>
+        <span class="lstItmDesc lstSpan">{{firm.eml}}</span>
+        <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
+      </a>
+    </li>
+
+    <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)">
+      <a href="javascript:void(0)" ng-click="helpers.openWebPage('hdnFirmWebUrl', true, true);">
+        <div>Website</div>
+        <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
+        <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
+        <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
+      </a>
+    </li>
+        
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.lat)">
+      <a href="javascript:void(0)" ng-click="helpers.openWebPage('hdnMapUrl', true, true);">
+        <div>Map</div>
+        <span class="lstItmDesc lstSpan">View location on map</span>
+        <span class="icn locationIcn">&nbsp;&nbsp;&nbsp;</span>
+        <input type="hidden" id="hdnMapUrl" ng-value="helpers.getMapUrl(firm)" />
+      </a>
+    </li>
+    
+    <li class="topcoat-list__item" ng-show="helpers.isOnline()">
+      <a href="javascript:void(0)" ng-click="helpers.openWebPage('hdnFirmProfileUrl', true, true);">
+        <div>More Information</div>
+        <span class="lstItmDesc lstSpan">View more information about this firm on www.moorestephens.com</span>
+        <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
+        <input type="hidden" id="hdnFirmProfileUrl" ng-value="helpers.getFirmProfileUrl(firm.id)" />
+      </a>
+    </li>
+
+  </ul>
+</div>
+
+<div class="bottomSpace"></div>

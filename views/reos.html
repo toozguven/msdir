@@ -1,0 +1,82 @@
+&nbsp;
+<div class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar__item left quarter h100pc">
+    <div class="prevIcnDiv" ng-click="helpers.g('#')">
+      <span class="icn prevIcn">&nbsp;</span>
+    </div>
+  </div>
+  <div class="topcoat-navigation-bar__item center half">
+    <h5 style="margin-left: -20px; color: #fff;">Regional Executive Offices</h5>
+  </div>
+</div>
+
+<div class="firstContent">
+  <p class="pad10">
+    Tap on a region heading below to expand/collapse the details of the regional executive office and its contacts. 
+  </p>
+</div>
+
+<div class="reoList">
+  <div ng-repeat="firm in reos" class="topcoat-list reoListItem">
+    <h3 class="topcoat-list__header pad10" ng-click="toggleFirm(firm.reoid);">
+      {{firm.sn}}
+      <i class="fa fa-angle-double-down fright" ng-show="!isVisible(firm.reoid)" style="color: #555"></i>
+      <i class="fa fa-angle-double-up fright" ng-show="isVisible(firm.reoid)" style="color: #555"></i>
+    </h3>
+
+    <div ng-show="isVisible(firm.reoid)" class="details">
+      <div class="pad1_25rem" style="color: #ccc">
+        <div class="reon">{{firm.reon}}</div><br />
+        <span ng-bind-html="firm.ad">{{firm.ad}}</span>
+        <br /><br />
+
+        <div ng-show="helpers.hasValueFunc(firm.f)">
+          <div>Facsimile: {{firm.f}}</div> 
+        </div>
+      </div>
+
+      <ul class="topcoat-list__container list firmList">
+        <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
+          <a href="tel:{{firm.t}}">
+            <div>Call Office</div>
+            <span class="lstItmDesc lstSpan">{{firm.t}}</span>
+            <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
+          </a>
+        </li>
+
+        <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
+          <a href="mailto:{{firm.eml}}">
+            <div>Email</div>
+            <span class="lstItmDesc lstSpan">{{firm.eml}}</span>
+            <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
+          </a>
+        </li>
+
+        <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)">
+          <a href="javascript:void(0)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
+            <div>Website</div>
+            <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
+            <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
+            <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
+          </a>
+        </li>
+      </ul>
+
+      <h5 class="topcoat-list__header town2">CONTACTS</h5>
+      <ul class="topcoat-list__container list firmList">
+        <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi" ng-repeat="member in firm.members">
+          <div>{{member.n}}</div>
+          <span class="lstSpan">{{member.r}}</span>
+          <span class="lstSpan">{{member.eml}}</span>
+          <span class="icn chevron">&nbsp;&nbsp;&nbsp;</span>  
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div class="bottomSpace"></div>

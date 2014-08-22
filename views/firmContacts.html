@@ -1,0 +1,51 @@
+&nbsp;
+<div class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar__item left quarter h100pc">
+    <div class="prevIcnDiv" onclick="javascript:history.go(-1)">
+      <span class="icn prevIcn">&nbsp;</span>
+    </div>
+  </div>
+  <div class="topcoat-navigation-bar__item center half">
+    <h4>Contacts</h4>
+  </div>
+</div>
+
+<div class="firstContent">
+
+  <div class="subHeader">
+    <h3 ng-bind-html="firm.n"></h3>
+    <h4>{{firm.l}}</h4>
+  </div>
+
+  <ul class="topcoat-list__container list contactList">
+    <li ng-show="internationalContacts.length > 0">
+      <h2 class="topcoat-list__header town">Main Contacts</h2>
+    </li>
+
+    <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in internationalContacts">
+      <div>{{contact.n}}</div>
+      <span ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}<br /></span>
+    </li>
+
+    <li ng-show="helpers.hasValueFunc(firm.cml)">
+      <p class="pad10" ng-bind-html="firm.cml"></p>
+    </li>
+
+    <li ng-show="contacts.length > 0">
+      <h2 class="topcoat-list__header town">All Contacts</h2>
+    </li>
+
+    <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts">
+      <div>{{contact.n}}</div>      
+      <span ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}<br /></span>
+    </li>
+  </ul>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+  </p>
+
+</div>
+
+<div class="bottomSpace"></div>
+

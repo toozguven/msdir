@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <svg viewBox="0 0 42 42" height="42px" width="42px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg_1">
+   <polygon points="11,38.32 28.609,21 11,3.68 13.72,1 34,21.01 13.72,41 " fill="#5DC1FF" fill-rule="evenodd"/>
+  </svg>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <use x="-73.539955" y="4.200004" transform="matrix(0.48953, 0, 0, 0.47619, 33.1986, 0)" id="svg_2" xlink:href="#svg_1"/>
+ </g>
+</svg>
