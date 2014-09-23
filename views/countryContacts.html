@@ -36,7 +36,7 @@
 
   <ul class="topcoat-list__container list firmList">
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div once-text="contact.n"></div>
+      <div once-text="contact.n" class="boldBlue"></div>
       <div once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>
       <span class="lstSpan" once-html="contact.f + contact.l.replace(', ' + country.n, '')"></span>
     </li>

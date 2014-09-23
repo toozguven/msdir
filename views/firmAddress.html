@@ -17,30 +17,30 @@
 
 <div class="details" ng-show="helpers.showLoading == false">
   <div class="subHeader firstContent">
-    <h3 ng-bind-html="firm.n"></h3>
+    <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
     <h4>{{firm.l}}</h4>
     <br />
   </div>
 
   <ul class="topcoat-list__container list">
 
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.ad)">
+    <li class="topcoat-list__item">
       <span ng-bind-html="firm.ad"></span>     
     </li>
 
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.mad)" ng-click="helpers.g('/fa/' + firm.id);">
+    <li class="topcoat-list__item">
       <span>
         <div>Mailing Address</div>
         <p ng-bind-html="firm.mad"></p>     
       </span>
     </li>
 
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.f)">
+    <li class="topcoat-list__item">
       <div>Facsimile</div>
       <span>{{firm.f}}</span>      
     </li>
 
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
+    <li class="topcoat-list__item">
       <span ng-bind-html="firm.cm"></span>      
     </li>
 

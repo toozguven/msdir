@@ -29,7 +29,7 @@
   <div id="bottom-nav" ng-controller="MenuCtrl" >
     <div id="mstphMenu" class="slideable">
       <div ng-repeat="item in menuItems">
-        <span class="topcoat-tab-bar__button subMenuItem" ng-click="helpers.g(item.u)">
+        <span class="topcoat-tab-bar__button subMenuItem {{helpers.getNavSelectedCss(item.u)}}" ng-click="helpers.g(item.u)">
           <i class="fa {{item.c}}"></i>
           <span class="miniIconTxt" style="display: inline-block">{{item.t}}</span>
         </span>

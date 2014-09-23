@@ -380,12 +380,14 @@
     for ( var i = 0; i < firm.cs.length; i++ )
     {
       var contact = factory.getContact( allContacts, firm.cs[i].id );
-      
-      //overwrite role
-      contact.r = firm.cs[i].r;
-      //overwrite location
-      contact.l = firm.cs[i].l;
-      rtnVal.push( contact );
+      if ( contact )
+      {
+        //overwrite role
+        contact.r = firm.cs[i].r;
+        //overwrite location
+        contact.l = firm.cs[i].l;
+        rtnVal.push( contact );
+      }
     }
     return rtnVal;
   }

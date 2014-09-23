@@ -31,7 +31,7 @@
 
     <div ng-show="isVisible(firm.reoid)" class="details">
       <div class="pad1_25rem">
-        <div class="reon">{{firm.reon}}</div><br />
+        <div class="reon boldBlue">{{firm.reon}}</div><br />
         <span ng-bind-html="firm.ad">{{firm.ad}}</span>
         <br /><br />
 
@@ -43,7 +43,7 @@
       <ul class="topcoat-list__container list firmList">
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
           <a href="tel:{{firm.t}}" ng-click="helpers.closeMenu()">
-            <div>Call Office</div>
+            <div class="blue">Call Office</div>
             <span class="lstItmDesc lstSpan">{{firm.t}}</span>
             <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
           </a>
@@ -51,7 +51,7 @@
 
         <li class="topcoat-list__item" ng-show="firm.tz != '0'">
           <span>
-            <div>Time Zone</div>
+            <div class="blue">Time Zone</div>
             <span class="lstItmDesc lstSpan">GMT{{firm.tz}}</span>
             <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
           </span>
@@ -59,7 +59,7 @@
 
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
           <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
-            <div>Email</div>
+            <div class="blue">Email</div>
             <span class="lstItmDesc lstSpan">{{firm.eml}}</span>
             <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
           </a>
@@ -67,7 +67,7 @@
 
         <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
           <span>
-            <div>Website</div>
+            <div class="blue">Website</div>
             <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
             <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
             <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
@@ -78,10 +78,8 @@
       <h5 class="topcoat-list__header town2">CONTACTS</h5>
       <ul class="topcoat-list__container list firmList">
         <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi" ng-repeat="member in firm.members">
-          <div>{{member.n}}</div>
+          <div class="blue">{{member.n}}</div>
           <span class="lstSpan">{{member.r}}</span>
-          <span class="lstSpan">{{member.eml}}</span>
-          <span class="icn chevron">&nbsp;&nbsp;&nbsp;</span>  
         </li>
       </ul>
     </div>
