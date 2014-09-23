@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<div class="firstContent">
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
     <label class="topcoat-radio-button">
       <input type="radio" name="topcoat" checked="checked">
@@ -38,10 +42,6 @@
 
   <p ng-show="(towns|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
     No result found mathing the search criteria.
-  </p>
-
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
   </p>
 
 </div>

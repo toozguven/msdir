@@ -89,6 +89,15 @@
 
         history.back( -1 );
       },
+      getNavSelectedCss: function(path) {
+        if ( path == "#" && $location.path() == "/" )
+          return "bottomNavSelected";
+        
+
+        if ( $location.path().indexOf( path ) > -1 )
+          return "bottomNavSelected";
+        return "";
+      },
       rootScope: ngRootScope,
       isOnline: function ()
       {
@@ -128,8 +137,6 @@
           $rootScope.doMenuClick();
 
         var url = document.getElementById( hiddenFieldId ).value;
-        alert('_system: ' + url);
-        window.open(url, '_system');
         window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
 
       },

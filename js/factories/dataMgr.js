@@ -28,7 +28,7 @@
   var CONTACTS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/contacts.json";
   var CONTACTS_LOCAL_STORAGE_KEY = "mstphDirContacts3";
 
-  if ( document.location.href.indexOf( "cdn.moorestephens.org" ) > -1 )
+  if ( true || document.location.href.indexOf( "cdn.moorestephens.org" ) > -1 )
   {
     REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json";
     COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/committees.json";

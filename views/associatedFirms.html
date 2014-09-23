@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<div class="firstContent">
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
   
   <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" style="display: none">
 
@@ -29,10 +33,6 @@
 
   <p ng-show="(countries|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
     No result found mathing the search criteria.
-  </p>
-
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
   </p>
 
 </div>

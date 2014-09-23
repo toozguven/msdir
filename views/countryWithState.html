@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<div class="firstContent">
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="topcoat-tab-bar centAlign" style="margin:auto; padding-top: 10px;">
     <select id="ddlState" ng-options="state.id as (state.id < 0 ? ' - Pick a state - ' : state.n) for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()">
     </select>
@@ -43,10 +47,6 @@
 
   <p ng-show="(towns|filter:searchDelayed | filter:{sid: state.id}:true).length == 0 && helpers.showLoading == false" class="pad10">
     No result found mathing the search criteria.
-  </p>
-
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
   </p>
 
 </div>

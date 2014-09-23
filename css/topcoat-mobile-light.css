@@ -1788,8 +1788,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 
 .topcoat-navigation-bar {
   height: 4.375rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
   background: #666;
   color: #fff !important;
   box-shadow: inset 0 -1px #9daca9, 0 1px #d6dcdb;
@@ -3129,11 +3127,8 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 3rem;*/
   letter-spacing: 1px;
   color: #454545;
-  text-shadow: 0 1px #fff;
   vertical-align: top;
   background-color: #e5e9e8;
-  box-shadow: inset 0 1px #fff;
-  border-top: 1px solid #9daca9;
 }
 
 .topcoat-tab-bar__button:active,

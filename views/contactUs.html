@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<div class="firstContent">
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
   <p class="pad10">
     Some text here... 
   </p>

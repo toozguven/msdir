@@ -1,18 +1,21 @@
-﻿&nbsp;
-
- <div class="details">
+﻿&nbsp; 
     
-  <div class="topcoat-navigation-bar topFixedBar">
-    <div class="topcoat-navigation-bar__item left quarter h100pc">
-      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-        <span class="icn prevIcn">&nbsp;</span>
-      </div>
-    </div>
-    <div class="topcoat-navigation-bar__item center half">
-      <h4>Firm Address</h4>
+<div class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar__item left quarter h100pc">
+    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+      <span class="icn prevIcn">&nbsp;</span>
     </div>
   </div>
+  <div class="topcoat-navigation-bar__item center half">
+    <h4>Firm Address</h4>
+  </div>
+</div>
 
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div class="details" ng-show="helpers.showLoading == false">
   <div class="subHeader firstContent">
     <h3 ng-bind-html="firm.n"></h3>
     <h4>{{firm.l}}</h4>

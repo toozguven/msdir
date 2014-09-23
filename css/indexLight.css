@@ -369,6 +369,7 @@ p {
   background: url('img/back.svg') no-repeat scroll 0% 0% / cover  transparent;
   position: absolute;
   margin-top: 26px !important;
+  margin-left: 20px;
   width: 24px;
   height: 24px;
 }
@@ -434,7 +435,21 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
 
 .topcoat-tab-bar__button {
   width: 100%;
-  padding-top: 5px !important;
+  padding: 10px !important;
+  text-shadow: 0 !important;
+  background: #666 !important;
+  border-top: 0 !important;
+  color: #eee !important;
+}
+
+.topcoat-tab-bar__button i {
+  color: #fff;
+}
+.bottomNavSelected {
+  background: -webkit-radial-gradient(#00AEEF, #666) !important;
+  background: -o-radial-gradient(#00AEEF, #666) !important;
+  background: -moz-radial-gradient(#00AEEF, #666) !important;
+  background: radial-gradient(#00AEEF, #666) !important;
 }
 
 .plusMinusToggle {
@@ -474,6 +489,20 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
 
 .topFixedBar {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 444;
+  background: #19779A !important;
+  /*background: -webkit-radial-gradient(#19779A, #666) !important;
+  background: -o-radial-gradient(#19779A, #666) !important;
+  background: -moz-radial-gradient(#19779A, #666) !important;
+  background: radial-gradient(#19779A, #666) !important;*/
+}
+
+.topcoat-button--cta {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  --background: #19779A !important;
+  padding: 0px 0.55rem !important;
+  line-height: 2rem !important;
+  background: #00AEEF !important;
 }
 
 .lstItmDesc {
@@ -514,15 +543,15 @@ i {
   background: #E5E9E8; 
   color: #fff; 
   position: absolute; 
-  bottom: 44px; 
-  right: 0
+  bottom: 60px; 
+  right: 0;
 }
 
 .subMenuItem
 {
   box-shadow: none !important; 
   padding: 16px !important; 
-  border-top: 1px solid #ddd !important; 
+  border-top: 1px solid #888 !important; 
   border-bottom: 0 !important; 
   box-shadow: 0 !important;
 }
@@ -547,6 +576,19 @@ select {
 .centAlign {
   text-align: center;
 }
+.pageNote {
+  color: #fff;
+  background: #aaa;
+  --font-style: italic;
+  font-size: 0.88rem;
+}
+.miniBtn {
+  margin: 5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  background: #00AEEF;
+  cursor: pointer;
+}
 
 .firmList li div {
   color: #111;
@@ -569,6 +611,7 @@ select {
 }
 .topcoat-tab-bar {
   width: 100%;
+  border-top: 1px solid #888;
 }
 
 .topcoat-tab-bar button {

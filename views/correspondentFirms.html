@@ -10,12 +10,19 @@
   </div>
 </div>
 
-<div class="firstContent">
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
   
   <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" style="display: none">
 
-  <div class="pad10">
+  <div class="pad10 pageNote">
+    <span class="miniBtn fRight">MORE INFO</span>
     Correspondent firms are not full member firms of Moore Stephens International Limited.
+    
+    <div style="clear: both"></div>
   </div>
 
   <div ng-repeat="country in countries | filter:searchDelayed" class="topcoat-list">
@@ -30,11 +37,6 @@
   <p ng-show="(countries|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
     No result found mathing the search criteria.
   </p>
-
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
-  </p>
-
 </div>
 
 

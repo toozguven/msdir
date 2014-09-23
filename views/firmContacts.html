@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<div class="firstContent">
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
 
   <div class="subHeader">
     <h3 ng-bind-html="firm.n"></h3>
@@ -40,10 +44,6 @@
       <span ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}<br /></span>
     </li>
   </ul>
-
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
-  </p>
 
 </div>
 

@@ -21,7 +21,7 @@
 
   <div ng-view class="app"></div>
 
-  <div id="con" style="display: noneXXX"></div>
+  <div id="con" style="display: none"></div>
   <button class="help-btn" onclick="doIt()" style="display: none">Help</button>
   
   <!--<br />-->
@@ -38,19 +38,19 @@
 
     <div class="topcoat-tab-bar" style="width: 100%;">
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button" ng-click="helpers.g('#')">
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('#')}}" ng-click="helpers.g('#')">
           <i class="fa fa-home"></i>
           <span class="miniIconTxt">Home</span>
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button" ng-click="helpers.g('/appInfo')">
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/appInfo')}}" ng-click="helpers.g('/appInfo')">
           <i class="fa fa-info"></i>
           <span class="miniIconTxt">App Info</span>
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button" ng-click="helpers.g('/aboutUs')">
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/aboutUs')}}" ng-click="helpers.g('/aboutUs')">
           <i class="fa fa-group"></i>
           <span class="miniIconTxt">About Us</span>
         </span>
