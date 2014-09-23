@@ -36,21 +36,19 @@ var app = {
   // function, we must explicity call 'app.receivedEvent(...);'
   onDeviceReady: function ()
   {
+    //document.body.style.marginTop = "20px"; //only for iOS7 and upwards
     app.receivedEvent( 'deviceready' );
   },
   // Update DOM on a Received Event
   receivedEvent: function ( id )
   {
-    var parentElement = document.getElementById( id );
+    /*var parentElement = document.getElementById( id );
     var listeningElement = parentElement.querySelector( '.listening' );
     var receivedElement = parentElement.querySelector( '.received' );
 
     listeningElement.setAttribute( 'style', 'display:none;' );
     receivedElement.setAttribute( 'style', 'display:block;' );
-
-    //console_log( 'Received Event: ' + id );
-
-    alert( ngapp );
-    var ngapp = ngInitApp();
+    */
   }
 };
+app.initialize();
