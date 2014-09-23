@@ -18,6 +18,7 @@
     return true;
   }
 
+
   dataMgr.setScopeCountries( function ( data )
   {
     $timeout( function ()

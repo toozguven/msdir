@@ -48,7 +48,7 @@ var app = {
     listeningElement.setAttribute( 'style', 'display:none;' );
     receivedElement.setAttribute( 'style', 'display:block;' );
 
-    console_log( 'Received Event: ' + id );
+    //console_log( 'Received Event: ' + id );
 
     alert( ngapp );
     var ngapp = ngInitApp();

@@ -35,8 +35,8 @@
 
     if ( $scope.selectedCountryId == "210" )
       $location.path( "/countryWithState/" + $scope.selectedCountryId + "/0" );
-    else if ( $scope.selectedCountryId == "43" )
-      $location.path( "/china/" + $scope.selectedCountryId );
+    /*else if ( $scope.selectedCountryId == "43" )
+      $location.path( "/china/" + $scope.selectedCountryId );*/
     else
       $location.path( "/country/" + $scope.selectedCountryId );
   }
@@ -79,3 +79,4 @@
   
   $anchorScroll();
 } );
+

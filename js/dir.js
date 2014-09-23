@@ -1,6 +1,8 @@
 var ngRootScope;
 var globalDataMgr;
 
+
+
 var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'] )
 .config( function ( $routeProvider )
 {
@@ -8,6 +10,26 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
   .when( '/', {
     controller: 'HomeCtrl',
     templateUrl: 'views/home.html'
+  } )
+  .when( '/aboutUs', {
+    controller: 'AboutUsCtrl',
+    templateUrl: 'views/aboutUs.html'
+  } )
+  .when( '/appInfo', {
+    controller: 'AppInfoCtrl',
+    templateUrl: 'views/appInfo.html'
+  } )
+  .when( '/contactUs', {
+    controller: 'ContactUsCtrl',
+    templateUrl: 'views/contactUs.html'
+  } )
+  .when( '/cFirms', {
+    controller: 'CorrespondentFirmsCtrl',
+    templateUrl: 'views/correspondentFirms.html'
+  } )
+  .when( '/aFirms', {
+    controller: 'AssociatedFirmsCtrl',
+    templateUrl: 'views/associatedFirms.html'
   } )
   .when( '/comms', {
     controller: 'CommsCtrl',
@@ -65,6 +87,10 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     controller: 'FirmContactsCtrl',
     templateUrl: 'views/firmContacts.html'
   } )
+  .when( '/menu', {
+    controller: 'MenuCtrl',
+    templateUrl: 'menu.html'
+  } )
   .otherwise( {
     redirectTo: '/'
   } );
@@ -75,11 +101,6 @@ ngapp.config( ['$compileProvider', function ( $compileProvider )
   $compileProvider.aHrefSanitizationWhitelist( /^\s*(https?|file|tel|sms|mailto):/ );
 }] );
 
-function addMoreItems()
-{
-  alert( 9 );
-}
-
 ngapp.filter( 'startFrom', function ()
 {
   return function ( input, start )
@@ -87,6 +108,20 @@ ngapp.filter( 'startFrom', function ()
     start = parseInt( start, 10 );
     return input.slice( start );
   };
+} );
+
+ngapp.filter( 'filterByState', function ()
+{
+  return function ( input, stateId )
+  {
+    var rtnVal = [];
+    for ( var i = 0; i < input.length; i++ )
+    {
+      if ( input[i].sid == stateId || input[i].sid == -1 * stateId )
+        rtnVal.push( input[i] );
+    }
+    return rtnVal;
+  }
 } );
 
 ngapp.directive( 'mstphPaginate', function ()
@@ -191,25 +226,44 @@ ngapp.directive( 'mstphPaginate', function ()
 } );
 
 
-ngapp.directive("rawAjaxBusyIndicator", function () {
-  return {
-  link: function (scope, element) {
-    scope.$on( "ajax-start", function ()
-    {
-      ngRootScope.showLoading = true;
-      //element.attr( "style", "display: block" );
-    } );
+//ngapp.directive("rawAjaxBusyIndicator", function () {
+//  return {
+//  link: function (scope, element) {
+//    scope.$on( "ajax-start", function ()
+//    {
+//      ngRootScope.showLoading = true;
+//      //element.attr( "style", "display: block" );
+//    } );
 
-    scope.$on("ajax-stop", function () {
-      ngRootScope.showLoading = false;
-      //element.attr( "style", "display: none" );
-      });
-    }
-  };
-});
+//    scope.$on("ajax-stop", function () {
+//      ngRootScope.showLoading = false;
+//      //element.attr( "style", "display: none" );
+//      });
+//    }
+//  };
+//});
 
 
-ngapp.directive( 'slideable', function ()
+ngapp.controller( 'MenuCtrl', ['$scope', '$rootScope', '$location', 'factory', 'dataMgr', function ( $scope, $rootScope, $location, factory, dataMgr )
+{
+  $scope.helpers = factory.getHelpers();
+
+  $scope.menuItems = [];
+
+  dataMgr.setScopeMenuItems( function ( data )
+  {
+    $scope.menuItems = data;
+    $rootScope.menuItemsCount = data.length;
+    
+  } );
+
+}] );
+
+
+
+ngapp.directive( 'slideable', slideableFunc );
+
+function slideableFunc()
 {
   return {
     restrict: 'C',
@@ -218,7 +272,7 @@ ngapp.directive( 'slideable', function ()
       // wrap tag
       var contents = element.html();
       element.html( '<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' + contents + '</div>' );
-
+      
       return function postLink( scope, element, attrs )
       {
         // default properties
@@ -234,34 +288,51 @@ ngapp.directive( 'slideable', function ()
       };
     }
   };
-} );
+}
 
-
-ngapp.directive( 'slideToggle', function ()
+ngapp.directive( 'slideToggle', function ( $rootScope )
 {
   return {
     restrict: 'A',
     link: function ( scope, element, attrs )
     {
-      var target = document.querySelector( attrs.slideToggle );
       attrs.expanded = false;
-      element.bind( 'click', function ()
+
+      $rootScope.menuVisible = attrs.expanded; //watch the visibility of the slide-up menu via the rootScope
+
+      var target = document.querySelector( attrs.slideToggle );
+
+      var doMenuClickFunc = function () //this is the actual click function definition
       {
-        var content = target.querySelector( '.slideable_content' );
-        if ( !attrs.expanded )
+        //var content = jQuery( '.slideable_content' );
+
+        //console_log( " content.clientHeight: " + content.height() );
+
+        var y = $rootScope.menuItemsCount * 55;
+        console_log( " height: " + y );
+
+        if ( !$rootScope.menuVisible )
         {
           //target.style.bottom = '45px';
-          content.style.border = '1px solid rgba(0,0,0,0)';
-          var y = content.clientHeight;
-          content.style.border = 0;
+          //content.style.border = '1px solid rgba(0,0,0,0)';
+          
+          //content.css.border = 0;
           target.style.height = y + 'px';
         } else
         {
           target.style.height = '0px';
           //target.style.bottom = '-20px';
         }
-        attrs.expanded = !attrs.expanded;
-      } );
+        attrs.expanded = !$rootScope.menuVisible;
+        $rootScope.menuVisible = attrs.expanded;
+      } //END: doMenuClickFunc
+
+      element.bind( 'click', doMenuClickFunc ); //bind to the click even of the menu toggle btn
+
+      $rootScope.doMenuClick = function () //define a function on rootScope. This will be called to programmatically close the slide-up menu
+      {        
+        doMenuClickFunc();
+      }
     }
   }
 } );

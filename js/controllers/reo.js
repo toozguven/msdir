@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'ReosCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'ReosCtrl', function ( $scope, $rootScope, factory, dataMgr, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   

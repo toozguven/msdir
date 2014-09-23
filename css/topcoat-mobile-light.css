@@ -1582,7 +1582,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 }
 
 .topcoat-list__container {
-  --border-top: 1px solid #9daca9;
+  border-top: 1px solid #9daca9;
   color: #454545;
 }
 
@@ -1597,7 +1597,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 }
 
 .topcoat-list__item:first-child {
-  border-top: 1px solid #d6dcdb;
+  --border-top: 1px solid #d6dcdb;
 }
 
 /**

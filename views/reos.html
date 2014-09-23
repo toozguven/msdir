@@ -10,13 +10,15 @@
   </div>
 </div>
 
-<div class="firstContent">
-  <p class="pad10">
-    Tap on a region heading below to expand/collapse the details of the regional executive office and its contacts. 
-  </p>
-</div>
 
-<div class="reoList">
+<div class="reoList firstContent" ng-show="helpers && helpers.showLoading == false">
+
+  <div>
+    <p class="pad10">
+      Tap on a region heading below to expand/collapse the details of the regional executive office and its contacts. 
+    </p>
+  </div>
+
   <div ng-repeat="firm in reos" class="topcoat-list reoListItem">
     <h3 class="topcoat-list__header pad10" ng-click="toggleFirm(firm.reoid);">
       {{firm.sn}}
@@ -25,40 +27,48 @@
     </h3>
 
     <div ng-show="isVisible(firm.reoid)" class="details">
-      <div class="pad1_25rem" style="color: #ccc">
+      <div class="pad1_25rem">
         <div class="reon">{{firm.reon}}</div><br />
         <span ng-bind-html="firm.ad">{{firm.ad}}</span>
         <br /><br />
 
         <div ng-show="helpers.hasValueFunc(firm.f)">
-          <div>Facsimile: {{firm.f}}</div> 
+          <div>Facsimile: {{firm.f}}</div>
         </div>
       </div>
 
       <ul class="topcoat-list__container list firmList">
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
-          <a href="tel:{{firm.t}}">
+          <a href="tel:{{firm.t}}" ng-click="helpers.closeMenu()">
             <div>Call Office</div>
             <span class="lstItmDesc lstSpan">{{firm.t}}</span>
             <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
           </a>
         </li>
 
+        <li class="topcoat-list__item" ng-show="firm.tz != '0'">
+          <span>
+            <div>Time Zone</div>
+            <span class="lstItmDesc lstSpan">GMT{{firm.tz}}</span>
+            <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
+          </span>
+        </li>
+
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
-          <a href="mailto:{{firm.eml}}">
+          <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
             <div>Email</div>
             <span class="lstItmDesc lstSpan">{{firm.eml}}</span>
             <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
           </a>
         </li>
 
-        <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)">
-          <a href="javascript:void(0)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
+        <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
+          <span>
             <div>Website</div>
             <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
             <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
             <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
-          </a>
+          </span>
         </li>
       </ul>
 
@@ -75,8 +85,5 @@
   </div>
 </div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
-</p>
 
 <div class="bottomSpace"></div>

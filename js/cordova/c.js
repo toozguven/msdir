@@ -6,7 +6,7 @@ var app = {
   // Application Constructor
   initialize: function ()
   {
-    console_log( 'initialize' );
+    //console_log( 'initialize' );
     this.bindEvents();
   },
   // Bind Event Listeners
@@ -15,7 +15,7 @@ var app = {
   // 'load', 'deviceready', 'offline', and 'online'.
   bindEvents: function ()
   {
-    console_log( 'bindEvents' );
+    //console_log( 'bindEvents' );
     document.addEventListener( 'deviceready', this.onDeviceReady, false );
   },
   // deviceready Event Handler
@@ -24,7 +24,7 @@ var app = {
   // function, we must explicity call 'app.receivedEvent(...);'
   onDeviceReady: function ()
   {
-    console_log( 'onDeviceReady' );
+    //console_log( 'onDeviceReady' );
     if ( parseFloat( window.device.version ) === 7.0 )
     {
       document.body.style.marginTop = "20px";
@@ -68,7 +68,7 @@ var app = {
     listeningElement.setAttribute( 'style', 'display:none;' );
     receivedElement.setAttribute( 'style', 'display:block;' );
 
-    console_log( 'Received Event: ' + id );
+    //console_log( 'Received Event: ' + id );
   }
 };
 
@@ -78,6 +78,11 @@ function console_log( msg )
 {
   var element = document.getElementById( 'con' );
   element.innerHTML = element.innerHTML + " | " + msg;
+
+  try {
+    console.warn(msg);
+  }
+  catch ( e ) { }
 }
 
 function doIt()

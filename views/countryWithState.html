@@ -12,7 +12,7 @@
 
 <div class="firstContent">
   <div class="topcoat-tab-bar centAlign" style="margin:auto; padding-top: 10px;">
-    <select id="ddlState" ng-options="state.id as state.n for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()">
+    <select id="ddlState" ng-options="state.id as (state.id < 0 ? ' - Pick a state - ' : state.n) for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()">
     </select>
   </div>
 

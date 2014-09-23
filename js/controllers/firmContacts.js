@@ -7,13 +7,12 @@
   $scope.contacts = [];
   $scope.internationalContacts = [];
 
-  dataMgr.setScopeFirms( function ( data )
+  dataMgr.setScopeSingleFirm( $scope.firmId, function ( firm )
   {
+    $scope.firm = firm;
+
     $timeout( function ()
     {
-      $scope.firms = data;
-      $scope.firm = dataMgr.getFirm( data, $scope.firmId );
-
       dataMgr.setScopeContacts( function ( data )
       {
         $scope.contacts = dataMgr.getMainContactsForFirm( data, $scope.firm );

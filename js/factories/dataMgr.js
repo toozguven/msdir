@@ -13,8 +13,17 @@
   var COUNTRIES_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/countries.json";
   var COUNTRIES_LOCAL_STORAGE_KEY = "mstphDirCountries3";
 
+  var MENU_ITEMS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/menuItems.json";
+  var MENU_ITEMS_LOCAL_STORAGE_KEY = "mstphDirMenuItems3";
+
   var FIRMS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/firms.json";
   var FIRMS_LOCAL_STORAGE_KEY = "mstphDirFirms3";
+
+  var CORRESPONDENT_FIRMS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/correspondentFirms.json";
+  var CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY = "mstphDirCorrespondentFirms3";
+
+  var ASSOCIATED_FIRMS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/AssociatedFirms.json";
+  var ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY = "mstphDirAssociatedFirms3";
 
   var CONTACTS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/contacts.json";
   var CONTACTS_LOCAL_STORAGE_KEY = "mstphDirContacts3";
@@ -24,30 +33,37 @@
     REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json";
     COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/committees.json";
     COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/countries.json";
+    MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/menuItems.json";
     FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/firms.json";
+    CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/correspondentFirms.json";
+    ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/associatedFirms.json";
     CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/contacts.json";
+
+    //REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/reos";
+    //COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/committees";
+    //COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/countries";
+    //MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/menuItems";
+    //FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/firms";
+    //CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/correspondentFirms";
+    //ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/associatedFirms";
+    //CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/contacts";
   }
 
   localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
   localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
   localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
+  localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
   localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
+  localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
+  localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
   localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
 
   var factory = {};
 
-  try
-  {
-    //localStorage.removeItem( 'mstphDirCountries' );
-    //localStorage.removeItem( 'mstphDirFirms' );
-    //localStorage.removeItem( 'mstphDirContacts' );
-  } 
-  catch ( e ) { }
-
   /*helpers*/
   factory.persistJsonToLocalStorage = function ( key, value )
   {
-    console_log( "saving to localStorage: " + key );
+    //console_log( "saving to localStorage: " + key );
     localStorage.setItem( key, JSON.stringify( value ) );
   }
 
@@ -57,7 +73,7 @@
 
     if ( ALWAYS_USE_WEB == false && localData != null )
     {
-      console_log( "reading from localStorage: " + key );
+      //console_log( "reading from localStorage: " + key );
 
       var jsonData = JSON.parse( localData );
       if ( jsonData.lastUpdated > getDateOfWeekAgoAsInt() )
@@ -73,7 +89,7 @@
 
   factory.getApiPromise = function ( url )
   {
-    console_log( "about to go to " + url );
+    //console_log( "about to go to " + url );
     return $http.get( url );
   };
 
@@ -100,7 +116,7 @@
     { //if localStorage empty, go to web
       factory.getApiPromise( REO_API_URL ).success( function ( data )
       {
-        console_log( "got some reos from web" );
+        //console_log( "got some reos from web" );
         factory.persistJsonToLocalStorage( REO_LOCAL_STORAGE_KEY, data );  //persist locally
         callback( data.d );
       } );
@@ -124,7 +140,7 @@
     { //if localStorage empty, go to web
       factory.getApiPromise( COMMS_API_URL ).success( function ( data )
       {
-        console_log( "got some comms from web" );
+        //console_log( "got some comms from web" );
         factory.persistJsonToLocalStorage( COMMS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback( data.d );
       } );
@@ -148,7 +164,7 @@
     { //if localStorage empty, go to web
       factory.getApiPromise( COUNTRIES_API_URL ).success( function ( data )
       {
-        console_log( "got some countries from web" );
+        //console_log( "got some countries from web" );
         factory.persistJsonToLocalStorage( COUNTRIES_LOCAL_STORAGE_KEY, data );  //persist locally
         callback(data.d);
       } );
@@ -187,7 +203,62 @@
   }
 
 
+  /*#region MenuItems*/
+  factory.setScopeMenuItems = function ( callback )
+  {
+    var localData = factory.readDataFromLocalStorage( MENU_ITEMS_LOCAL_STORAGE_KEY ); //read from localStorage
+    if ( localData.d.length == 0 )
+    { //if localStorage empty, go to web
+      factory.getApiPromise( MENU_ITEMS_API_URL ).success( function ( data )
+      {
+        //console_log( "got some menu items from web" );
+        factory.persistJsonToLocalStorage( MENU_ITEMS_LOCAL_STORAGE_KEY, data );  //persist locally
+        callback( data.d );
+      } );
+    }
+    else //great there is cached data
+    {
+      callback( localData.d );
+    }
+  }
 
+  /*#region CorrespondentFirms */
+  factory.setScopeCorrespondentFirms = function ( callback )
+  {
+    var localData = factory.readDataFromLocalStorage( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY ); //read from localStorage
+    if ( localData.d.length == 0 )
+    { //if localStorage empty, go to web
+      factory.getApiPromise( CORRESPONDENT_FIRMS_API_URL ).success( function ( data )
+      {
+        //console_log( "got some cfirms from web" );
+        factory.persistJsonToLocalStorage( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
+        callback( data.d );
+      } );
+    }
+    else //great there is cached data
+    {
+      callback( localData.d );
+    }
+  }
+
+  /*#region AssociatedFirms */
+  factory.setScopeAssociatedFirms = function ( callback )
+  {
+    var localData = factory.readDataFromLocalStorage( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY ); //read from localStorage
+    if ( localData.d.length == 0 )
+    { //if localStorage empty, go to web
+      factory.getApiPromise( ASSOCIATED_FIRMS_API_URL ).success( function ( data )
+      {
+        //console_log( "got some afirms from web" );
+        factory.persistJsonToLocalStorage( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
+        callback( data.d );
+      } );
+    }
+    else //great there is cached data
+    {
+      callback( localData.d );
+    }
+  }
 
   /*#region Firms*/
   factory.setScopeFirms = function ( callback )
@@ -197,7 +268,7 @@
     { //if localStorage empty, go to web
       factory.getApiPromise( FIRMS_API_URL ).success( function ( data )
       {
-        console_log( "got some Firms from web" );        
+        //console_log( "got some Firms from web" );        
         factory.persistJsonToLocalStorage( FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback(data.d);
       } );
@@ -206,6 +277,44 @@
     {
       callback(localData.d);
     }
+  }
+
+  factory.setScopeSingleFirm = function ( fid, callback )
+  {
+    var firmFound = null;
+
+    factory.setScopeFirms( function ( firms ) { //first check the main list of firms
+      firmFound = factory.getFirm( firms, fid );
+      if ( firmFound )
+        callback( firmFound );
+      else
+      {
+        factory.setScopeCorrespondentFirms( function ( correspondentFirms ) //then try correspondent firms
+        {
+          firmFound = factory.getFirm( correspondentFirms, fid );
+          if ( firmFound )
+            callback( firmFound );
+          else
+          {
+            factory.setScopeAssociatedFirms( function ( associatedFirms ) //then try associated firms
+            {
+              firmFound = factory.getFirm( associatedFirms, fid );
+              if ( firmFound )
+                callback( firmFound );
+              else
+              {
+                factory.setScopeREOs( function ( reos ) //then try associated firms
+                {
+                  firmFound = factory.getFirm( reos, fid );
+                  if ( firmFound )
+                    callback( firmFound );
+                } );
+              }
+            } );
+          }
+        } );
+      }
+    } );
   }
 
   factory.getFirm = function ( firms, id )
@@ -243,7 +352,7 @@
     { //if localStorage empty, go to web
       factory.getApiPromise( CONTACTS_API_URL ).success( function ( data )
       {
-        console_log( "got some Contacts from web" );
+        //console_log( "got some Contacts from web" );
         factory.persistJsonToLocalStorage( CONTACTS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback(data.d);
       } );

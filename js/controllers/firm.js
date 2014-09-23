@@ -3,11 +3,11 @@
   $scope.helpers = factory.getHelpers();
   $scope.firm = {};
 
-  dataMgr.setScopeFirms( function ( data )
+  dataMgr.setScopeSingleFirm( $routeParams.id, function ( data )
   {
     $timeout( function ()
     {
-      $scope.firm = dataMgr.getFirm( data, $routeParams.id );
+      $scope.firm = data;
       $scope.helpers.showLoading = false;
 
     }, $scope.helpers.renderDelay );

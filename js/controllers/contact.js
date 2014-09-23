@@ -1,7 +1,7 @@
 ﻿ngapp.controller( 'ContactCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $timeout )
 {
   $scope.helpers = factory.getHelpers();
-
+  
   dataMgr.setScopeContacts( function ( data )
   {
     $timeout( function ()

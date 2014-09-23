@@ -16,50 +16,50 @@
   <title>MSIL Directory</title>
 </head>
 <body>
-  <div id="mstphMenu" class="slideable" style="z-index: 7777; background: #E5E9E8; min-width: 100px; max-width: 55%; color: #fff; position: absolute; bottom: 42px; right: 0">
-    <a class="topcoat-tab-bar__button" href="#" style="padding: 15px; border-top: 1px solid #E5E9E8; box-shadow: 0 !important">
-      <i class="fa fa-university"></i>
-      <span class="miniIconTxt" style="display: inline-block">REOs</span>
-    </a>
-
-    <a class="topcoat-tab-bar__button" href="#" style="padding: 15px; border-top: 1px solid #E5E9E8; box-shadow: 0 !important">
-      <i class="fa fa-group"></i>
-      <span class="miniIconTxt" style="display: inline-block">Committees</span>
-    </a>
-    
-    <a class="topcoat-tab-bar__button" href="#" style="padding: 15px; border-top: 1px solid #E5E9E8; box-shadow: 0 !important">
-      <i class="fa fa-mail-forward"></i>
-      <span class="miniIconTxt" style="display: inline-block">Contact Us</span>
-    </a>      
-  </div>
+  
 <!--  <div raw-ajax-busy-indicator="" class="centAlign renderingIndic" ng-show="showLoading"><br /><br /><br /><br /><br /><br />LOADING</div>-->
 
   <div ng-view class="app"></div>
 
-  <div id="con" style="display: none"></div>
+  <div id="con" style="display: noneXXX"></div>
   <button class="help-btn" onclick="doIt()" style="display: none">Help</button>
   
   <!--<br />-->
 
-  <div id="bottom-nav">
-    <div class="topcoat-tab-bar" style="width: 100%; padding-top: 5px;">
+  <div id="bottom-nav" ng-controller="MenuCtrl" >
+    <div id="mstphMenu" class="slideable">
+      <div ng-repeat="item in menuItems">
+        <span class="topcoat-tab-bar__button subMenuItem" ng-click="helpers.g(item.u)">
+          <i class="fa {{item.c}}"></i>
+          <span class="miniIconTxt" style="display: inline-block">{{item.t}}</span>
+        </span>
+      </div>  
+    </div>
+
+    <div class="topcoat-tab-bar" style="width: 100%;">
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <a class="topcoat-tab-bar__button" href="#">
+        <span class="topcoat-tab-bar__button" ng-click="helpers.g('#')">
           <i class="fa fa-home"></i>
           <span class="miniIconTxt">Home</span>
-        </a>
+        </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <a class="topcoat-tab-bar__button" href="#/reos">
-          <i class="fa fa-info-circle"></i>
+        <span class="topcoat-tab-bar__button" ng-click="helpers.g('/appInfo')">
+          <i class="fa fa-info"></i>
+          <span class="miniIconTxt">App Info</span>
+        </span>
+      </label>
+      <label class="topcoat-tab-bar__item" style="width: 33%">
+        <span class="topcoat-tab-bar__button" ng-click="helpers.g('/aboutUs')">
+          <i class="fa fa-group"></i>
           <span class="miniIconTxt">About Us</span>
-        </a>
+        </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 34%"> 
-        <a class="topcoat-tab-bar__button" href="javascript:return false;" slide-toggle="#mstphMenu">
+        <span class="topcoat-tab-bar__button" slide-toggle="#mstphMenu">
           <i class="fa fa-bars"></i>
           <span class="miniIconTxt">Menu</span>
-        </a>
+        </span>
       </label>
     </div>
   </div>
@@ -74,6 +74,11 @@
 
   <script type="text/javascript" src="js/dir.js"></script>
   <script type="text/javascript" src="js/controllers/home.js"></script>
+  <script type="text/javascript" src="js/controllers/appInfo.js"></script>
+  <script type="text/javascript" src="js/controllers/aboutUs.js"></script>
+  <script type="text/javascript" src="js/controllers/contactUs.js"></script>
+  <script type="text/javascript" src="js/controllers/associatedFirms.js"></script>
+  <script type="text/javascript" src="js/controllers/correspondentFirms.js"></script>
   <script type="text/javascript" src="js/controllers/country.js"></script>
   <script type="text/javascript" src="js/controllers/countryContacts.js"></script>
   <script type="text/javascript" src="js/controllers/firmsSearch.js"></script>

@@ -17,8 +17,21 @@
     var rtnVal = {
       hasValueFunc: function ( val )
       {
-        return ( val && val.length > 2 && val != "0");
+        return ( val && val.length > 2 && val != "0" && val != "666" );
       },
+      getGmtString: function(gmtoffset) {
+        try {
+          if ( gmtoffset.toString().indexOf( "666" ) > -1 )
+            return "";
+          if ( gmtoffset > 0 )
+            return "+" + gmtoffset;
+          if ( gmtoffset == 0 )
+            return "";
+
+          return "-" + gmtoffset;
+        }
+        catch ( e ) { }
+      },      
       getContactImageUrl: function ( cid )
       {
         return "https://api.moorestephens.org/i/msimage2.ashx?cid=" + cid;
@@ -39,9 +52,43 @@
       {
         return "https://onlineforms.moorestephens.org/Firm2/IntDirDirections?daddr=" + firm.lat + "," + firm.lon + "&saddr=" + ngRootScope.lat + "," + ngRootScope.lon;
       },
-      f: function ( fid ) { $location.path( "/f/" + fid ); },
-      c: function ( cid ) { $location.path( "/c/" + cid ); },
-      g: function ( path ) { this.showLoading = true; $location.path( path ); },
+
+      f: function ( fid ) { 
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
+        $location.path( "/f/" + fid );        
+      },
+
+      c: function ( cid ) { 
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick(); 
+        $location.path( "/c/" + cid );
+      },
+      
+      g: function ( path )
+      {        
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+        
+        this.showLoading = true; 
+        $location.path( path ); 
+
+      },
+
+      goBack: function (step) {
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
+        javascript:history.go(step);
+      },
+
+      goBack: function () {
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
+        history.back( -1 );
+      },
       rootScope: ngRootScope,
       isOnline: function ()
       {
@@ -52,7 +99,7 @@
         return ngRootScope.isPhone;
       },
       showLoading: true,
-      renderDelay: 111,
+      renderDelay: 999,
       paging: { 
         pageSize: 10, 
         currentPage: 0, 
@@ -77,6 +124,9 @@
       },
       openWebPage: function (hiddenFieldId, isNewWindow, isShowLocation)
       {
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
         var url = document.getElementById( hiddenFieldId ).value;
         alert('_system: ' + url);
         window.open(url, '_system');
@@ -85,7 +135,14 @@
       },
       openWebPage2: function ( url, isNewWindow, isShowLocation )
       {
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
         window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
+      },
+      closeMenu: function() {
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
       },
       delayModelSetting: function ( scope, timeout, modelToWatch, callback )
       {
