@@ -1,0 +1,55 @@
+﻿&nbsp;
+
+
+  <p ng-show="helpers.showLoading == true" class="centAlign firstContent">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" style="">
+    <div class="mstphSplashBg" style="" ng-style="style()">
+  
+      <div class="centAlign" style="position: absolute; top: 40px; left: 1%; right: 1%">
+        <img src="img/logo/MSLogoTransparent.png" onclick="alert(jQuery( window ).height() + ' X ' + jQuery( window ).width())"/>
+      </div>
+
+      <div class="centAlign" style="position: absolute; top: 120px; left: 1%; right: 1%; font-size: 2.2rem; color: #00AEEF">
+        <div>
+          <span style="padding-left: 3px; padding-right: 3px; color: #fff; background: rgba(0, 174, 239, 0.7);">International</span>
+          <br />
+          <span style="display: inline-block; margin-top: 5px; padding-left: 3px; padding-right: 3px; color: #fff; background: rgba(0, 174, 239, 0.7)">Directory</span>
+          <br /><br />
+          <div>
+            <a ng-click="helpers.g('/appInfo')"><i class="fa fa-info-circle" style="font-size: 38px; color: #00AEEF;"></i></a>
+          </div>
+          <br />
+        </div>
+
+        
+
+        <div>
+          <input class="mstphSearchbox mstphInputFieldBordered" style="padding: 8px; background: rgba(166, 166, 166, 0.4); " ng-model="search" type="text" placeholder="Search phrase" ng-keypress=" $event.keyCode == 13 ? gotoFirmSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
+          <span class="mstphBtnArrow">
+            <span ng-click="gotoFirmSearch(search)" style="border-bottom: 0">QUICK FIND</span>
+          </span>
+        </div>
+
+
+      </div>
+
+      
+    </div>  
+
+  </div>
+
+  
+
+
+
+
+
+
+
+<div class="bottomSpace"></div>
+
+
+

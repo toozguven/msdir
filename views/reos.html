@@ -24,12 +24,13 @@
 
   <div ng-repeat="firm in reos" class="topcoat-list reoListItem">
     <h3 class="topcoat-list__header pad10" ng-click="toggleFirm(firm.reoid);">
+      <a id="{{firm.reoid}}"></a>
       {{firm.sn}}
       <i class="fa fa-angle-double-down fright" ng-show="!isVisible(firm.reoid)" style="color: #555"></i>
       <i class="fa fa-angle-double-up fright" ng-show="isVisible(firm.reoid)" style="color: #555"></i>
     </h3>
 
-    <div ng-show="isVisible(firm.reoid)" class="details">
+    <div  class="details reoDetailsDiv reoDetailsDiv{{firm.reoid}}" style="display: none">
       <div class="pad1_25rem">
         <div class="reon boldBlue">{{firm.reon}}</div><br />
         <span ng-bind-html="firm.ad">{{firm.ad}}</span>

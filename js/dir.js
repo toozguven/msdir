@@ -3,13 +3,22 @@ var globalDataMgr;
 
 
 
+
 var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'] )
 .config( function ( $routeProvider )
 {
   $routeProvider
-  .when( '/', {
-    controller: 'HomeCtrl',
-    templateUrl: 'views/home.html'
+  .when( '/firms', {
+    controller: 'FirmsCtrl',
+    templateUrl: 'views/firms.html'
+  } )
+  .when( '/contacts', {
+    controller: 'ContactsCtrl',
+    templateUrl: 'views/contacts.html'
+  } )
+  .when( '/splash', {
+    controller: 'SplashCtrl',
+    templateUrl: 'views/splash.html'
   } )
   .when( '/aboutUs', {
     controller: 'AboutUsCtrl',
@@ -26,6 +35,10 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
   .when( '/cFirms', {
     controller: 'CorrespondentFirmsCtrl',
     templateUrl: 'views/correspondentFirms.html'
+  } )
+  .when( '/cFirmsInfo', {
+    controller: 'CorrespondentFirmsInfoCtrl',
+    templateUrl: 'views/correspondentFirmsInfo.html'
   } )
   .when( '/aFirms', {
     controller: 'AssociatedFirmsCtrl',
@@ -92,11 +105,10 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     templateUrl: 'menu.html'
   } )
   .otherwise( {
-    redirectTo: '/'
+    redirectTo: '/splash'
   } );
-} );
-
-ngapp.config( ['$compileProvider', function ( $compileProvider )
+} )
+.config( ['$compileProvider', function ( $compileProvider )
 {
   $compileProvider.aHrefSanitizationWhitelist( /^\s*(https?|file|tel|sms|mailto):/ );
 }] );
@@ -165,15 +177,15 @@ ngapp.directive( 'mstphPaginate', function ()
 
         var $ = $ || angular.element;
 
-        var prevBtn = $( '<input class="topcoat-button--cta" type="button" value="Previous" >' );
-        prevBtn.bind( 'click', function () { $scope.mstphPaginate.doPrevClick() } );
+        var prevBtn = $( '<span class="mstphBtnArrow"><span>Previous</span></span>' );
+        prevBtn.bind( 'click', function () { $scope.mstphPaginate.doPrevClick(this) } );
         if ( $scope.mstphPaginate.isPrevEnabled() == false )
-          prevBtn.attr( "disabled", "disabled" );
+          prevBtn.addClass( "disabled" );
 
-        var nextBtn = $( '<input class="topcoat-button--cta" type="button" value="Next" >' );
-        nextBtn.bind( 'click', function () { $scope.mstphPaginate.doNextClick() } );
+        var nextBtn = $( '<span class="mstphBtnArrow"><span>Next</span></span>' );
+        nextBtn.bind( 'click', function () { $scope.mstphPaginate.doNextClick( this ) } );
         if ( $scope.mstphPaginate.isNextEnabled() == false )
-          nextBtn.attr( "disabled", "disabled" );
+          nextBtn.addClass( "disabled" );
 
         var pagingLabel = $( '<span> Page ' + ( $scope.helpers.paging.currentPage + 1 ) + ' of ' + ( $scope.mstphPaginate.numberOfPages ) + ' </span>' );
 
@@ -182,14 +194,18 @@ ngapp.directive( 'mstphPaginate', function ()
         $element.append( nextBtn );
       }
 
-      $scope.mstphPaginate.doPrevClick = function () { 
+      $scope.mstphPaginate.doPrevClick = function (btn) { 
+        if ( angular.element(btn).hasClass( "disabled" ) )
+          return;
         $scope.helpers.paging.currentPage--;
         $scope.helpers.paging.startFrom = ( $scope.helpers.paging.currentPage * $scope.mstphPaginate.pageSize );
         $scope.$apply();
         $scope.mstphPaginate.draw();
       };
 
-      $scope.mstphPaginate.doNextClick = function () { 
+      $scope.mstphPaginate.doNextClick = function (btn) { 
+        if ( angular.element( btn ).hasClass( "disabled" ) )
+          return;
         $scope.helpers.paging.currentPage++;
         $scope.helpers.paging.startFrom = ( $scope.helpers.paging.currentPage * $scope.mstphPaginate.pageSize );
         $scope.$apply();
@@ -224,7 +240,6 @@ ngapp.directive( 'mstphPaginate', function ()
     }
   };
 } );
-
 
 //ngapp.directive("rawAjaxBusyIndicator", function () {
 //  return {
@@ -304,6 +319,9 @@ ngapp.directive( 'slideToggle', function ( $rootScope )
 
       var doMenuClickFunc = function () //this is the actual click function definition
       {
+        //fixed app height so click on anywhere on the .app div will close the sub-menu
+        setTimeout( function () { jQuery( ".app" ).height( jQuery( window ).height() ); }, 1 );
+
         //var content = jQuery( '.slideable_content' );
 
         //console_log( " content.clientHeight: " + content.height() );

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Search Results</h4>
+    <h4>Contacts Search</h4>
   </div>
 </div>
 
@@ -16,6 +16,20 @@
 
 <div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
 
+  <div class="pad10">
+    <label class="topcoat-radio-button" ng-click="helpers.g('/findFirms/' + search)">
+      <input type="radio" name="topcoat">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Member Firms
+    </label>
+    &nbsp;&nbsp;
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat" checked="checked">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Contacts
+    </label>
+  </div>
+
   <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">
   
   <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
@@ -23,7 +37,7 @@
   <div>
     <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
       <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
-        <div once-html="contact.n"></div>
+        <div once-html="contact.n" class="boldBlue"></div>
         <div once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
         <span once-html="contact.f" class="bold"></span>
         <span once-text="contact.l"></span>

@@ -16,7 +16,8 @@
   $scope.searchDelayedFunc = function ( item )
   {
     if ( $scope.searchDelayed )
-      return item.n.toLowerCase().indexOf( $scope.searchDelayed ) > -1;
+      return item.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 
+              || item.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1;
 
     return true;
   }

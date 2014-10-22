@@ -1,4 +1,4 @@
-﻿ngapp.factory( "factory", function ( $http, $rootScope, $location )
+﻿ngapp.factory( "factory", function ( $http, $rootScope, $location, $route )
 {
   ngRootScope = $rootScope;
   ngRootScope.isOnline = -1;
@@ -7,6 +7,11 @@
   ngRootScope.dst_offset = 0;
   ngRootScope.lat = 0;
   ngRootScope.lon = 0;
+
+  $rootScope.reLoadCurrentPage = function ()
+  {
+    $route.reload();
+  };
 
   var factory = {};
   
@@ -53,6 +58,13 @@
         return "https://onlineforms.moorestephens.org/Firm2/IntDirDirections?daddr=" + firm.lat + "," + firm.lon + "&saddr=" + ngRootScope.lat + "," + ngRootScope.lon;
       },
 
+      getTel: function(telNo) {
+        try {
+          return telNo.replace(/\s/g, '').replace('(0)', '');
+        }
+        catch ( e ) { return telNo; }
+      },      
+
       f: function ( fid ) { 
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick();
@@ -89,6 +101,11 @@
 
         history.back( -1 );
       },
+
+      gotoById: function(id) {
+        $location.hash( id );
+      },
+
       getNavSelectedCss: function(path) {
         if ( path == "#" && $location.path() == "/" )
           return "bottomNavSelected";

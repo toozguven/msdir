@@ -49,14 +49,14 @@
     <li class="topcoat-list__item" ng-show="firm.tz != '0'">
       <span>
         <div>Time Zone</div>
-        <span class="lstItmDesc lstSpan">GMT{{firm.tz}}</span>
+        <span class="lstItmDesc lstSpan">GMT {{firm.tz}}</span>
         <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
       </span>
     </li>
         
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
-      <a href="tel:{{firm.t}}" ng-click="helpers.closeMenu()">
+      <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
         <div>Call Office</div>
         <span class="lstItmDesc lstSpan">{{firm.t}}</span>
         <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        

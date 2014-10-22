@@ -20,9 +20,22 @@
   $scope.toggleFirm = function (fid)
   {
     if ( $scope.currentlyOpenFirms.indexOf( "{" + fid + "}" ) > -1 )
+    {
       $scope.currentlyOpenFirms = $scope.currentlyOpenFirms.replace( "{" + fid + "}", "" );
+      jQuery( ".reoDetailsDiv" + fid ).hide( 'slow' );
+    }
     else
-      $scope.currentlyOpenFirms = $scope.currentlyOpenFirms + "{" + fid + "}";
+    {
+      $scope.currentlyOpenFirms = "{" + fid + "}";
+
+      jQuery( ".reoDetailsDiv" ).hide();
+
+      jQuery( 'html, body' ).animate( {
+          scrollTop: $( "#" + fid ).offset().top - 100
+        }, 1000 )
+
+      jQuery( ".reoDetailsDiv" + fid ).show( 'slow' );
+    }
   }
 
   $scope.isVisible = function ( fid )

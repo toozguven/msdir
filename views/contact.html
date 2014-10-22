@@ -16,7 +16,9 @@
 
 <div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
   <div class="subHeader contactHeader">
-    <img class="fRight contactImg" ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msimage2.ashx?cid={{contact.id}}" />
+    <div class="fRight contactImg">
+      <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msimage2.ashx?cid={{contact.id}}" />
+    </div>
     <h2 class="boldBlue">{{contact.n}}</h2>
     <span class="bold">{{contact.r}}</span> <br />
     <span>{{contact.l + '&nbsp;'}}</span>
@@ -25,7 +27,7 @@
    <ul class="topcoat-list__container list">
 
      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.t)">
-      <a href="tel:{{contact.t}}" ng-click="helpers.closeMenu()">
+      <a href="tel:{{helpers.getTel(contact.t)}}" ng-click="helpers.closeMenu()">
         <div>Call Office</div>
         <span class="lstSpan">{{contact.t}}</span>
         <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
@@ -34,7 +36,7 @@
 
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
-      <a href="tel:{{contact.m}}" ng-click="helpers.closeMenu()">
+      <a href="tel:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
         <div>Call Mobile</div>
         <span class="lstSpan">{{contact.m}}</span>
         <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
@@ -42,7 +44,7 @@
     </li>
 
      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
-      <a href="sms:{{contact.m}}" ng-click="helpers.closeMenu()">
+      <a href="sms:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
         <div>SMS / Text</div>
         <span class="lstSpan">{{contact.m}}</span>
         <span class="icn smsIcn">&nbsp;&nbsp;&nbsp;</span>
@@ -68,7 +70,7 @@
     <li class="topcoat-list__item" ng-show="contact.tz != '0'">
       <span>
         <div>Time Zone</div>
-        <span class="lstItmDesc lstSpan">GMT{{contact.tz}}</span>
+        <span class="lstItmDesc lstSpan">GMT {{contact.tz}}</span>
         <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
       </span>
     </li>

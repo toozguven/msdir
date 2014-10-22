@@ -89,7 +89,6 @@
 
   factory.getApiPromise = function ( url )
   {
-    //console_log( "about to go to " + url );
     return $http.get( url );
   };
 
@@ -247,12 +246,14 @@
     var localData = factory.readDataFromLocalStorage( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY ); //read from localStorage
     if ( localData.d.length == 0 )
     { //if localStorage empty, go to web
-      factory.getApiPromise( ASSOCIATED_FIRMS_API_URL ).success( function ( data )
-      {
-        //console_log( "got some afirms from web" );
-        factory.persistJsonToLocalStorage( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
-        callback( data.d );
-      } );
+      factory.getApiPromise( ASSOCIATED_FIRMS_API_URL )
+        .success( function ( data )
+                  {
+                    //console_log( "got some afirms from web" );
+                    factory.persistJsonToLocalStorage( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
+                    callback( data.d );
+                  } 
+        ).error( function () { callback(null) } );
     }
     else //great there is cached data
     {
@@ -298,7 +299,13 @@
           {
             factory.setScopeAssociatedFirms( function ( associatedFirms ) //then try associated firms
             {
-              firmFound = factory.getFirm( associatedFirms, fid );
+              try {
+                firmFound = factory.getFirm( associatedFirms, fid );
+              }
+              catch ( e )
+              {
+                firmFound = null;
+              }
               if ( firmFound )
                 callback( firmFound );
               else

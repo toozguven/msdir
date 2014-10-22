@@ -3546,8 +3546,6 @@ input[type="search"]::-webkit-search-cancel-button {
 body {
   margin: 0;
   padding: 0;
-  --background: #dfe2e2;
-  background: #FCFCFC;
   color: #555;
   font: 16px "Tahoma", Verdana, arial, sans-serif;
   font-weight: 400;

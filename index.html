@@ -19,7 +19,7 @@
   
 <!--  <div raw-ajax-busy-indicator="" class="centAlign renderingIndic" ng-show="showLoading"><br /><br /><br /><br /><br /><br />LOADING</div>-->
 
-  <div ng-view class="app"></div>
+  <div ng-view class="app" onclick="if ( ngRootScope && ngRootScope.menuVisible ) ngRootScope.doMenuClick()"></div>
 
   <div id="con" style="display: none"></div>
   <button class="help-btn" onclick="doIt()" style="display: none">Help</button>
@@ -38,21 +38,21 @@
 
     <div class="topcoat-tab-bar" style="width: 100%;">
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('#')}}" ng-click="helpers.g('#')">
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/splash')}}" ng-click="helpers.g('/splash')">
           <i class="fa fa-home"></i>
           <span class="miniIconTxt">Home</span>
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/appInfo')}}" ng-click="helpers.g('/appInfo')">
-          <i class="fa fa-info"></i>
-          <span class="miniIconTxt">App Info</span>
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/firms')}}" ng-click="helpers.g('/firms')">
+          <i class="fa fa-university"></i>
+          <span class="miniIconTxt">Firms</span>
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/aboutUs')}}" ng-click="helpers.g('/aboutUs')">
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/contacts')}}" ng-click="helpers.g('/contacts')">
           <i class="fa fa-group"></i>
-          <span class="miniIconTxt">About Us</span>
+          <span class="miniIconTxt">People</span>
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 34%"> 
@@ -71,14 +71,17 @@
   <script type="text/javascript" src="js/lib/angular-animate.min.js"></script>  
   <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
   <script type="text/javascript" src="js/lib/angular-once.js"></script>
-
+  <script src="js/lib/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/dir.js"></script>
-  <script type="text/javascript" src="js/controllers/home.js"></script>
+  <script type="text/javascript" src="js/controllers/splash.js"></script>
+  <script type="text/javascript" src="js/controllers/firms.js"></script>
+  <script type="text/javascript" src="js/controllers/contacts.js"></script>
   <script type="text/javascript" src="js/controllers/appInfo.js"></script>
   <script type="text/javascript" src="js/controllers/aboutUs.js"></script>
   <script type="text/javascript" src="js/controllers/contactUs.js"></script>
   <script type="text/javascript" src="js/controllers/associatedFirms.js"></script>
   <script type="text/javascript" src="js/controllers/correspondentFirms.js"></script>
+  <script type="text/javascript" src="js/controllers/correspondentFirmsInfo.js"></script>
   <script type="text/javascript" src="js/controllers/country.js"></script>
   <script type="text/javascript" src="js/controllers/countryContacts.js"></script>
   <script type="text/javascript" src="js/controllers/firmsSearch.js"></script>

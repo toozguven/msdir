@@ -24,17 +24,7 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
+    --background: #00AEEF;
     background-attachment:fixed;
     font-size:12px;
     height:100%;
@@ -88,9 +78,15 @@ p {
   font-size: 0.9rem;
 }
 
-.contactImg {
+.contactImg img {
   max-height: 70px;
   min-height: 70px;
+}
+
+.contactImg {
+  min-width: 100px;
+  max-width: 150px;
+  text-align: right;
 }
 
 
@@ -112,13 +108,22 @@ p {
 }
 
 /*#region HomePage*/
-.homeWrapper
+.mstphSplashBg {
+  position: absolute; 
+  top: 0%; width: 100%; 
+  height: 100%; 
+  background: url('img/bg/Globe1-P-Small.png') no-repeat; 
+  background-color: #d0e0ec; 
+  background-size: cover; 
+}
+
+.homeWrapperXXX
 {
   background: #FCFCFC;
   overflow: hidden;
   z-index: 6666;
 }
-.homeBottom
+.homeBottomXXX
 {
   /*background: url('../img/Image3_360x640_2.png') top no-repeat #FCFCFC ;*/
   width: 100%;
@@ -126,7 +131,7 @@ p {
   text-align: center;
 }
 
-.bgimg {
+.bgimgXXX {
 	width: 100%;
   height: 100%;
 	position: absolute;
@@ -143,7 +148,7 @@ p {
 /* too narrow - hide bg img*/
 @media only screen and (max-width:550px)
 {
-  .bgimg
+  .bgimgXXX
   {
     display: none;
   }
@@ -152,7 +157,7 @@ p {
 /* wide enough to show*/
 @media only screen and (max-width:320px)
 {
-  .bgimg
+  .bgimgXXX
   {
     top: 20px;
   }
@@ -160,7 +165,7 @@ p {
 
 @media only screen and (max-height:500px)
 {
-  .bgimg
+  .bgimgXXX
   {
     display: none;
   }
@@ -170,7 +175,17 @@ p {
 /* PHONE and (min-aspect-ratio: 1/1) => Portrait*/
 @media only screen and (max-aspect-ratio: 1/1) and (max-width:600px)
 {
-  .bgimg
+  .mstphSplashBg {
+    position: absolute; 
+    top: 0%; width: 100%; 
+    height: 100%; 
+    background: url('../img/bg/Globe1-P-Small.png') no-repeat; 
+    background-color: #d0e0ec; 
+    background-size: cover; 
+    --background: pink;
+  }
+
+  .bgimgXXX
   {
     top: 38px;
   }
@@ -179,7 +194,17 @@ p {
 /* PHONE and (min-aspect-ratio: 1/1) => Landscape*/
 @media only screen and (min-aspect-ratio: 1/1) and (max-width:600px)
 {
-  .bgimg
+  .mstphSplashBg {
+    position: absolute; 
+    top: 0%; width: 100%; 
+    height: 100%; 
+    --background-color: #d0e0ec; 
+    background-size: cover; 
+    --background: url('../img/bg/Globe1-L-Small.png') no-repeat; 
+    --background: gray;
+  }
+
+  .bgimgXXX
   {
     display: none;
   }
@@ -188,14 +213,23 @@ p {
 /* TABLET and (max-aspect-ratio: 1/1) => Portrait*/
 @media only screen and (min-width:600px)
 {
-  .contactImg {
+  .mstphSplashBg {
+    position: absolute; 
+    top: 0%; width: 100%; 
+    height: 100%; 
+    background-color: #d0e0ec; 
+    background-size: cover; 
+    background: url('../img/bg/Globe1-P-Big.png') no-repeat; 
+  }
+
+  .contactImg img {
     max-height: 140px;
     min-height: 140px;
   }
 
   .contactHeader {
-    max-height: 130px;
-    min-height: 130px;
+    max-height: 160px;
+    min-height: 160px;
   }
 
 }
@@ -203,6 +237,16 @@ p {
 /* TABLET and (max-aspect-ratio: 1/1) => Portrait*/
 @media only screen and (max-aspect-ratio: 1/1) and (min-width:600px)
 {
+  .mstphSplashBg {
+    position: absolute; 
+    top: 0%; width: 100%; 
+    height: 100%; 
+    background-color: #d0e0ec; 
+    background-size: cover; 
+    background: url('../img/bg/Globe1-P-Big.png') no-repeat; 
+    --background: orange;
+  }
+
   .bgimg {
     
   }
@@ -228,7 +272,17 @@ p {
 /* TABLET: and (min-aspect-ratio: 1/1) => Landscape*/
 @media only screen and (min-aspect-ratio: 1/1) and (min-width:600px)
 {
-  .bgimg {
+  .mstphSplashBg {
+    position: absolute; 
+    top: 0%; width: 100%; 
+    height: 100%; 
+    background-color: #d0e0ec; 
+    background-size: cover;
+    background: url('../img/bg/Globe1-L-Big.png'); 
+    --background: red;
+  }
+
+  .bgimgXXX {
     
   }
 
@@ -313,7 +367,7 @@ p {
 }
 
 .timezoneIcn {
-  background: url('img/settings.svg') no-repeat scroll 0% 0% / cover  transparent;
+  background: url('img/clock.svg') no-repeat scroll 0% 0% / cover  transparent;
   position: absolute;
   right: 10px;
   margin-top: -35px;
@@ -438,24 +492,25 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
   width: 100%;
   padding: 10px !important;
   text-shadow: 0 !important;
-  --background: #666 !important;
+  --background: #777 !important;
   border-top: 0 !important;
   color: #eee !important;
 
-  background: -webkit-linear-gradient(#666, #222) !important;
-  background: -o-linear-gradient(#666, #222) !important;
-  background: -moz-linear-gradient(#666, #222) !important;
-  background: linear-gradient(#666, #222) !important;
+  background: -webkit-linear-gradient(#666, #444) !important;
+  background: -o-linear-gradient(#666, #444) !important;
+  background: -moz-linear-gradient(#666, #444) !important;
+  background: linear-gradient(#666, #444) !important;
 }
 
 .topcoat-tab-bar__button i {
   color: #fff;
 }
 .bottomNavSelected {
-  background: -webkit-radial-gradient(#00AEEF, #666) !important;
+  /*background: -webkit-radial-gradient(#00AEEF, #666) !important;
   background: -o-radial-gradient(#00AEEF, #666) !important;
   background: -moz-radial-gradient(#00AEEF, #666) !important;
-  background: radial-gradient(#00AEEF, #666) !important;
+  background: radial-gradient(#00AEEF, #666) !important;*/
+  background: #00AEEF !important;
 }
 
 .plusMinusToggle {
@@ -496,10 +551,12 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
 .topFixedBar {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 444;
   --background: #19779A !important;
-  background: -webkit-linear-gradient(#222, #666) !important;
-  background: -o-linear-gradient(#222, #666) !important;
-  background: -moz-linear-gradient(#222, #666) !important;
-  background: linear-gradient(#222, #666) !important;
+  --background: #00AEEF !important;
+  --background: #777 !important;
+  background: -webkit-linear-gradient(#444, #666) !important;
+  background: -o-linear-gradient(#444, #666) !important;
+  background: -moz-linear-gradient(#444, #666) !important;
+  background: linear-gradient(#444, #666) !important;
 }
 
 .topcoat-button--cta {
@@ -515,9 +572,10 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
   width:94%; display: block;
 }
 .town {
-  --background-color: #00AEEF !important;
   color: #fff !important;
   text-transform: uppercase;
+  font-weight: bold !important;
+  letter-spacing: 0.1rem;
 
   background: -webkit-linear-gradient(#00AEEF, #006186) !important;
   background: -o-linear-gradient(#00AEEF, #006186) !important;
@@ -584,14 +642,26 @@ i {
   border-bottom: 0 !important; 
   box-shadow: 0 !important;
 }
+.topcoat-search-input--large
+{
+  border-radius: 0 !important;
+  background: #eee !important;
+  border: 0 !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.23) inset !important;
+}
 
 
 select {
   padding: 5px;
-  margin: 0.5rem;
-  font-size: 20px;
+  margin: 0;
+  font-size: 17.6px;
   width: 93%;
-  border-radius: 30px;
+  --border-radius: 30px;
+  border: 0;
+  background: #eee;
+  color: #888;
+  font-family: Tahoma, Verdana;
+
 }
 .pad10 {
   padding: 10px !important;
@@ -629,14 +699,17 @@ select {
 }
 
 .list li:active {
-  background-color: #333;
+  background-color: #ddd;
 }
 
 .chevron:active {
   color: #333;
 }
 .bottomSpace {
-  margin-bottom: 45px;
+  margin-bottom: 60px;
+  z-index: 5555;
+  height: 4px;
+  border-top: 2px dotted #ccc;
 }
 .topcoat-tab-bar {
   width: 100%;
@@ -713,7 +786,7 @@ select {
   color: #333;
 }
 .topcoat-list__item {
-  padding-right: 1.50rem !important;
+  padding-right: 2.50rem !important;
 }
 
 .topcoat-list__item:last-child {
@@ -754,7 +827,6 @@ div.commsList div.commsListItem:nth-child(2n+0) h5  {
 
 /*#region reos*/
 div.reoList div.reoListItem:nth-child(2n+1) h3  {
-  --background-color: #00AEEF;
   color: #fff;
   text-transform: uppercase;
 
@@ -762,6 +834,8 @@ div.reoList div.reoListItem:nth-child(2n+1) h3  {
   background: -o-linear-gradient(#00AEEF, #006186) !important;
   background: -moz-linear-gradient(#00AEEF, #006186) !important;
   background: linear-gradient(#00AEEF, #006186) !important;
+
+  padding: 1.25rem !important;
 }
 
 div.reoList div.reoListItem:nth-child(2n+0) h3  {
@@ -778,6 +852,8 @@ div.reoList div.reoListItem:nth-child(2n+0) h3  {
   background: -o-linear-gradient(#00AEEF, #006186) !important;
   background: -moz-linear-gradient(#00AEEF, #006186) !important;
   background: linear-gradient(#00AEEF, #006186) !important;
+
+  padding: 1.25rem !important;
 }
 .reon {
   font-weight: bold; color:#000;
@@ -809,6 +885,7 @@ img {
   float: left;
   padding: 2px;
   margin-bottom: 2px;
+  color: #57cefb
 }
 
 /* iOS7 upwards only 
@@ -819,3 +896,67 @@ img {
   top: 20px;
 }
   */
+
+
+.patternBackgroundBlue
+{
+  background: linear-gradient(27deg, #00AEEF 5px, transparent 55px) 0 5px,
+            linear-gradient(207deg, #00AEEF 5px, transparent 55px) 10px 0px,
+            linear-gradient(27deg, #57cefb 5px, transparent 55px) 0px 10px,
+            linear-gradient(207deg, #57cefb 5px, transparent 5px) 10px 5px,
+            linear-gradient(90deg, #57cefb 10px, transparent 10px),
+            linear-gradient(#57cefb 25%, #57cefb 25%, #1a1a1a 20%, transparent 20%, transparent 25%, #57cefb 25%, #57cefb);
+background-size: 20px 20px;
+background-color: #00AEEF;
+
+}
+
+
+.mstphSearchbox
+{
+  padding:6px 5px; 
+  background:rgba(50, 50, 50, 0.2); 
+  border:0px solid #dbdbdb;
+  margin:0;
+  font-size: 1rem;
+  width: 45%;
+  line-height: 19.8167px !important;
+  font-family: Tahoma, Verdana;
+  letter-spacing: normal !important;
+}
+
+
+.mstphBtnArrow { 
+  font-size: 1rem;
+  display: inline-block; 
+  right: 10px; 
+  margin: 5px;
+} 
+
+
+
+.mstphBtnArrow span {
+  display: inline-block;
+  position:relative; 
+  padding:8px; 
+  border: 0;
+  border-bottom: 0.1rem solid #207cca; 
+  background-color:#207cca; 
+  color:#fff;
+  font-size: 1rem;
+  min-width: 75px;
+  border-radius: 4px;
+}
+
+.mstphBtnArrow.disabled span {
+  background: #bbb;
+  border-bottom: 0.1rem solid #bbb; 
+  color: #ddd;
+}
+
+
+.mstphInputFieldBordered {
+  background: #EEE; 
+  border: 1px solid #ddd; 
+  padding: 10px;
+}

@@ -1,0 +1,49 @@
+﻿&nbsp;
+<div class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar__item left quarter h100pc">
+    <div class="prevIcnDiv" ng-click="helpers.goBack()">
+      <span class="icn prevIcn">&nbsp;</span>
+    </div>
+  </div>
+  <div class="topcoat-navigation-bar__item center half">
+    <h5 style="margin-left: -20px; color: #fff;">Find People</h5>
+  </div>
+</div>
+
+  
+<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+</p>
+
+
+<div ng-show="helpers.showLoading == false" class="firstContent">
+  <div class="pad10">
+
+    <p>
+      Please either pick a country, or type in the search box and click on 'Find' button below.
+    </p>
+
+    <div style="left: 1%; right: 1%; color: #00AEEF">    
+
+      <div style="background: #EEE; border: 1px solid #ddd; padding: 10px;">
+        <select class="" style="background: #EEE; width: 100%; font-size: 1rem;" id="ddlCountry" ng-options="country.id as country.n for country in countries" ng-model="selectedCountryId" ng-change="redirectToCountry()">
+          <option value="">Pick a country...</option>
+        </select>
+      </div>
+
+      <br />
+
+      <div style="background: #EEE; border: 1px solid #ddd; padding: 10px;">
+        
+        <input class="mstphSearchbox" style="background: #EEE; width: 70%; font-size: 1rem;" ng-model="search" type="text" placeholder="Or, just search" ng-keypress=" $event.keyCode == 13 ? gotoContactSearch(search) : false" onfocus="jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
+        <div class="mstphBtnArrow" style="position: absolute;">
+          <span ng-click="gotoContactSearch(search)" style="min-width: 55px; display: inline">FIND</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="bottomSpace"></div>

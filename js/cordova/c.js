@@ -17,7 +17,22 @@ var app = {
   {
     //console_log( 'bindEvents' );
     document.addEventListener( 'deviceready', this.onDeviceReady, false );
+    window.addEventListener( 'orientationchange', this.onOrientationChange );
   },
+
+  onOrientationChange: function ()
+  {
+    ngRootScope.reLoadCurrentPage();
+    /*switch ( window.orientation )
+    {
+      case -90:
+      case 90:
+        break;
+      default:
+        break;
+    }*/
+  },
+
   // deviceready Event Handler
   //
   // The scope of 'this' is the event. In order to call the 'receivedEvent'
