@@ -32,12 +32,12 @@
 
     <div  class="details reoDetailsDiv reoDetailsDiv{{firm.reoid}}" style="display: none">
       <div class="pad1_25rem">
-        <div class="reon boldBlue">{{firm.reon}}</div><br />
-        <span ng-bind-html="firm.ad">{{firm.ad}}</span>
+        <div class="reon boldBlue" once-html="firm.reon"></div><br />
+        <span ng-bind-html="firm.ad" once-html="firm.ad"></span>
         <br /><br />
 
         <div ng-show="helpers.hasValueFunc(firm.f)">
-          <div>Facsimile: {{firm.f}}</div>
+          <div once-html="'Facsimile: ' + firm.f"></div>
         </div>
       </div>
 
@@ -45,7 +45,7 @@
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
           <a href="tel:{{firm.t}}" ng-click="helpers.closeMenu()">
             <div class="blue">Call Office</div>
-            <span class="lstItmDesc lstSpan">{{firm.t}}</span>
+            <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
             <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
           </a>
         </li>
@@ -53,7 +53,7 @@
         <li class="topcoat-list__item" ng-show="firm.tz != '0'">
           <span>
             <div class="blue">Time Zone</div>
-            <span class="lstItmDesc lstSpan">GMT{{firm.tz}}</span>
+            <span class="lstItmDesc lstSpan" once-html="'GMT ' + firm.tz"></span>
             <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
           </span>
         </li>
@@ -61,7 +61,7 @@
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
           <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
             <div class="blue">Email</div>
-            <span class="lstItmDesc lstSpan">{{firm.eml}}</span>
+            <span class="lstItmDesc lstSpan" once-html="firm.eml"></span>
             <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
           </a>
         </li>
@@ -79,8 +79,8 @@
       <h5 class="topcoat-list__header town2">CONTACTS</h5>
       <ul class="topcoat-list__container list firmList">
         <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi" ng-repeat="member in firm.members">
-          <div class="blue">{{member.n}}</div>
-          <span class="lstSpan">{{member.r}}</span>
+          <div class="blue" once-html="member.n"></div>
+          <span class="lstSpan" once-html="member.r"></span>
         </li>
       </ul>
     </div>

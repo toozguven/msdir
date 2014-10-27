@@ -19,7 +19,7 @@
 
   <div class="subHeader">
     <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <h4>{{firm.l}}</h4>
+    <h4 once-html="firm.l"></h4>
   </div>
 
   <ul class="topcoat-list__container list">
@@ -27,7 +27,7 @@
     <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)" ng-click="helpers.c(firm.ilid);">
       <span>
         <div>International Liaison</div>
-        <span class="lstItmDesc lstSpan">{{firm.il}}</span>
+        <span class="lstItmDesc lstSpan" once-html="firm.il"></span>
       </span>
     </li>
 
@@ -49,7 +49,7 @@
     <li class="topcoat-list__item" ng-show="firm.tz != '0'">
       <span>
         <div>Time Zone</div>
-        <span class="lstItmDesc lstSpan">GMT {{firm.tz}}</span>
+        <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + firm.tz"></span>
         <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
       </span>
     </li>
@@ -58,7 +58,7 @@
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
       <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
         <div>Call Office</div>
-        <span class="lstItmDesc lstSpan">{{firm.t}}</span>
+        <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
         <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
       </a>
     </li>
@@ -66,7 +66,7 @@
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
       <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
         <div>Email</div>
-        <span class="lstItmDesc lstSpan">{{firm.eml}}</span>
+        <span class="lstItmDesc lstSpan" once-html="firm.eml"></span>
         <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
       </a>
     </li>

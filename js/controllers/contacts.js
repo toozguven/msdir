@@ -34,7 +34,7 @@
     $scope.helpers.showLoading = true;
 
     if ( $scope.selectedCountryId == "210" )
-      $location.path( "/countryContactsWithState/" + $scope.selectedCountryId + "/0" );
+      $location.path( "/countryWithStateContacts/" + $scope.selectedCountryId + "/0" );
     /*else if ( $scope.selectedCountryId == "43" )
       $location.path( "/china/" + $scope.selectedCountryId );*/
     else

@@ -31,7 +31,7 @@
       <div ng-repeat="item in menuItems">
         <span class="topcoat-tab-bar__button subMenuItem {{helpers.getNavSelectedCss(item.u)}}" ng-click="helpers.g(item.u)">
           <i class="fa {{item.c}}"></i>
-          <span class="miniIconTxt" style="display: inline-block">{{item.t}}</span>
+          <span class="miniIconTxt" style="display: inline-block" ng-bind="item.t"></span>
         </span>
       </div>  
     </div>

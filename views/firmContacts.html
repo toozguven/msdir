@@ -18,7 +18,7 @@
 
   <div class="subHeader">
     <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <h4>{{firm.l}}</h4>
+    <h4 once-html="firm.l"></h4>
   </div>
 
   <ul class="topcoat-list__container list contactList">
@@ -27,8 +27,8 @@
     </li>
 
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in internationalContacts">
-      <div ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}</div>
-      <span>{{contact.n}}<br /></span>
+      <div ng-show="helpers.hasValueFunc(contact.r)" once-html="contact.r"></div>
+      <span once-html="contact.n + '<br/>'"></span>
     </li>
 
     <li ng-show="helpers.hasValueFunc(firm.cml)">
@@ -40,7 +40,7 @@
     </li>
 
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts">
-      <span>{{contact.n}}</span> <!--<br />     
+      <span once-html="contact.n"></span> <!--<br />     
       <span ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}<br /></span>-->
     </li>
   </ul>

@@ -37,7 +37,7 @@
   <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
     <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:'n' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
       <div ng-bind-html="firm.n" class="boldBlue"></div><br />
-      <span>{{firm.l}}</span>
+      <span once-html="firm.l"></span>
     </li>
   </ul>
 

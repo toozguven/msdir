@@ -18,6 +18,8 @@
     return true;
   }
 
+  $scope.positiveIdsOnly = function ( item ) { return item.id > 0 };
+
 
   dataMgr.setScopeCountries( function ( data )
   {
@@ -32,7 +34,9 @@
       } catch ( e ) { }
 
       if ( $scope.state )
+      {
         $scope.selectedStateId = $scope.state.id;
+      }
 
       dataMgr.setScopeContacts( function ( data )
       {

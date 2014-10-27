@@ -18,7 +18,7 @@
 <div class="details" ng-show="helpers.showLoading == false">
   <div class="subHeader firstContent">
     <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <h4>{{firm.l}}</h4>
+    <h4 once-html="firm.l"></h4>
     <br />
   </div>
 
@@ -37,7 +37,7 @@
 
     <li class="topcoat-list__item">
       <div>Facsimile</div>
-      <span>{{firm.f}}</span>      
+      <span once-html="firm.f"></span>      
     </li>
 
     <li class="topcoat-list__item">
