@@ -21,7 +21,7 @@
 
 
   var w = angular.element( $window );
-  $scope.getInnerHeight = function ()
+  $scope.getHeight = function ()
   {
     return w[0].innerHeight;
   };
