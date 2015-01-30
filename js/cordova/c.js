@@ -179,13 +179,20 @@ function getDateOfWeekAgoAsInt()
 {
   var theDate = new Date();
   theDate.setDate( theDate.getDate() - 5 );
+  var min = theDate.getMinutes();
+  var hh = theDate.getHours();
   var dd = theDate.getDate();
   var mm = theDate.getMonth() + 1; //January is 0!
   var yyyy = theDate.getFullYear();
+
+
+  if ( min < 10 ) min = '0' + min;
+
+  if ( hh < 10 ) hh = '0' + hh;
 
   if ( dd < 10 ) dd = '0' + dd;
 
   if ( mm < 10 ) mm = '0' + mm;
 
-  return parseInt( yyyy + '' + mm + '' + dd );
+  return parseInt( yyyy + '' + mm + '' + dd + '' + hh + '' + min );
 }

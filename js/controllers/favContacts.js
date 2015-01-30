@@ -1,7 +1,7 @@
-﻿ngapp.controller( 'FindFirmsCtrl', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'FavContactsCtrl', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
-  $scope.firms = [];
+  $scope.contacts = [];
   
   $scope.searchDelayed = $routeParams.phrase;
   $scope.search = $routeParams.phrase;
@@ -17,28 +17,12 @@
     return true;
   }
 
-  $scope.relevanceFunc = function ( firm )
-  {
-    if ( firm.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
-      return 1;
-
-    if ( firm.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
-      return 2;
-
-    return 999;
-  }
-
-  dataMgr.setScopeFirms( function ( data )
+  dataMgr.setScopeFavContacts( function ( data )
   {
     $timeout( function ()
     {
-      $scope.firms = data;
+      $scope.contacts = data;
       $scope.helpers.showLoading = false;
-
-      /*if ( ($filter( "filter" )( $scope.firms, $scope.search )).length <= 0)
-      {
-        $location.path( "findContacts/" + $scope.search );
-      }*/
 
     }, $scope.helpers.renderDelay );
   } );

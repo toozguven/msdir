@@ -1,6 +1,7 @@
 ﻿ngapp.controller( 'ContactCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $timeout )
 {
   $scope.helpers = factory.getHelpers();
+  $scope.dataMgr = dataMgr;
   
   dataMgr.setScopeContacts( function ( data )
   {
@@ -12,6 +13,12 @@
     }, $scope.helpers.renderDelay );
 
   } );
+
+
+  $scope.toggleBookmark = function ()
+  {
+
+  }
   
   $anchorScroll();
 } );

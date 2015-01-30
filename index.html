@@ -14,6 +14,17 @@
   <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <title>MSIL Directory</title>
+  <script>
+    //localStorage.removeItem( "MStphIsFirstUse" );
+    var sIsFirstUse = localStorage.getItem( "MStphIsFirstUse" );
+    if ( sIsFirstUse && sIsFirstUse == "false" )
+    {
+      
+    }
+    else {
+      window.location.href = "init.html";
+    }
+  </script>
 </head>
 <body>
   
@@ -44,15 +55,15 @@
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 33%">
-        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/firms')}}" ng-click="helpers.g('/firms')">
-          <i class="fa fa-university"></i>
-          <span class="miniIconTxt">Firms</span>
-        </span>
-      </label>
-      <label class="topcoat-tab-bar__item" style="width: 33%">
         <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/contacts')}}" ng-click="helpers.g('/contacts')">
           <i class="fa fa-group"></i>
           <span class="miniIconTxt">People</span>
+        </span>
+      </label>
+      <label class="topcoat-tab-bar__item" style="width: 33%">
+        <span class="topcoat-tab-bar__button {{helpers.getNavSelectedCss('/firms')}}" ng-click="helpers.g('/firms')">
+          <i class="fa fa-university"></i>
+          <span class="miniIconTxt faUniBottomLabel">Firms</span>
         </span>
       </label>
       <label class="topcoat-tab-bar__item" style="width: 34%"> 
@@ -73,9 +84,12 @@
   <script type="text/javascript" src="js/lib/angular-once.js"></script>
   <script src="js/lib/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/dir.js"></script>
+  <script type="text/javascript" src="js/controllers/firstTime.js"></script>
   <script type="text/javascript" src="js/controllers/splash.js"></script>
   <script type="text/javascript" src="js/controllers/firms.js"></script>
   <script type="text/javascript" src="js/controllers/contacts.js"></script>
+  <script type="text/javascript" src="js/controllers/favContacts.js"></script>
+  <script type="text/javascript" src="js/controllers/favFirms.js"></script>
   <script type="text/javascript" src="js/controllers/appInfo.js"></script>
   <script type="text/javascript" src="js/controllers/aboutUs.js"></script>
   <script type="text/javascript" src="js/controllers/contactUs.js"></script>

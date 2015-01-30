@@ -22,6 +22,17 @@
     return true;
   }
 
+  $scope.relevanceFunc = function ( contact )
+  {
+    if ( contact.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
+      return 1;
+
+    if ( contact.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
+      return 2;
+
+    return 999;
+  }
+
   dataMgr.setScopeContacts( function ( data )
   {
     $timeout( function ()

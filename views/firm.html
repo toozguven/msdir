@@ -19,21 +19,27 @@
 
   <div class="subHeader">
     <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <h4 once-html="firm.l"></h4>
+    <h4 once-html="firm.l"></h4>  
+    <span class="frmStatus"  ng-show="helpers.hasValueFunc(firm.st)" ng-bind-html="helpers.getFirmStatus(firm)"></span>
+    <span class="miniBtnWithIcon frmBkmrkBtn" ng-click="dataMgr.toggleFavourite(firm.id, 'firm')">
+      <i class="fa fa-star"></i>
+      {{dataMgr.getFavLabel(firm.id, 'firm')}}
+    </span>
+    
+    <div once-html="firm.no" ng-show="helpers.hasValueFunc(firm.no)"></div>
   </div>
 
   <ul class="topcoat-list__container list">
     
     <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)" ng-click="helpers.c(firm.ilid);">
-      <span>
         <div>International Liaison</div>
         <span class="lstItmDesc lstSpan" once-html="firm.il"></span>
-      </span>
+
     </li>
 
-    <li class="topcoat-list__item chevronLi" ng-show="firm.cs" ng-click="helpers.g('/fc/' + firm.id);">
+    <li class="topcoat-list__item chevronLi" ng-show="firm.cs.length > 0 || firm.ics.length > 0" ng-click="helpers.g('/fc/' + firm.id);">
       <span>
-        <div>Main Contacts</div>
+        <div>Contacts</div>
         <span class="lstItmDesc lstSpan">View the list of partners</span>    
       </span>
     </li>

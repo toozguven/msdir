@@ -15,8 +15,9 @@
     {
       dataMgr.setScopeContacts( function ( data )
       {
-        $scope.contacts = dataMgr.getMainContactsForFirm( data, $scope.firm );
         $scope.internationalContacts = dataMgr.getInternationalContactsForFirm( data, $scope.firm );
+        $scope.contacts = dataMgr.getMainContactsForFirm( data, $scope.firm, $scope.internationalContacts );
+        
 
         $scope.helpers.showLoading = false;
       } );

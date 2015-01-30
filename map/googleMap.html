@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place details</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      .controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        padding: 0 11px 0 13px;
+        width: 400px;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px;  /* Regular padding-left + 1. */
+        width: 401px;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <script>
+var map;
+var markers = [];
+var mstphMarkers = [];
+
+function initialize() {
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: new google.maps.LatLng(53.65914, 0.072050),
+    zoom: 7
+  });
+  
+  var currentMarker = null;
+  
+  
+  if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(function (position) {
+           initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+           map.setCenter(initialLocation);
+           updateMStphLocations( initialLocation );
+       });
+   }
+   
+   google.maps.event.addListener(map, 'click', function(event) {
+      startLocation = event.latLng;
+      setTimeout(function () { placeMarker(startLocation)}, 1);
+  });
+  
+  function placeMarker(location) {
+    
+    clearMarkers();
+    
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    
+    markers.push(marker);
+    updateMStphLocations(location);
+    
+    map.panTo(location);
+  }
+  
+  function clearMarkers() {
+    for (var i = 0, marker; marker = markers[i]; i++) {
+      marker.setMap(null);
+    }
+  }
+
+
+  // Create the search box and link it to the UI element.
+  var input = /** @type {HTMLInputElement} */(
+      document.getElementById('pac-input'));
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var searchBox = new google.maps.places.SearchBox(
+    /** @type {HTMLInputElement} */(input));
+
+  // [START region_getplaces]
+  // Listen for the event fired when the user selects an item from the
+  // pick list. Retrieve the matching places for that item.
+  google.maps.event.addListener(searchBox, 'places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+    
+    clearMarkers();
+
+    // For each place, get the icon, place name, and location.
+    markers = [];
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0, place; place = places[i]; i++) {
+      var image = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      var marker = new google.maps.Marker({
+        map: map,
+        title: place.name,
+        position: place.geometry.location
+      });
+
+      markers.push(marker);
+      updateMStphLocations(place.geometry.location);
+
+      bounds.extend(place.geometry.location);
+      
+      map.panTo(place.geometry.location);
+    }
+
+    //map.fitBounds(bounds);
+    
+  });
+  // [END region_getplaces]
+}
+
+function updateMStphLocations(latLongLocation) {
+  //alert("cal MStph Locations API with LAT: " + latLongLocation.lat() + " and LONG: " + latLongLocation.lng())
+  document.getElementById( "locs" ).src = "https://onlineforms.moorestephens.org/MsCom/GeoLocation/ShowFirms?centreLat=" + latLongLocation.lat() + "&centreLon=" + latLongLocation.lng() + "&radiusInMiles=50"
+}
+
+function showMStphOffice(lat, long, id)
+{
+  var loc = new google.maps.LatLng( lat, long );
+
+  var marker = new google.maps.Marker( {
+    position: loc,
+    map: map,
+    icon: "http://www.moorestephens.com/images/MS_logo_32x24.gif"
+  } );
+
+  mstphMarkers.push( { "id": id, "marker": marker });
+
+  map.panTo( loc );
+}
+
+function clearMStphMarkers() {
+  for ( var i = 0, marker; marker = mstphMarkers[i]; i++ )
+  {
+    marker.setMap( null );
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map-canvas" style="width: 70%; float: left"></div>
+
+    <div style="width: 29%; float: right">
+      <iframe id="locs" src="" seamless="seamless" style="border: 0; width: 99%; height: 100%; min-height: 666px; position: relative; top:0; right: 0; bottom: 0" frameborder="0" height="100%" width="100%"></iframe>
+    </div>
+
+    <br />
+
+    <input type="button" onclick="markMStphOffice(55, 1)" value="ss" />
+
+
+    <script>
+      /*var ngapp = angular.module( 'dir', ['ngRoute'] )
+        .config( function ( $routeProvider )
+        {
+          $routeProvider
+          .when( '/firms', {
+            controller: 'FirmsCtrl',
+            templateUrl: 'firms.html'
+          } )
+          .otherwise( {
+            controller: 'MyCtrl',
+            templateUrl: 'firms.html'
+          } );
+        } );
+
+      ngapp.controller( 'MyCtrl', function ( $scope, dataMgr )
+      {
+        $scope.centreLocation = null;
+
+        $scope.firms = [
+                        {name: "1111"},
+                        {name: "2222"},
+                       ];
+        dataMgr.setScopeFirms(51, 0, 44, function (firms) {
+          $scope.firms = firms;
+        });
+
+      } );
+
+      ngapp.factory( "dataMgr", function ( $http )
+      {
+        var factory = {};
+
+        factory.setScopeFirms = function ( lat, lon, radiusInMiles, callback )
+        {
+          var url = "http://localhost:58832/MsCom/GeoLocation/GetFirmsJson?centreLat=" + lat + "&centreLon=" + lon + "&radiusInMiles=" + radiusInMiles;
+          
+          jQuery.getScript( url )
+                .success( function ( data ) { callback( data ); } );
+        };
+
+        return factory;
+      } );*/
+    </script>
+  </body>
+</html>
+

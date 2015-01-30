@@ -16,11 +16,8 @@
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
-
-    <h5 style="float: left; min-height: 20px; margin-right: 10px;">©</h5>
-    <h5 style="padding-left: 10px;">
-      Moore Stephens International Limited
-    </h5>
+    <h3 class="blue">Moore Stephens International Limited</h3>
+    <h4 class="blue">International Directory Mobile App</h4>
     <p>
       This directory lists the firms and companies that are members of Moore Stephens International Limited, and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
     </p>
@@ -29,8 +26,41 @@
       Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them.
     </p>
 
+    <br />
+
+    <h5 style="float: left; min-height: 20px; margin-right: 10px;">©</h5>
+    <h5 style="padding-left: 10px;">
+      Moore Stephens International Limited
+    </h5>
+
+    <br />
 
   </div>
+
+  
+  <ul class="topcoat-list__container list contactList">
+
+    <li class="topcoat-list__item chevronLi" ng-click="helpers.gotoTerms();">
+      <div>Terms of Use</div>
+      <span class="lstSpan">{{dataMgr.getAgreedDate()}}</span>
+    </li>
+    
+    <li class="topcoat-list__item">
+      <div>Directory data last updated on</div>
+      <span class="lstSpan">{{LastUpdatedOn}}</span>
+      
+      <span class="miniBtn" style="margin-left: 0px;" ng-click="updateData()">REFRESH DATA</span>
+      <br />
+    </li>
+
+    <li class="topcoat-list__item">
+      <div class="lbl">App version</div>
+      <span style="display: block">{{AppVersion}}</span>      
+    </li>
+
+
+  </ul>
+
 </div>
 
 

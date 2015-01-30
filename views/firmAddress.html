@@ -28,19 +28,19 @@
       <span ng-bind-html="firm.ad"></span>     
     </li>
 
-    <li class="topcoat-list__item">
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.mad)">
       <span>
         <div>Mailing Address</div>
         <p ng-bind-html="firm.mad"></p>     
       </span>
     </li>
 
-    <li class="topcoat-list__item">
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.f)">
       <div>Facsimile</div>
       <span once-html="firm.f"></span>      
     </li>
 
-    <li class="topcoat-list__item">
+    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
       <span ng-bind-html="firm.cm"></span>      
     </li>
 

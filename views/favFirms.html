@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Firms Search</h4>
+    <h4>Bookmarks</h4>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
 
   <div class="pad10">
-    <label class="topcoat-radio-button" ng-click="helpers.g('/findContacts/' + search)">
+    <label class="topcoat-radio-button" ng-click="helpers.g('/favContacts/' + search)">
       <input type="radio" name="topcoat">
       <div class="topcoat-radio-button__checkmark"></div>
       Contacts
@@ -26,20 +26,16 @@
     <label class="topcoat-radio-button">
       <input type="radio" name="topcoat" checked="checked">
       <div class="topcoat-radio-button__checkmark"></div>
-      Firms
+      Member Firms
     </label>
-
-    <br /><br />
-
-    <div class="mstphInputFieldBordered">        
-      <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
-    </div>
   </div>
-  
+
+  <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->
+
   <div class="prevNextBtnDiv" ng-show="(firms | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(firms | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
   <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
-    <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:[relevanceFunc, 'n', 'l'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
+    <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:'n' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
       <div ng-bind-html="firm.n" class="boldBlue"></div><br />
       <span once-html="firm.l"></span>
       <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
@@ -47,7 +43,7 @@
   </ul>
 
   <p ng-show="!((firms|filter:searchDelayedFunc).length > 0)" class="pad10">
-    No member firms found mathing the search criteria.
+    You have no bookmarked firms.
   </p>
 
 </div>

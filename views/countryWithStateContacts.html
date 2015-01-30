@@ -15,29 +15,42 @@
 </p>
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="topcoat-tab-bar centAlign" style="margin:auto; padding-top: 10px;">
-    <select id="ddlState" ng-options="state.id as state.n for state in country.states | filter:positiveIdsOnly" ng-model="selectedStateId" ng-change="redirectToState()">
-    </select>
-  </div>
+  <div class="pad10">
+    <div class="mstphInputFieldBordered">
+      <select id="ddlState" ng-options="state.id as state.n for state in country.states | filter:positiveIdsOnly" ng-model="selectedStateId" ng-change="redirectToState()"></select>
+    </div>
 
-  <div class="marg10">
-    <label class="topcoat-radio-button" ng-click="helpers.g('/countryWithState/' + country.id + '/' + selectedStateId)">
-      <input type="radio" name="topcoat">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Member Firms
-    </label>
-    &nbsp;&nbsp;
-    <label class="topcoat-radio-button">
-      <input type="radio" name="topcoat" checked="checked">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Contacts
-    </label>
-  </div>
+    <br />
 
-  <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list">
+    <!--<div>
+      <label class="topcoat-radio-button">
+        <input type="radio" name="topcoat" checked="checked">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Contacts
+      </label>
+      &nbsp;&nbsp;
+      <label class="topcoat-radio-button" ng-click="helpers.g('/countryWithState/' + country.id + '/' + selectedStateId)">
+        <input type="radio" name="topcoat">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Member Firms
+      </label>
+    </div>
 
-  <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+    <br />-->
 
+    <div class="mstphInputFieldBordered">        
+      <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+    </div>
+
+    <br />
+
+    <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+
+
+  </div>  
+</div>  
+
+<div>
   <ul class="topcoat-list__container list firmList">
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
       <div once-text="contact.n" class="boldBlue"></div>

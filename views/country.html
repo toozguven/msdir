@@ -15,27 +15,34 @@
 </p>
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10">
-    <label class="topcoat-radio-button">
-      <input type="radio" name="topcoat" checked="checked">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Member Firms
-    </label>
-    &nbsp;&nbsp;
+  <!--<div class="pad10">
     <label class="topcoat-radio-button" ng-click="helpers.g('/countryContacts/' + country.id)">
       <input type="radio" name="topcoat">
       <div class="topcoat-radio-button__checkmark"></div>
       Contacts
     </label>
-  </div>
+    &nbsp;&nbsp;
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat" checked="checked">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Member Firms
+    </label>
+  </div>-->
 
-  <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list">
+  <div class="pad10" once-html="country.no" ng-show="helpers.hasValueFunc(country.no)"></div>
+
+  <div class="pad10" ng-show="towns.length > 1">
+    <div class="mstphInputFieldBordered">
+      <input class="mstphSearchbox" style="background: #EEE; width: 98%; font-size: 1rem;" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+    </div>
+  </div>
 
   <div ng-repeat="town in towns | filter:searchDelayed" class="topcoat-list">
     <h2 class="topcoat-list__header town bold" once-text="town.n"></h2>
     <ul class="topcoat-list__container list firmList">
       <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayed | filter:{tid: town.id}:true">
         <div once-html="firm.n"></div>
+        <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
       </li>
     </ul>
   </div>

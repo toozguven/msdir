@@ -1,4 +1,4 @@
-﻿ngapp.factory( "factory", function ( $http, $rootScope, $location, $route )
+﻿ngapp.factory( "factory", function ( $http, $rootScope, $location, $route, $window )
 {
   ngRootScope = $rootScope;
   ngRootScope.isOnline = -1;
@@ -20,6 +20,7 @@
   factory.getHelpers = function ()
   {
     var rtnVal = {
+      AppVersion: "1.0",
       hasValueFunc: function ( val )
       {
         return ( val && val.length > 2 && val != "0" && val != "666" );
@@ -39,7 +40,7 @@
       },      
       getContactImageUrl: function ( cid )
       {
-        return "https://api.moorestephens.org/i/msimage2.ashx?cid=" + cid;
+        return "https://api.moorestephens.org/i/msdirImg.ashx?cid=" + cid;
       },
       getContactProfileUrl: function ( cid )
       {
@@ -88,6 +89,34 @@
 
       },
 
+      getFirmStatus: function ( f )
+      {
+        if ( f && f.st )
+        {
+          return f.st;
+          if ( f.st.indexOf( "Umbrella" ) > -1 || f.st.indexOf( "umbrella" ) > -1 || f.st.indexOf( "UMBRELLA" ) > -1 )
+            return "";
+
+          return f.st;
+        }
+
+        return "";
+    
+        //if ( f.st == "Member" || f.st == "Member Firm" || f.st == "MEMBER" || f.st == "MEMBER FIRM" || f.st == "member firm" || f.st == "member firm" )
+        //  return "";
+
+        return f.st;
+      },
+
+      gotoTerms: function() {
+        $window.location.href = "init.html";
+      },
+
+      gotoApp: function ()
+      {
+        $window.location.href = "index.html";
+      },
+
       goBack: function (step) {
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick();
@@ -108,11 +137,17 @@
 
       getNavSelectedCss: function(path) {
         if ( path == "#" && $location.path() == "/" )
-          return "bottomNavSelected";
-        
+          return "bottomNavSelected";       
 
         if ( $location.path().indexOf( path ) > -1 )
           return "bottomNavSelected";
+
+        if ( ( $location.path().indexOf( "/c/" ) > -1 || $location.path().indexOf( "/countryContacts/" ) > -1 || $location.path().indexOf( "/countryWithStateContacts/" ) > -1 || $location.path().indexOf( "/findContacts/" ) > -1 || $location.path().indexOf( "/fc/" ) > -1 ) && path == "/contacts" )
+          return "bottomNavSelected";
+
+        if ( ( $location.path().indexOf( "/f/" ) > -1 || $location.path().indexOf( "/country/" ) > -1 || $location.path().indexOf( "/countryWithState/" ) > -1 || $location.path().indexOf( "/findFirms/" ) > -1 || $location.path().indexOf( "/fa/" ) > -1 ) && path == "/firms" )
+          return "bottomNavSelected";
+
         return "";
       },
       rootScope: ngRootScope,
@@ -135,6 +170,8 @@
       {
         if ( cname == "Former Yugoslav Republic of Macedonia" )
           return "F.Y.R. Macedonia";
+        if ( cname == "United States of America" )
+          return "USA";
         return cname;
       },
       getUrl: function ( url )

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h5 style="margin-left: -20px; color: #fff;">About Us</h5>
+    <h5>About Us</h5>
   </div>
 </div>
 
@@ -17,10 +17,7 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
 
-    <h5 style="float: left; min-height: 20px; margin-right: 10px;">©</h5>
-    <h5 style="padding-left: 10px;">
-      Moore Stephens International Limited
-    </h5>
+    <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
     
     <p>
       A wide range of professional services has been developed by the member firms over the 100 years since Moore Stephens was first founded to assit clients in meeting their cross-border commercial objectives. 
@@ -29,8 +26,9 @@
     </p>
 
     <p>
-      For more information, please visit www.moorestephens.com.
+      For more information, please visit <span class="blue bold" ng-click="helpers.openWebPage('hdnWebUrl')">www.moorestephens.com</span>.
     </p>
+    <input type="hidden" id="hdnWebUrl" value="http://www.moorestephens.com" />
 
   </div>
 </div>

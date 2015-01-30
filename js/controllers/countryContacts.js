@@ -18,6 +18,15 @@
     return true;
   }
 
+  $scope.customStateFilterFunc = function ( item )
+  {
+    return $scope.selectedStateId == item.sid;
+
+    return true;
+  }
+
+  //
+
   $scope.positiveIdsOnly = function ( item ) { return item.id > 0 };
 
 
@@ -30,7 +39,7 @@
 
       try
       {
-        $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid );
+        $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid == 0 ? 1 : $routeParams.sid );
       } catch ( e ) { }
 
       if ( $scope.state )

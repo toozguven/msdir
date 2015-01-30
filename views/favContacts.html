@@ -1,12 +1,12 @@
 ﻿&nbsp;
 <div class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.g('#')">
+    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
       <span class="icn prevIcn">&nbsp;</span>
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Contacts Search</h4>
+    <h4>Bookmarks</h4>
   </div>
 </div>
 
@@ -23,24 +23,20 @@
       Contacts
     </label>
     &nbsp;&nbsp;
-    <label class="topcoat-radio-button" ng-click="helpers.g('/findFirms/' + search)">
+    <label class="topcoat-radio-button" ng-click="helpers.g('/favFirms/' + search)">
       <input type="radio" name="topcoat">
       <div class="topcoat-radio-button__checkmark"></div>
-      Firms
+      Member Firms
     </label>
-
-    <br /><br />
-
-    <div class="mstphInputFieldBordered">        
-      <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
-    </div>
   </div>
-    
+
+  <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->
+  
   <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
   <div>
     <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
-      <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
+      <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
         <div once-html="contact.n" class="boldBlue"></div>
         <div once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
         <span once-html="contact.f"></span>
@@ -50,7 +46,7 @@
   </div>
 
   <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false" class="pad10">
-    No contacts found mathing the search criteria.
+    You have no bookmarked contacts.
   </p>
 
 </div>

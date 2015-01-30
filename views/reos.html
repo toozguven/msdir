@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h5 style="margin-left: -20px; color: #fff;">Regional Executive Offices</h5>
+    <h5>Regional Executive Offices</h5>
   </div>
 </div>
 
@@ -18,16 +18,16 @@
 
   <div>
     <p class="pad10">
-      Tap on a region heading below to expand/collapse the details of the regional executive office and its contacts. 
+      Tap on a region heading below to expand/collapse the details of a regional executive office and its contacts. 
     </p>
   </div>
-
+  <!--<input value="{{currentlyOpenFirms}}" />-->
   <div ng-repeat="firm in reos" class="topcoat-list reoListItem">
     <h3 class="topcoat-list__header pad10" ng-click="toggleFirm(firm.reoid);">
       <a id="{{firm.reoid}}"></a>
       {{firm.sn}}
-      <i class="fa fa-angle-double-down fright" ng-show="!isVisible(firm.reoid)" style="color: #555"></i>
-      <i class="fa fa-angle-double-up fright" ng-show="isVisible(firm.reoid)" style="color: #555"></i>
+      <i class="fa fa-angle-double-down fright" ng-show="!isVisible(firm.reoid)"></i>
+      <i class="fa fa-angle-double-up fright" ng-show="isVisible(firm.reoid)"></i>
     </h3>
 
     <div  class="details reoDetailsDiv reoDetailsDiv{{firm.reoid}}" style="display: none">
@@ -39,11 +39,14 @@
         <div ng-show="helpers.hasValueFunc(firm.f)">
           <div once-html="'Facsimile: ' + firm.f"></div>
         </div>
+
+        <div once-html="firm.reon" ng-show="helpers.hasValueFunc(firm.no)"></div>
+
       </div>
 
       <ul class="topcoat-list__container list firmList">
         <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
-          <a href="tel:{{firm.t}}" ng-click="helpers.closeMenu()">
+          <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
             <div class="blue">Call Office</div>
             <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
             <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        

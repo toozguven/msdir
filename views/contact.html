@@ -17,11 +17,16 @@
 <div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
   <div class="subHeader contactHeader">
     <div class="fRight contactImg">
-      <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msimage2.ashx?cid={{contact.id}}" />
+      <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" />
     </div>
     <h2 class="boldBlue" once-html="contact.n"></h2>
     <span class="bold" once-html="contact.r"></span> <br />
-    <span ng-bind="contact.l + '&nbsp;'"></span>
+    <span ng-bind="contact.l + '&nbsp;'"></span> <br /><br />
+    <span class="miniBtnWithIcon" ng-click="dataMgr.toggleFavourite(contact.id, 'contact')">
+      <i class="fa fa-star"></i>
+      {{dataMgr.getFavLabel(contact.id, 'contact')}}
+    </span>
+    <div once-html="contact.no" ng-show="helpers.hasValueFunc(contact.no)"></div>
   </div>
 
    <ul class="topcoat-list__container list">

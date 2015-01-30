@@ -2,8 +2,6 @@ var ngRootScope;
 var globalDataMgr;
 
 
-
-
 var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'] )
 .config( function ( $routeProvider )
 {
@@ -16,9 +14,21 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     controller: 'ContactsCtrl',
     templateUrl: 'views/contacts.html'
   } )
+  .when( '/favContacts', {
+    controller: 'FavContactsCtrl',
+    templateUrl: 'views/favContacts.html'
+  } )
+  .when( '/favFirms', {
+    controller: 'FavFirmsCtrl',
+    templateUrl: 'views/favFirms.html'
+  } )
   .when( '/splash', {
     controller: 'SplashCtrl',
     templateUrl: 'views/splash.html'
+  } )
+  .when( '/firstTime', {
+    controller: 'FirstTimeCtrl',
+    templateUrl: 'views/firstTime.html'
   } )
   .when( '/aboutUs', {
     controller: 'AboutUsCtrl',
@@ -136,7 +146,8 @@ ngapp.filter( 'filterByState', function ()
   }
 } );
 
-ngapp.directive( 'mstphPaginate', function ()
+ngapp.directive( 'mstphPaginate', mstphPaginateFunc );
+function mstphPaginateFunc()
 {
   return {
     restrict: 'A',
@@ -236,27 +247,10 @@ ngapp.directive( 'mstphPaginate', function ()
           scope.mstphPaginate.totalNoOfItems = newValue; 
           initAndDrawFunc();
         } 
-      ); 
+      );       
     }
   };
-} );
-
-//ngapp.directive("rawAjaxBusyIndicator", function () {
-//  return {
-//  link: function (scope, element) {
-//    scope.$on( "ajax-start", function ()
-//    {
-//      ngRootScope.showLoading = true;
-//      //element.attr( "style", "display: block" );
-//    } );
-
-//    scope.$on("ajax-stop", function () {
-//      ngRootScope.showLoading = false;
-//      //element.attr( "style", "display: none" );
-//      });
-//    }
-//  };
-//});
+}
 
 
 ngapp.controller( 'MenuCtrl', ['$scope', '$rootScope', '$location', 'factory', 'dataMgr', function ( $scope, $rootScope, $location, factory, dataMgr )
@@ -273,7 +267,6 @@ ngapp.controller( 'MenuCtrl', ['$scope', '$rootScope', '$location', 'factory', '
   } );
 
 }] );
-
 
 
 ngapp.directive( 'slideable', slideableFunc );
@@ -322,11 +315,8 @@ ngapp.directive( 'slideToggle', function ( $rootScope )
         //fixed app height so click on anywhere on the .app div will close the sub-menu
         setTimeout( function () { jQuery( ".app" ).height( jQuery( window ).height() ); }, 1 );
 
-        //var content = jQuery( '.slideable_content' );
 
-        //console_log( " content.clientHeight: " + content.height() );
-
-        var y = $rootScope.menuItemsCount * 55;
+        var y = $rootScope.menuItemsCount * 43;
         console_log( " height: " + y );
 
         if ( !$rootScope.menuVisible )

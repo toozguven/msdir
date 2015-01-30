@@ -1,4 +1,7 @@
-﻿ngapp.factory( "dataMgr", function ($http)
+﻿var months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+
+ngapp.factory( "dataMgr", function ( $http, $route )
 {
   /*constants*/
 
@@ -30,14 +33,14 @@
 
   if ( true || document.location.href.indexOf( "cdn.moorestephens.org" ) > -1 )
   {
-    REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json";
-    COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/committees.json";
-    COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/countries.json";
-    MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/menuItems.json";
-    FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/firms.json";
-    CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/correspondentFirms.json";
-    ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/associatedFirms.json";
-    CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/contacts.json";
+    REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json?rnd=234346347";
+    COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/committees.json?rnd=234346347";
+    COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/countries.json?rnd=234346347";
+    MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/menuItems.json?rnd=234346347";
+    FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/firms.json?rnd=234346347";
+    CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/correspondentFirms.json?rnd=234346347";
+    ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/associatedFirms.json?rnd=234346347";
+    CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/contacts.json?rnd=234346347";
 
     //REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/reos";
     //COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/committees";
@@ -49,22 +52,178 @@
     //CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/contacts";
   }
 
-  localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
-  localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
+  var resetLocalData = function ()
+  {
+    localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
 
+    //localStorage.removeItem( "MStphLastUpdated");
+
+    //localStorage.removeItem( "MStphFav_contact" );
+    //localStorage.removeItem( "MStphFav_firm" );
+  };
+
+  //resetLocalData();
+  
   var factory = {};
 
   /*helpers*/
+  factory.isFirstUse = function ()
+  {
+    var sIsFirstUse = localStorage.getItem( "MStphIsFirstUse" );
+    if ( sIsFirstUse && sIsFirstUse == "false" )
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  factory.recordAgreement = function ()
+  {
+    localStorage.setItem( "MStphIsFirstUse", "false" );
+    var now = new Date();
+    var nowString = "You agreed on " + now.getFullYear() + "-" + months[now.getMonth() + 1] + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
+    localStorage.setItem( "MStphTermsAgreedOn", nowString );
+  }
+
+  factory.getAgreedDate = function() {
+    return localStorage.getItem( "MStphTermsAgreedOn");
+  }
+
+  factory.getLastUpdatedDateAsString = function ()
+  {
+    try {
+      var d = localStorage.getItem( "MStphLastUpdated" );
+      if (d) {
+        var s = d.toString();
+        var sYear = s.charAt( 0 ) + s.charAt( 1 ) + s.charAt( 2 ) + s.charAt( 3 );
+        var sMonthNo = s.charAt( 4 ) + s.charAt( 5 );
+        var sDay = s.charAt( 6 ) + s.charAt( 7 );
+
+        var iYear = parseInt( sYear );
+        var iMonthNo = parseInt( sMonthNo );
+        var iDay = parseInt( sDay );
+
+
+        var rtnVal = iYear + " " + months[iMonthNo] + " " + iDay;
+
+        try {
+          var sHour = s.charAt( 8 ) + s.charAt( 9 );
+          var sMinute = s.charAt( 10 ) + s.charAt( 11 );
+
+          var iHour = parseInt( sHour );
+          var iMinute = parseInt( sMinute );
+
+          if (iHour > 0 || iMinute > 0)
+            return rtnVal + ( " " + sHour + ":" + sMinute );
+          else
+            return rtnVal;
+        }
+        catch ( e ) {
+          return rtnVal;
+        }
+        
+        
+      }
+    }
+    catch ( e )
+    {
+
+    }
+  }
+
+  factory.getFavLabel = function ( id, type )
+  {
+    var key = "MStphFav_" + type;
+    var existingFavs = localStorage.getItem( key );
+    var existingFavArray = new Array();
+
+    console_log( "existingFavs: " + existingFavs );
+
+    if ( existingFavs && existingFavs != "null" )
+      existingFavArray = existingFavs.split( "," );
+    else
+      return "ADD BOOKMARK";
+
+    var previouslyExisting = false;
+
+    for ( var i = 0; i < existingFavArray.length; i++ )
+    {
+      if ( existingFavArray[i] == id )
+        return "REMOVE BOOKMARK";
+    }
+
+    return "ADD BOOKMARK";
+  }
+
+  factory.toggleFavourite = function ( id, type )
+  {
+    var key = "MStphFav_" + type;
+    var existingFavs = localStorage.getItem( key );
+    var existingFavArray = new Array();
+    
+    if ( existingFavs && existingFavs != "null" )
+      existingFavArray = existingFavs.split(",");
+    else
+      existingFavArray = new Array();
+
+    console_log( "existingFavArray: " + existingFavArray );
+
+    var previouslyExisting = false;
+
+    for ( var i = 0; i < existingFavArray.length; i++ )
+    {
+      if ( existingFavArray[i] == id )
+      {
+        existingFavArray.splice( existingFavArray.indexOf( id ), 1 );
+        previouslyExisting = true;
+      }
+    }
+
+    if ( !previouslyExisting )
+    {
+      existingFavArray.push( id );
+      alert("Bookmark has been added.");
+    }
+    else
+    {
+      alert( "Bookmark has been removed." );
+    }
+
+    localStorage.setItem( key, existingFavArray.join(",") );
+
+    existingFavs = localStorage.getItem( key );
+    console_log( "existingFavs: " + existingFavs );
+
+    //$route.reload();
+  }
+
+  factory.getFavIdArray = function ( type )
+  {
+    var key = "MStphFav_" + type;
+    var existingFavs = localStorage.getItem( key );
+    var existingFavArray = new Array();
+
+    if ( existingFavs && existingFavs != "null" )
+      existingFavArray = existingFavs.split( "," );
+    else
+      existingFavArray = new Array();
+
+    return existingFavArray;
+  }
+
   factory.persistJsonToLocalStorage = function ( key, value )
   {
     //console_log( "saving to localStorage: " + key );
     localStorage.setItem( key, JSON.stringify( value ) );
+    localStorage.setItem( "MStphLastUpdated", value.lastUpdated );
   }
 
   factory.readDataFromLocalStorage = function ( key ) //this function expects the data (to be read) to have a property called lastUpdated
@@ -104,7 +263,7 @@
 
     return rtnVal;
   }
-
+   
 
   /*#region REOs*/
   factory.setScopeREOs = function ( callback )
@@ -125,12 +284,12 @@
       callback( localREOs.d );
     }
   }
+  /*#endregion*/
 
 
 
 
-
-  /*#region Comms*/
+  /*#region Comms
   factory.setScopeComms = function ( callback )
   {
     var localComms = factory.readDataFromLocalStorage( COMMS_LOCAL_STORAGE_KEY ); //read from localStorage
@@ -149,7 +308,7 @@
       callback( localComms.d );
     }
   }
-
+  */
 
 
 
@@ -200,6 +359,8 @@
       return states[0];
     }
   }
+  /*#endregion*/
+
 
 
   /*#region MenuItems*/
@@ -279,6 +440,54 @@
       callback(localData.d);
     }
   }
+  
+  factory.setScopeFavFirms = function ( callback )
+  {
+    var firmsFound = [];
+
+    var favIds = factory.getFavIdArray( "firm" );
+
+    factory.setScopeFirms( function ( firms )
+    { //first check the main list of firms
+      firmsFound = firmsFound.concat( factory.getFirms( firms, favIds ) );
+      if ( false && firmsFound )
+        callback( firmsFound );
+      else
+      {
+        factory.setScopeCorrespondentFirms( function ( correspondentFirms ) //then try correspondent firms
+        {
+          firmsFound = firmsFound.concat( factory.getFirms( correspondentFirms, favIds ) );
+          if ( false && firmsFound )
+            callback( firmsFound );
+          else
+          {
+            factory.setScopeAssociatedFirms( function ( associatedFirms ) //then try associated firms
+            {
+              try
+              {
+                firmsFound = firmsFound.concat( factory.getFirms( associatedFirms, favIds ) );
+              }
+              catch ( e )
+              {
+                //firmsFound = null;
+              }
+              if ( false && firmsFound )
+                callback( firmsFound );
+              else
+              {
+                factory.setScopeREOs( function ( reos ) //then try associated firms
+                {
+                  firmsFound = firmsFound.concat( factory.getFirms( reos, favIds ) );
+                  if ( firmsFound )
+                    callback( firmsFound );
+                } );
+              }
+            } );
+          }
+        } );
+      }
+    } );
+  }
 
   factory.setScopeSingleFirm = function ( fid, callback )
   {
@@ -334,6 +543,22 @@
     return null;
   }
 
+  factory.getFirms = function ( firms, idArray )
+  {
+    var rtnVal = [];
+
+    for ( var i = 0; i < firms.length; i++ )
+    {
+      for ( var j = 0; j < idArray.length; j++ )
+      {
+        if ( firms[i].id == idArray[j] )
+          rtnVal.push( firms[i] );
+      }
+    }
+    return rtnVal;
+  }
+  /*#endregion*/
+
   /*factory.filterFirmsByCountryId = function ( data, countryId )
   {
     return data;
@@ -370,6 +595,19 @@
     }
   }
   
+  factory.setScopeFavContacts = function ( callback )
+  {
+    var contactsFound = [];
+
+    var favIds = factory.getFavIdArray( "contact" );
+
+    factory.setScopeContacts( function ( contacts )
+    {
+      contactsFound = contactsFound.concat( factory.getContacts( contacts, favIds ) );
+      callback( contactsFound );
+    } );
+  };
+
   factory.getContact = function ( contacts, id )
   {
     for ( var i = 0; i < contacts.length; i++ )
@@ -380,7 +618,22 @@
     return null;
   }
 
-  factory.getMainContactsForFirm = function ( allContacts, firm )
+  factory.getContacts = function ( contacts, idArray )
+  {
+    var rtnVal = [];
+
+    for ( var i = 0; i < contacts.length; i++ )
+    {
+      for ( var j = 0; j < idArray.length; j++ )
+      {
+        if ( contacts[i].id == idArray[j] )
+          rtnVal.push( contacts[i] );
+      }
+    }
+    return rtnVal;
+  }
+
+  factory.getMainContactsForFirm = function ( allContacts, firm, contactsToExclude )
   {
     var rtnVal = [];
     
@@ -389,11 +642,19 @@
       var contact = factory.getContact( allContacts, firm.cs[i].id );
       if ( contact )
       {
-        //overwrite role
-        contact.r = firm.cs[i].r;
-        //overwrite location
-        contact.l = firm.cs[i].l;
-        rtnVal.push( contact );
+        var toBeExcluded = false;
+        for ( var j = 0; j < contactsToExclude.length; j++ )
+          if ( contactsToExclude[j].id == contact.id )
+            toBeExcluded = true;
+
+        if ( toBeExcluded == false )
+        {
+          //overwrite role
+          contact.r = firm.cs[i].r;
+          //overwrite location
+          contact.l = firm.cs[i].l;
+          rtnVal.push( contact );
+        }
       }
     }
     return rtnVal;
@@ -418,9 +679,43 @@
     }
     return rtnVal;
   }
+  /*#endregion*/
 
 
+  factory.updateDataNow = function (callback)
+  {
+    resetLocalData();
 
+    factory.setScopeMenuItems( function ()  {
+      factory.setScopeCountries( function () {
+        factory.setScopeFirms( function ()
+        {
+          factory.setScopeContacts( function ()
+          {
+            factory.setScopeREOs( function ()
+            {
+              factory.setScopeCorrespondentFirms( function ()
+              {
+                factory.setScopeAssociatedFirms( function ()
+                {
+                  callback( true );
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+
+    localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
+  }
 
 
   return factory;

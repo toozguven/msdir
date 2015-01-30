@@ -21,30 +21,42 @@
     <h4 once-html="firm.l"></h4>
   </div>
 
-  <ul class="topcoat-list__container list contactList">
-    <li ng-show="internationalContacts.length > 0">
-      <h2 class="topcoat-list__header town">Main Contacts</h2>
+  <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cmp)">
+    <li>
+      <p class="pad10Sides" ng-bind-html="firm.cmp"></p>
+    </li>
+  </ul>
+
+  <ul class="topcoat-list__container list contactList" ng-show="internationalContacts.length > 0">
+    <li>
+      <h2 class="topcoat-list__header town">International Liaison{{internationalContacts.length > 1 ? "s" : ""}}</h2>
     </li>
 
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in internationalContacts">
       <div ng-show="helpers.hasValueFunc(contact.r)" once-html="contact.r"></div>
       <span once-html="contact.n + '<br/>'"></span>
     </li>
+  </ul>
 
-    <li ng-show="helpers.hasValueFunc(firm.cml)">
-      <p class="pad10" ng-bind-html="firm.cml"></p>
+  <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cml)">
+    <li>
+      <p class="pad10Sides" ng-bind-html="firm.cml"></p>
     </li>
+  </ul>
 
-    <li ng-show="contacts.length > 0">
-      <h2 class="topcoat-list__header town">All Contacts</h2>
+
+  <ul class="topcoat-list__container list contactList" ng-show="contacts.length > 0">
+    <li>
+      <h2 class="topcoat-list__header town">{{contacts.length > 1 ? "Partners/Directors" : contacts[0].r}}</h2>
     </li>
 
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts">
+      <div ng-show="helpers.hasValueFunc(contact.r) && contacts.length > 1" once-html="contact.r"></div>
       <span once-html="contact.n"></span> <!--<br />     
       <span ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}<br /></span>-->
     </li>
   </ul>
-
+  
 </div>
 
 <div class="bottomSpace"></div>
