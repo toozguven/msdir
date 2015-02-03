@@ -12,10 +12,9 @@
   {
     $route.reload();
   };
-
+  
   var factory = {};
   
-
   //generic helpers
   factory.getHelpers = function ()
   {

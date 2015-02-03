@@ -1,5 +1,5 @@
 &nbsp;
-<div class="topcoat-navigation-bar topFixedBar">
+<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
     <div class="prevIcnDiv" ng-click="helpers.g('/firms')">
       <span class="icn prevIcn">&nbsp;</span>
@@ -11,7 +11,7 @@
 </div>
 
 <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
 </p>
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
@@ -33,14 +33,15 @@
 
   <div class="pad10" ng-show="towns.length > 1">
     <div class="mstphInputFieldBordered">
-      <input class="mstphSearchbox" style="background: #EEE; width: 98%; font-size: 1rem;" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+      <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
+      <input type="search" class="mstphSearchbox" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
     </div>
   </div>
 
   <div ng-repeat="town in towns | filter:searchDelayed" class="topcoat-list">
     <h2 class="topcoat-list__header town bold" once-text="town.n"></h2>
     <ul class="topcoat-list__container list firmList">
-      <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayed | filter:{tid: town.id}:true">
+      <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayedFunc | filter:{tid: town.id}:true">
         <div once-html="firm.n"></div>
         <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
       </li>

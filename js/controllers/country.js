@@ -8,7 +8,17 @@
   $scope.firms = [];
 
   $scope.searchDelayed = "";
+
   $scope.helpers.delayModelSetting( $scope, $timeout, "search", function ( val ) { $scope.searchDelayed = val; } );
+
+  $scope.searchDelayedFunc = function ( item )
+  {
+    if ( $scope.searchDelayed )
+      return item.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 
+             || item.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1;
+
+    return true;
+  }
 
   dataMgr.setScopeCountries( function ( data )
   {
@@ -35,7 +45,8 @@
     }, $scope.helpers.renderDelay );
 
   } );
-   
+  
+  
   
   $scope.redirectToState = function ()
   {

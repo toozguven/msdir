@@ -1,5 +1,5 @@
 ﻿&nbsp;
-<div class="topcoat-navigation-bar topFixedBar">
+<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
     <div class="prevIcnDiv" ng-click="helpers.goBack()">
       <span class="icn prevIcn">&nbsp;</span>
@@ -12,7 +12,7 @@
 
   
 <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
 </p>
 
 
@@ -30,8 +30,9 @@
       <br />
 
       <div class="mstphInputFieldBordered">        
-        <input class="mstphSearchbox" ng-model="search" type="text" placeholder="Or, just search" ng-keypress=" $event.keyCode == 13 ? gotoFirmSearch(search) : false" onfocus="jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
+        <input class="mstphSearchbox" ng-model="search" type="search" placeholder="Or, just search" ng-keypress=" $event.keyCode == 13 ? gotoFirmSearch(search) : false" onfocus="jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
         <div class="mstphBtnArrow absPos">
+          <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
           <span class="inlineFindBtn" ng-click="gotoFirmSearch(search)">FIND</span>
         </div>
       </div>

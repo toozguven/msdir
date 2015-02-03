@@ -1,6 +1,6 @@
 ﻿&nbsp;
   <p ng-show="helpers.showLoading == true" class="centAlign firstContent">
-    <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
   <div ng-show="helpers.showLoading == false" style="">
@@ -28,7 +28,7 @@
         
 
         <div class="splashQuickFindDiv">
-          <input class="mstphSearchbox mstphInputFieldBordered" ng-model="search" type="text" placeholder="Search phrase" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
+          <input class="mstphSearchbox mstphInputFieldBordered" ng-model="search" type="search" placeholder="Search phrase" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
           <span class="mstphBtnArrow">
             <span ng-click="gotoSearch(search)">QUICK FIND</span>
           </span>

@@ -751,7 +751,6 @@ select {
   margin-bottom: 60px;
   z-index: 5555;
   height: 4px;
-  border-top: 2px dotted #ccc;
 }
 .topcoat-tab-bar {
   width: 100%;
@@ -1022,6 +1021,33 @@ background-color: #00AEEF;
   padding: 10px;
 }
 
+.fa-times1
+{
+  position: absolute;
+  right: 30px;
+  margin-top: 4px;
+  color:#bbb;
+}
+
+.fa-times2
+{
+  position: absolute;
+  right: 65px;
+  color:#bbb;
+}
+
+.fa-search2 {
+  color: #00AEEF !important;
+}
+
+  .mstphInputFieldBordered select {
+    background: #EEE; width: 100%; font-size: 1rem; margin-left: -4px;
+  }
+
+  .mstphInputFieldBordered .mstphSearchbox {
+    background: #EEE; width: 88%; font-size: 1rem;
+  }
+
 
 
 
@@ -1034,13 +1060,7 @@ background-color: #00AEEF;
   left: 1%; right: 1%; color: #00AEEF;
 }
 
-.mstphInputFieldBordered select {
-  background: #EEE; width: 100%; font-size: 1rem; margin-left: -4px;
-}
 
-.mstphInputFieldBordered .mstphSearchbox {
-  background: #EEE; width: 70%; font-size: 1rem;
-}
 .absPos {
   position: absolute;
 }

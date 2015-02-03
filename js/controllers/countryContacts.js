@@ -13,9 +13,24 @@
   $scope.searchDelayedFunc = function ( item )
   {
     if ( $scope.searchDelayed )
-      return item.n.toLowerCase().indexOf( $scope.searchDelayed ) > -1;
+      return item.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1
+              || ( item.nfs && item.nfs.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
+              || item.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1;
 
     return true;
+  }
+
+  $scope.relevanceFunc = function ( contact )
+  {
+    if ( $scope.searchDelayed )
+    {
+      if ( contact.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 || ( contact.nfs && contact.nfs.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 ) )
+        return 1;
+
+      if ( contact.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
+        return 2;
+    }
+    return 999;
   }
 
   $scope.customStateFilterFunc = function ( item )

@@ -1,5 +1,5 @@
 &nbsp;
-<div class="topcoat-navigation-bar topFixedBar">
+<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
     <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
       <span class="icn prevIcn">&nbsp;</span>
@@ -11,7 +11,7 @@
 </div>
 
 <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading data...
+  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
 </p>
 
 <div ng-show="helpers.showLoading == false" class="firstContent">

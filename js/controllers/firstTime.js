@@ -14,5 +14,4 @@ ngapp.controller( 'FirstTimeCtrl', function ( $scope, factory, dataMgr, $anchorS
   }
 
   $anchorScroll();
-
 } );
