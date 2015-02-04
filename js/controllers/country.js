@@ -51,7 +51,7 @@
   $scope.redirectToState = function ()
   {
     $scope.helpers.showLoading = true;
-    $location.path( "/countryWithState/" + $scope.countryId + "/" + $scope.selectedStateId );
+    $scope.helpers.g("/countryWithState/" + $scope.countryId + "/" + $scope.selectedStateId );
   }
 
   $anchorScroll();

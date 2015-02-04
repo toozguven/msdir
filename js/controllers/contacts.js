@@ -34,11 +34,9 @@
     $scope.helpers.showLoading = true;
 
     if ( $scope.selectedCountryId == "210" )
-      $location.path( "/countryWithStateContacts/" + $scope.selectedCountryId + "/0" );
-    /*else if ( $scope.selectedCountryId == "43" )
-      $location.path( "/china/" + $scope.selectedCountryId );*/
+      $scope.helpers.g("/countryWithStateContacts/" + $scope.selectedCountryId + "/0" );
     else
-      $location.path( "/countryContacts/" + $scope.selectedCountryId );
+      $scope.helpers.g("/countryContacts/" + $scope.selectedCountryId );
   }
 
   $scope.gotoContactSearch = function ( phrase )
@@ -49,7 +47,7 @@
         alert( "Search term must be at least 3 characters." );
       else
       {
-        $location.path( "/findContacts/" + phrase );
+        $scope.helpers.g("/findContacts/" + phrase );
       }
     }
     else
@@ -64,7 +62,7 @@
         alert( "Search term must be at least 3 characters." );
       else
       {
-        $location.path( "/findFirms/" + phrase );
+        $scope.helpers.g("/findFirms/" + phrase );
       }
     }
     else

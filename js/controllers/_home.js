@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'FirmsCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'HomeCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
 {
   //set global var so we can call it from setTimeout
   globalDataMgr = dataMgr;
@@ -23,7 +23,7 @@
   //async load other data
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 1 );
   $timeout( function () { globalDataMgr.setScopeContacts( function ( data ) { } );}, 11 );
-  //$timeout( function () { globalDataMgr.setScopeComms( function ( data ) { } );}, 22 );
+  $timeout( function () { globalDataMgr.setScopeComms( function ( data ) { } );}, 22 );
   $timeout( function () { globalDataMgr.setScopeREOs( function ( data ) { } ); }, 33 );
 
   

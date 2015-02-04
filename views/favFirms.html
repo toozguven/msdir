@@ -17,17 +17,19 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
 
   <div class="pad10">
-    <label class="topcoat-radio-button" ng-click="helpers.g('/favContacts/' + search)">
-      <input type="radio" name="topcoat">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Contacts
-    </label>
-    &nbsp;&nbsp;
-    <label class="topcoat-radio-button">
-      <input type="radio" name="topcoat" checked="checked">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Member Firms
-    </label>
+    <div class="mstphCFRadioDiv">
+      <label class="topcoat-radio-button" ng-click="helpers.g('/favContacts/' + search)">
+        <input type="radio" name="topcoat">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Contacts
+      </label>
+      &nbsp;&nbsp;
+      <label class="topcoat-radio-button">
+        <input type="radio" name="topcoat" checked="checked">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Firms
+      </label>
+    </div>
   </div>
 
   <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->

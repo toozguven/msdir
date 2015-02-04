@@ -30,7 +30,7 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
         alert( "Search term must be at least 3 characters." );
       else
       {
-        $location.path( "/findContacts/" + phrase );
+        $scope.helpers.g( "/findContacts/" + phrase );
       }
     }
     else

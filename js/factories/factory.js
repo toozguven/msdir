@@ -69,13 +69,13 @@
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick();
 
-        $location.path( "/f/" + fid );        
+        this.g( "/f/" + fid );        
       },
 
       c: function ( cid ) { 
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick(); 
-        $location.path( "/c/" + cid );
+        this.g( "/c/" + cid );
       },
       
       g: function ( path )

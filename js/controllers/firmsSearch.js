@@ -43,11 +43,6 @@
       $scope.firms = data;
       $scope.helpers.showLoading = false;
 
-      /*if ( ($filter( "filter" )( $scope.firms, $scope.search )).length <= 0)
-      {
-        $location.path( "findContacts/" + $scope.search );
-      }*/
-
     }, $scope.helpers.renderDelay );
   } );
 
