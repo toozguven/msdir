@@ -45,7 +45,7 @@
       <span class="lstSpan">{{dataMgr.getAgreedDate()}}</span>
     </li>
     
-    <li class="topcoat-list__item">
+    <li class="topcoat-list__item" ng-show="helpers.isOnline()">
       <div>Directory data last updated on</div>
       <span class="lstSpan">{{LastUpdatedOn}}</span>
       
