@@ -11,8 +11,16 @@
   $scope.searchDelayedFunc = function ( item )
   {
     if ( $scope.searchDelayed )
-      return  item.n.toLowerCase().indexOf(  $scope.searchDelayed.toLowerCase() ) > -1
-              ||  item.l.toLowerCase().indexOf(  $scope.searchDelayed.toLowerCase() ) > -1;
+    {
+      if ( $scope.searchDelayed.length < 3 )
+        return false;
+
+      return item.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1
+              || item.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1;
+    }
+
+    if ( $scope.searchDelayed == "" )
+      return false;
 
     return true;
   }

@@ -16,21 +16,45 @@
           <br />
           <span class="splashTitleLine2">Directory</span>
           <br /><br />
-          <div>
+          <!--<div>
             <input class="mstphSearchbox mstphInputFieldBordered" ng-model="search" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
             <span class="miniBtn splashIcnBtn" ng-click="gotoSearch(search)"><i class="fa fa-search"></i></span>
+          </div>-->
+
+          <div class="centAlign">
+            <span style="padding: 11px 6px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
+              <input class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" />
+              <div style="display: inline-block">
+                <i class="fa fa-times fa-times2 ng-hide" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
+                <span class="inlineFindBtn" ng-click="gotoContactSearch(search)" style="background: #00AEEF; padding: 4px 6px 4px 9px; border-radius: 4px; color: #fff">
+                  FIND
+                </span>
+              </div>
+            </span>
           </div>
-          <br />
+
+          <!--<div class="centAlign">
+            <span style="padding: 13px 7px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
+              <input ng-model="search" class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
+              <div style="display: inline-block">
+                <i class="fa fa-times fa-times2 ng-hide" ng-show="search.length > 0" ng-click="search=''"></i>
+                <span class="inlineFindBtn" ng-click="gotoSearch(search)" style="background: #00AEEF; padding: 6px 5px 4px 6px; border-radius: 4px; color: #fff">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+            </span>
+          </div>-->
+
         </div>
 
         
 
-        <div class="splashQuickFindDiv">
+        <!--<div class="splashQuickFindDiv">
           <span class="midBtnWithIcon" ng-click="helpers.g('/appInfo')">
             <i class="fa fa-info-circle"></i>
             <span class="midBtnWithIcon-innerLabel">APP INFO</span>
           </span>
-        </div>
+        </div>-->
 
 
       </div>

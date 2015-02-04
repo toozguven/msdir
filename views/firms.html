@@ -17,8 +17,8 @@
 
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10">
-    <p>Please either pick a country, or type in the search box and click on 'Find' button below.</p>
+  <div class="pad10Sides">
+    <div class="paragDiv">Please either pick a country, or type in the search box and click on 'Find' button below.</div>
     <div class="pageInnerPanel">    
 
       <div class="mstphInputFieldBordered">
@@ -26,8 +26,6 @@
           <option value="">Pick a country...</option>
         </select>
       </div>
-
-      <br />
 
       <div class="mstphInputFieldBordered">        
         <input class="mstphSearchbox" ng-model="search" type="search" placeholder="Or, just search" ng-keypress=" $event.keyCode == 13 ? gotoFirmSearch(search) : false" onfocus="jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />

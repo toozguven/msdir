@@ -1,7 +1,7 @@
 ﻿&nbsp;
 <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.g('#')">
+    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
       <span class="icn prevIcn">&nbsp;</span>
     </div>
   </div>
@@ -17,19 +17,20 @@
 <div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
 
   <div class="pad10">
-    <label class="topcoat-radio-button">
-      <input type="radio" name="topcoat" checked="checked">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Contacts
-    </label>
-    &nbsp;&nbsp;
-    <label class="topcoat-radio-button" ng-click="helpers.g('/findFirms/' + search)">
-      <input type="radio" name="topcoat">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Firms
-    </label>
+    <div class="mstphCFRadioDiv">
+      <label class="topcoat-radio-button">
+        <input type="radio" name="topcoat" checked="checked">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Contacts
+      </label>
+      &nbsp;&nbsp;
+      <label class="topcoat-radio-button" ng-click="helpers.g('/findFirms/' + search)">
+        <input type="radio" name="topcoat">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Firms
+      </label>
 
-    <br /><br />
+    </div>
 
     <div class="mstphInputFieldBordered">        
       <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
@@ -50,8 +51,12 @@
     </ul>
   </div>
 
-  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false" class="pad10">
+  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
     No contacts found mathing the search criteria.
+  </p>
+
+  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
+    Search term must be at least three characters.
   </p>
 
 </div>

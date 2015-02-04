@@ -19,9 +19,9 @@
     <div class="fRight contactImg">
       <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" />
     </div>
-    <h2 class="boldBlue" once-html="contact.n"></h2>
+    <h3 class="boldBlue" once-html="contact.n"></h3>
     <span class="bold" once-html="contact.r"></span> <br />
-    <span ng-bind="contact.l + '&nbsp;'"></span> <br /><br />
+    <span ng-bind="contact.l + '&nbsp;'"></span> <br />
     <span class="miniBtnWithIcon" ng-click="dataMgr.toggleFavourite(contact.id, 'contact')">
       <i class="fa fa-star"></i>
       {{dataMgr.getFavLabel(contact.id, 'contact')}}

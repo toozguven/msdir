@@ -312,6 +312,7 @@ p {
 }
 .prevNextBtnDiv {
   text-align: center;
+  margin-top:5px;
   margin-bottom:10px;
   font-size: 0.9rem;
   line-height: 34px;
@@ -532,7 +533,7 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
 }
 
 .subHeader {
-  padding: 0.75rem 1.25rem 0.75rem 1.25rem;
+  padding: 0 1.25rem 0.75rem 1.25rem;
 }
 .details h1 {
   font-size: 22px;
@@ -558,7 +559,8 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
 
 .firstContent {
   margin-top: 50px !important;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  padding-top: 10px;
 }
 
 .topFixedBar {
@@ -681,8 +683,15 @@ select {
   font-family: Tahoma, Verdana;
 
 }
+.pad5
+{
+  padding: 5px;
+}
+
 .pad10 {
-  padding: 20px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  padding-top: 1px;
 }
 
 .pad10Sides {
@@ -984,13 +993,15 @@ background-color: #00AEEF;
 .mstphBtnArrow span {
   display: inline-block;
   position:relative; 
-  padding:8px; 
+  padding:4px; 
+  padding-left: 9px;
+  padding-right: 6px;
   border: 0;
   border-bottom: 0.1rem solid #00AEEF; 
   background-color:#00AEEF; 
   color:#fff;
   font-size: 1rem;
-  min-width: 75px;
+  --min-width: 75px;
   border-radius: 4px;
 }
 
@@ -1015,11 +1026,7 @@ background-color: #00AEEF;
   letter-spacing:0 !important;
 }
 
-.mstphInputFieldBordered {
-  background: #EEE; 
-  border: 1px solid #ddd; 
-  padding: 10px;
-}
+
 
 .fa-times1
 {
@@ -1032,22 +1039,13 @@ background-color: #00AEEF;
 .fa-times2
 {
   position: absolute;
-  right: 65px;
+  right: 60px;
   color:#bbb;
 }
 
 .fa-search2 {
   color: #00AEEF !important;
 }
-
-  .mstphInputFieldBordered select {
-    background: #EEE; width: 100%; font-size: 1rem; margin-left: -4px;
-  }
-
-  .mstphInputFieldBordered .mstphSearchbox {
-    background: #EEE; width: 88%; font-size: 1rem;
-  }
-
 
 
 
@@ -1065,7 +1063,7 @@ background-color: #00AEEF;
   position: absolute;
 }
 .inlineFindBtn {
-  min-width: 55px; display: inline !important; top: 1px; right: 3px;
+  display: inline !important; right: 1px;
 }
 
 .pageNote {
@@ -1098,9 +1096,8 @@ background-color: #00AEEF;
 }
 
 .miniBtnWithIcon {
-  margin: 5px;
+  margin: 15px 15px 0px 0px;
   padding: 6px;
-  margin-left: 0;
   font-size: 0.8rem;
   background: #00AEEF;
   color: #fff !important;
@@ -1116,7 +1113,7 @@ background-color: #00AEEF;
 }
 
 .frmStatus {
-  font-size: 0.8rem; color: #5ed2fe !important; margin-bottom: 10px; margin-top: 5px; display: block; 
+  font-size: 0.8rem; color: #5ed2fe !important; margin-top: 5px; display: block; 
   /*9bbb50*/
 }
 
@@ -1164,3 +1161,38 @@ background-color: #00AEEF;
   color: #111;
 }
 /*#endregion*/
+
+
+/*#region Modules*/
+.mstphCFRadioDiv {
+  margin-bottom: 10px;
+}
+
+.paragDiv {
+  margin-bottom: 10px;
+}
+
+.mstphInputFieldBordered {
+  background: #EEE; 
+  border: 1px solid #ddd; 
+  padding: 4px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+  .mstphInputFieldBordered select {
+    background: #EEE; width: 100%; font-size: 1rem; margin-left: -4px;
+  }
+
+  .mstphInputFieldBordered .mstphSearchbox {
+    background: #EEE; width: 88%; font-size: 1rem;
+  }
+/*#endregion*/
+
+
+/*hacks*/
+.singleItemUL {
+  border: 0 !important;
+  margin-top: -10px !important;
+}
+.botMarg20 {margin-bottom: 20px;}

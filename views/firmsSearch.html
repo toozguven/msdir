@@ -47,8 +47,12 @@
     </li>
   </ul>
 
-  <p ng-show="!((firms|filter:searchDelayedFunc).length > 0)" class="pad10">
-    No member firms found mathing the search criteria.
+  <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
+    No firms found mathing the search criteria.
+  </p>
+
+  <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
+    Search term must be at least three characters.
   </p>
 
 </div>

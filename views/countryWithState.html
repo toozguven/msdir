@@ -15,27 +15,10 @@
 </p>
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10">
+  <div class="pad10Sides">
     <div class="mstphInputFieldBordered">
       <select id="ddlState" ng-options="state.id as (state.id < 0 ? ' - Pick a state - ' : (state.id == selectedStateId ? state.n : state.n)) for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()"></select>
     </div>
-
-
-    <!--<div>
-      <label class="topcoat-radio-button" ng-click="helpers.g('/countryWithStateContacts/' + country.id + '/' + selectedStateId)">
-        <input type="radio" name="topcoat">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Contacts
-      </label>
-      &nbsp;&nbsp;
-      <label class="topcoat-radio-button">
-        <input type="radio" name="topcoat" checked="checked">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Member Firms
-      </label>
-    </div>
-
-    <br />-->
 
     <div class="pad10" once-html="state.no" ng-show="helpers.hasValueFunc(state.no)"></div>
 
