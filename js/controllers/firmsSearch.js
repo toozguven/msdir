@@ -11,8 +11,8 @@
   $scope.searchDelayedFunc = function ( item )
   {
     if ( $scope.searchDelayed )
-      return factory.removeDiacritics( item.n.toLowerCase() ).indexOf( factory.removeDiacritics( $scope.searchDelayed.toLowerCase() ) ) > -1
-              || factory.removeDiacritics( item.l.toLowerCase() ).indexOf( factory.removeDiacritics( $scope.searchDelayed.toLowerCase() ) ) > -1;
+      return  item.n.toLowerCase().indexOf(  $scope.searchDelayed.toLowerCase() ) > -1
+              ||  item.l.toLowerCase().indexOf(  $scope.searchDelayed.toLowerCase() ) > -1;
 
     return true;
   }
