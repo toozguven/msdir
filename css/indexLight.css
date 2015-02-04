@@ -1043,6 +1043,13 @@ background-color: #00AEEF;
   color:#bbb;
 }
 
+.fa-times3
+{
+  position: absolute;
+  right: 115px;
+  color:#bbb;
+}
+
 .fa-search2 {
   color: #00AEEF !important;
 }

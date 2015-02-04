@@ -42,7 +42,7 @@ var app = {
     //console_log( 'onDeviceReady' );
     if ( parseFloat( window.device.version ) === 7.0 )
     {
-      document.body.style.marginTop = "20px";
+      //document.body.style.marginTop = "20px";
     }
 
     //ngRootScope.isPhone = device.name.indexOf("iPad") == -1;
