@@ -21,16 +21,22 @@
             <span class="miniBtn splashIcnBtn" ng-click="gotoSearch(search)"><i class="fa fa-search"></i></span>
           </div>-->
 
-          <div class="centAlign">
-            <span style="padding: 11px 6px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
-              <input ng-model="search" class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="setTimeout(function () {jQuery('html, body').animate({scrollTop: 0},500);}, 11)" />
-              <div style="display: inline-block">
-                <i class="fa fa-times fa-times3 ng-hide" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
-                <span class="inlineFindBtn" ng-click="gotoSearch(search)" style="background: #00AEEF; padding: 4px 6px 4px 9px; border-radius: 4px; color: #fff">
-                  FIND
-                </span>
+          <div class="centAlign" style="font-size: 1rem">
+            <div class="mstphInputFieldBordered" style="display: inline-block; text-align: left; width: 220px;">        
+              <input class="mstphSearchbox" style="width: 165px" ng-model="search" placeholder="Quick find" type="search"  ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()">
+              <div class="splashCross" style="margin-left: 15px; position: relative; display: inline-block">
+                <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
               </div>
-            </span>
+            </div>
+            <!--<span style="padding: 11px 6px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
+              <input ng-model="search" class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()" />
+              <div class="mstphBtnArrow splashCross">
+                <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+                <!--<span class="inlineFindBtn" ng-click="gotoSearch(search)" style="background: #00AEEF; padding: 4px 6px 4px 9px; border-radius: 4px; color: #fff">
+                  FIND
+                </span>-->
+              <!--</div>
+            </span>-->
           </div>
 
           <!--<div class="centAlign">
@@ -45,7 +51,7 @@
             </span>
           </div>-->
 
-        </div>
+        </xdiv>
 
         
 

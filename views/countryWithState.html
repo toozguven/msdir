@@ -23,16 +23,17 @@
     <div class="pad10" once-html="state.no" ng-show="helpers.hasValueFunc(state.no)"></div>
 
     <div ng-show="(towns|filter:{sid: state.id}:true).length > 1">
-      <br />
       <div class="mstphInputFieldBordered">        
-        <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
         <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+        <div class="mstphBtnArrow absPos">
+          <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div>
+<div ng-show="helpers.showLoading == false">
   <div ng-repeat="town in towns | filter:searchDelayed | filter:{sid: state.id}:true | orderBy:'n'" class="topcoat-list">
       <h2 class="topcoat-list__header town" once-text="town.n"></h2>
       <ul class="topcoat-list__container list firmList">

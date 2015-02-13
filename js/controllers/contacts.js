@@ -19,6 +19,13 @@
     $scope.helpers.showLoading = false;
   } );
 
+  $scope.removeSearch = function ()
+  {
+    $scope.search = '';
+    $scope.searchDelayed = '';
+    jQuery( '.mstphSearchbox' ).focus();
+  }
+
 
   //async load other data
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 1 );

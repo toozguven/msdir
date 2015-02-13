@@ -33,8 +33,10 @@
     </div>
 
     <div class="mstphInputFieldBordered">        
-      <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
       <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+      <div class="mstphBtnArrow absPos">
+        <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+      </div>
     </div>
   </div>
     

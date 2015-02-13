@@ -30,16 +30,16 @@
 
   <ul class="topcoat-list__container list">
     
-    <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)" ng-click="helpers.c(firm.ilid);">
+    <!--<li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)" ng-click="helpers.c(firm.ilid);">
         <div>International Liaison</div>
         <span class="lstItmDesc lstSpan" once-html="firm.il"></span>
 
-    </li>
+    </li>-->
 
     <li class="topcoat-list__item chevronLi" ng-show="firm.cs.length > 0 || firm.ics.length > 0" ng-click="helpers.g('/fc/' + firm.id);">
       <span>
         <div>Contacts</div>
-        <span class="lstItmDesc lstSpan">View the list of partners</span>    
+        <span class="lstItmDesc lstSpan">View the list of partners/directors</span>    
       </span>
     </li>
 
@@ -51,7 +51,7 @@
       </span>
     </li>
 
-    <li class="topcoat-list__item" ng-show="firm.tz != '0'">
+    <li class="topcoat-list__item" ng-show="firm.tz != '0'" ng-click="helpers.g('/tz/' + firm.id);">
       <span>
         <div>Time Zone</div>
         <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + firm.tz"></span>
@@ -85,7 +85,7 @@
       </span>
     </li>
         
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.lat)" ng-click="helpers.openWebPage('hdnMapUrl', true, true);">
+    <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.lat)" ng-click="helpers.openWebPage('hdnMapUrl', true, true);">
       <span>
         <div>Map</div>
         <span class="lstItmDesc lstSpan">View location on map</span>

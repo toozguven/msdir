@@ -13,12 +13,6 @@
     }, $scope.helpers.renderDelay );
 
   } );
-
-
-  $scope.toggleBookmark = function ()
-  {
-
-  }
   
   $anchorScroll();
 } );

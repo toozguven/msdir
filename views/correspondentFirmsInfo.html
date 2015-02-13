@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h5 style="margin-left: -20px; color: #fff;">Correspondent Firms</h5>
+    <h5>{{pageContent.t1}}</h5>
   </div>
 </div>
 
@@ -17,19 +17,12 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
 
-    <h2 class="blue">Correspondent Firms Information</h2>
-    <p class="bold">
-      Correspondent firms are not full member firms of Moore Stephens International Limited. 
-    </p>
-    <p>
-      Firms may be designated as correspondent or associated firms where:
-    </p>
+    <h3 class="blue" style="display: inline-block">{{pageContent.t2}}</h3>
 
-    <ul class="saneUl">
-      <li><span class="undoBlue">the firm does not represent Moore Stephens International Limited exclusively; or</span></li>
-      <li><span class="undoBlue">the firm does not wish to comply with one or more of the other administrative criteria necessary for full membership; or</span></li>
-      <li><span class="undoBlue">the firm is in a development phase to seeking full membership of Moore Stephens International Limited.</span></li>
-    </ul>
+    <p ng-repeat="p in pageContent.ps">
+      <span once-html="p.t" ng-show="p.t.length > 0"></span>
+      <span once-html="p.b"></span>
+    </p>
 
 
   </div>

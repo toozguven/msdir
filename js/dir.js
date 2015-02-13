@@ -30,6 +30,10 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     controller: 'FirstTimeCtrl',
     templateUrl: 'views/firstTime.html'
   } )
+  .when( '/disclaimer', {
+    controller: 'FirstTimeCtrl',
+    templateUrl: 'views/disclaimer.html'
+  } )
   .when( '/aboutUs', {
     controller: 'AboutUsCtrl',
     templateUrl: 'views/aboutUs.html'
@@ -62,11 +66,11 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     controller: 'ReosCtrl',
     templateUrl: 'views/reos.html'
   } )
-  .when( '/findFirms/:phrase', {
+  .when( '/findFirms/:phrase?', {
     controller: 'FindFirmsCtrl',
     templateUrl: 'views/firmsSearch.html'
   } )
-  .when( '/findContacts/:phrase', {
+  .when( '/findContacts/:phrase?', {
     controller: 'FindContactsCtrl',
     templateUrl: 'views/contactsSearch.html'
   } )
@@ -113,6 +117,10 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
   .when( '/menu', {
     controller: 'MenuCtrl',
     templateUrl: 'menu.html'
+  } )
+  .when( '/tz/:id', {
+    controller: 'TimeZoneCtrl',
+    templateUrl: 'views/tz.html'
   } )
   .otherwise( {
     redirectTo: '/splash'

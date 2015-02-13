@@ -20,7 +20,14 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 11 );
   $timeout( function () { globalDataMgr.setScopeContacts( function ( data ) { } ); }, 22 );
 
-  //
+  $scope.removeSearch = function ()
+  {
+    $scope.helpers.blockSearchBlur = true;
+    $scope.search = '';
+    $scope.searchDelayed = '';
+    setTimeout( function () { jQuery( '.mstphSearchbox' )[0].focus(); }, 1 );
+    //setTimeout( function () { $scope.helpers.blockSearchBlur = false; }, 1 );
+  }
   
   $scope.gotoSearch = function ( phrase )
   {

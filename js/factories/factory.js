@@ -228,6 +228,26 @@
 
           }, 555 );
         } );
+      },
+
+      blockSearchBlur: false,
+
+      doSearchBlur: function() {
+        if ( this.blockSearchBlur == false )
+          setTimeout( function () { jQuery( 'html, body' ).animate( { scrollTop: 0 }, 500 ); }, 11 );
+        else
+        {
+          if ( this.blockSearchBlur == false )
+            setTimeout( function () { jQuery( 'html, body' ).animate( { scrollTop: 0 }, 500 ); }, 111 );
+        }
+      },
+      doSearchFocus: function (elem)
+      {
+        if ( jQuery( window ).height() < 700 )
+        {
+          jQuery( 'html, body' ).animate( { scrollTop: ( jQuery( '.mstphSearchbox' ).offset().top - 50 ) }, 500 );
+          this.blockSearchBlur = true;
+        }
       }
     };
     return rtnVal;

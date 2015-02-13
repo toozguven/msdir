@@ -20,26 +20,24 @@
     <h4 once-html="firm.l"></h4>
   </div>
 
-  <ul class="topcoat-list__container list">
+  <ul class="topcoat-list__container list firmList">
 
     <li class="topcoat-list__item">
       <span ng-bind-html="firm.ad"></span>     
     </li>
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.mad)">
-      <span>
-        <div>Mailing Address</div>
-        <p ng-bind-html="firm.mad"></p>     
-      </span>
+        <div class="blue">Mailing Address</div>
+        <div ng-bind-html="firm.mad"></div>     
     </li>
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.f)">
-      <div>Facsimile</div>
-      <span once-html="firm.f"></span>      
+      <div class="blue">Facsimile</div>
+      <div once-html="firm.f"></div>      
     </li>
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
-      <span ng-bind-html="firm.cm"></span>      
+      <div ng-bind-html="firm.cm"></div>      
     </li>
 
   </ul>

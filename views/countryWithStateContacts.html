@@ -20,9 +20,11 @@
       <select id="ddlState" ng-options="state.id as state.n for state in country.states | filter:positiveIdsOnly" ng-model="selectedStateId" ng-change="redirectToState()"></select>
     </div>
 
-    <div class="mstphInputFieldBordered" style="margin-top: 5px;">      
-      <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>  
+    <div class="mstphInputFieldBordered" style="margin-top: 5px;" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc ).length > 1">       
       <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+      <div class="mstphBtnArrow absPos">
+        <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+       </div> 
     </div>
 
     <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
@@ -31,7 +33,7 @@
   </div>  
 </div>  
 
-<div>
+<div ng-show="helpers.showLoading == false">
   <ul class="topcoat-list__container list firmList">
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
       <div once-text="contact.n" class="boldBlue"></div>

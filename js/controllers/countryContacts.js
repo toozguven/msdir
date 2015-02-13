@@ -20,6 +20,13 @@
     return true;
   }
 
+  $scope.removeSearch = function ()
+  {
+    $scope.search = '';
+    $scope.searchDelayed = '';
+    jQuery( '.mstphSearchbox' ).focus();
+  }
+
   $scope.relevanceFunc = function ( contact )
   {
     if ( $scope.searchDelayed )

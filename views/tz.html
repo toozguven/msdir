@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h5>{{pageContent.t1}}</h5>
+    <h5>Time Zone</h5>
   </div>
 </div>
 
@@ -17,12 +17,23 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
 
-    <h3 class="blue" style="display: inline-block">{{pageContent.t2}}</h3>
+    <h3 class="blue" style="display: inline-block">Local time in {{firm.l}}</h3>
     
-    <p ng-repeat="p in pageContent.ps">
-      <span once-html="p.t" ng-show="p.t.length > 0"></span>
-      <span once-html="p.b"></span>
-    </p>
+    <h4>{{localTime}}</h4>
+
+    <p>The time above is calcuated based on the following details.</p>
+
+    <div class="blue">Time zone in {{firm.l}}</div>
+    <div>{{'GMT ' + firm.tz}}</div>
+     <br />
+
+    <div class="blue">Time on your device</div>
+    <div>{{deviceTime}}</div>
+    <br />
+
+    <div class="blue">Time zone detected on your device</div>
+    <div>{{'GMT ' + deviceGmtOffsetAsString}}</div>
+    
     
   </div>
 </div>

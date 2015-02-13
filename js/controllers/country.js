@@ -20,6 +20,13 @@
     return true;
   }
 
+  $scope.removeSearch = function ()
+  {
+    $scope.search = '';
+    $scope.searchDelayed = '';
+    jQuery( '.mstphSearchbox' ).focus();
+  }
+
   dataMgr.setScopeCountries( function ( data )
   {
     $timeout( function ()

@@ -24,13 +24,22 @@
     else {
       window.location.href = "init.html";
     }
+
+    function openUrl( url )
+    {
+      if ( ngRootScope.menuVisible )
+        ngRootScope.doMenuClick();
+
+      window.open( url, '_blank', 'location=yes' );
+
+    }
   </script>
 </head>
 <body>
   
 <!--  <div raw-ajax-busy-indicator="" class="centAlign renderingIndic" ng-show="showLoading"><br /><br /><br /><br /><br /><br />LOADING</div>-->
 
-  <div ng-view class="app" onclick="if ( ngRootScope && ngRootScope.menuVisible ) ngRootScope.doMenuClick()"></div>
+  <form><div ng-view class="app" onclick="if ( ngRootScope && ngRootScope.menuVisible ) ngRootScope.doMenuClick()"></div></form>
 
   <div id="con" style="display: none"></div>
   <button class="help-btn" onclick="doIt()" style="display: none">Help</button>
@@ -93,6 +102,7 @@
   <script type="text/javascript" src="js/controllers/favContacts.js"></script>
   <script type="text/javascript" src="js/controllers/favFirms.js"></script>
   <script type="text/javascript" src="js/controllers/appInfo.js"></script>
+  <script type="text/javascript" src="js/controllers/tz.js"></script>
   <script type="text/javascript" src="js/controllers/aboutUs.js"></script>
   <script type="text/javascript" src="js/controllers/contactUs.js"></script>
   <script type="text/javascript" src="js/controllers/correspondentFirms.js"></script>

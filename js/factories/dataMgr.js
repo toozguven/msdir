@@ -19,6 +19,9 @@ ngapp.factory( "dataMgr", function ( $http, $route )
   var MENU_ITEMS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/menuItems.json";
   var MENU_ITEMS_LOCAL_STORAGE_KEY = "mstphDirMenuItems3";
 
+  var PAGE_CONTENTS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/pageContents.json";
+  var PAGE_CONTENTS_LOCAL_STORAGE_KEY = "mstphDirPageContents3";
+
   var FIRMS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/firms.json";
   var FIRMS_LOCAL_STORAGE_KEY = "mstphDirFirms3";
 
@@ -33,19 +36,21 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
   if ( true || document.location.href.indexOf( "cdn.moorestephens.org" ) > -1 )
   {
-    REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json?rnd=234346347";
-    COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/committees.json?rnd=234346347";
-    COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/countries.json?rnd=234346347";
-    MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/menuItems.json?rnd=234346347";
-    FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/firms.json?rnd=234346347";
-    CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/correspondentFirms.json?rnd=234346347";
-    ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/associatedFirms.json?rnd=234346347";
-    CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/contacts.json?rnd=234346347";
+    REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json";
+    COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/committees.json";
+    COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/countries.json";
+    MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/menuItems.json";
+    PAGE_CONTENTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/pageContents.json";
+    FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/firms.json";
+    CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/correspondentFirms.json";
+    ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/associatedFirms.json";
+    CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/contacts.json";
 
     //REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/reos";
     //COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/committees";
     //COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/countries";
     //MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/menuItems";
+    //PAGE_CONTENTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/pageContents";
     //FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/firms";
     //CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/correspondentFirms";
     //ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/associatedFirms";
@@ -58,6 +63,7 @@ ngapp.factory( "dataMgr", function ( $http, $route )
     localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
     localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
     localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( PAGE_CONTENTS_LOCAL_STORAGE_KEY );
     localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
     localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
     localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
@@ -248,8 +254,15 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
   factory.getApiPromise = function ( url )
   {
-    return $http.get( url );
+    if ( url.indexOf( "?" ) > -1 )
+      return $http.get( url + "&ck=" + factory.getCacheBuster() );
+    return $http.get( url + "?ck=" + factory.getCacheBuster() );
   };
+
+  factory.getCacheBuster = function ()
+  {
+    return (new Date()).getTime();
+  }
 
   factory.filterByField = function ( arr, fieldName, fieldValue )
   {
@@ -381,6 +394,29 @@ ngapp.factory( "dataMgr", function ( $http, $route )
       callback( localData.d );
     }
   }
+
+
+
+  /*#region PageContent*/
+  factory.setScopePageContents = function ( callback )
+  {
+    var localData = factory.readDataFromLocalStorage( PAGE_CONTENTS_LOCAL_STORAGE_KEY ); //read from localStorage
+    if ( localData.d.length == 0 )
+    { //if localStorage empty, go to web
+      factory.getApiPromise( PAGE_CONTENTS_API_URL ).success( function ( data )
+      {
+        //console_log( "got some menu items from web" );
+        factory.persistJsonToLocalStorage( PAGE_CONTENTS_LOCAL_STORAGE_KEY, data );  //persist locally
+        callback( data.d );
+      } );
+    }
+    else //great there is cached data
+    {
+      callback( localData.d );
+    }
+  }
+
+
 
   /*#region CorrespondentFirms */
   factory.setScopeCorrespondentFirms = function ( callback )
@@ -686,18 +722,23 @@ ngapp.factory( "dataMgr", function ( $http, $route )
   {
     resetLocalData();
 
+    localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( PAGE_CONTENTS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
+    localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
+
     factory.setScopeMenuItems( function ()  {
       factory.setScopeCountries( function () {
-        factory.setScopeFirms( function ()
-        {
-          factory.setScopeContacts( function ()
-          {
-            factory.setScopeREOs( function ()
-            {
-              factory.setScopeCorrespondentFirms( function ()
-              {
-                factory.setScopeAssociatedFirms( function ()
-                {
+        factory.setScopeFirms( function () {
+          factory.setScopeContacts( function () {
+            factory.setScopeREOs( function () {
+              factory.setScopeCorrespondentFirms( function () {
+                factory.setScopeAssociatedFirms( function () {
                   callback( true );
                 });
               });
@@ -707,14 +748,6 @@ ngapp.factory( "dataMgr", function ( $http, $route )
       });
     });
 
-    localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
   }
 
 

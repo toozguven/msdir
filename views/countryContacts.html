@@ -18,14 +18,16 @@
 
   <div class="pad10Sides" ng-show="(contacts | filter:{cid: country.id}:true).length > 1">
     <div class="mstphInputFieldBordered">
-      <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
       <input type="search" class="mstphSearchbox" style="background: #EEE; width: 98%; font-size: 1rem;" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+      <div class="mstphBtnArrow absPos">
+        <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+      </div>
     </div>
   </div>
 
   <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
-  <ul class="topcoat-list__container list firmList {{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true).length <= 1 ? 'singleItemUL' : ''}}">
+  <ul class="topcoat-list__container list firmList {{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true).length <= 1 ? 'singleItemUL' : ''}} {{contacts.length <= 1 ? 'topMarMinus20' : ''}}">
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
       <div once-text="contact.n" class="boldBlue"></div>
       <div once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>

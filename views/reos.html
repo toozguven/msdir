@@ -53,7 +53,7 @@
           </a>
         </li>
 
-        <li class="topcoat-list__item" ng-show="firm.tz != '0'">
+        <li class="topcoat-list__item" ng-show="firm.tz != '0'" ng-click="helpers.g('/tz/' + firm.id);">
           <span>
             <div class="blue">Time Zone</div>
             <span class="lstItmDesc lstSpan" once-html="'GMT ' + firm.tz"></span>

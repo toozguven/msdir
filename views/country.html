@@ -31,14 +31,16 @@
 
   <div class="pad10" once-html="country.no" ng-show="helpers.hasValueFunc(country.no)"></div>
 
-  <div class="pad10Sides botMarg20" ng-show="towns.length > 1">
+  <div class="pad10Sides" ng-show="towns.length > 1">
     <div class="mstphInputFieldBordered">
-      <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="search=''; searchDelayed=''"></i>
       <input type="search" class="mstphSearchbox" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+      <div class="mstphBtnArrow absPos">
+        <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+      </div>
     </div>
   </div>
 
-  <div ng-repeat="town in towns | filter:searchDelayed" class="topcoat-list {{(firms | filter:searchDelayedFunc | filter:{tid: town.id}:true).length <= 1 ? 'singleItemUL' : ''}}">
+  <div class="{{towns.length <= 1 ? 'topMarMinus10' : ''}}" ng-repeat="town in towns | filter:searchDelayed" class="topcoat-list {{(firms | filter:searchDelayedFunc | filter:{tid: town.id}:true).length <= 1 ? 'singleItemUL' : ''}}">
     <h2 class="topcoat-list__header town bold" once-text="town.n"></h2>
     <ul class="topcoat-list__container list firmList">
       <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayedFunc | filter:{tid: town.id}:true">
