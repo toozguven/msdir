@@ -26,21 +26,15 @@
     jQuery( '.mstphSearchbox' ).focus();
   }
 
-
   //async load other data
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 1 );
   $timeout( function () { globalDataMgr.setScopeContacts( function ( data ) { } );}, 11 );
-  //$timeout( function () { globalDataMgr.setScopeComms( function ( data ) { } );}, 22 );
   $timeout( function () { globalDataMgr.setScopeREOs( function ( data ) { } ); }, 33 );
 
-  
   $scope.selectedCountryId = 0;
 
   $scope.redirectToCountry = function ()
-  {
-    //$scope.helpers.showLoading = true;
-    
-
+  {   
     if ( $scope.selectedCountryId == "210" )
       $scope.helpers.g("/countryWithStateContacts/" + $scope.selectedCountryId + "/0" );
     else

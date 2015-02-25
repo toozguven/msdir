@@ -7,13 +7,8 @@
 
   dataMgr.setScopeSingleFirm( $routeParams.id, function ( data )
   {
-    $timeout( function ()
-    {
-      $scope.firm = data;
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
-    
+    $scope.firm = data;
+    $scope.helpers.showLoading = false;    
   } );
 
   $anchorScroll();

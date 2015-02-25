@@ -57,9 +57,7 @@
     }, $scope.helpers.renderDelay );
 
   } );
-  
-  
-  
+    
   $scope.redirectToState = function ()
   {
     $scope.helpers.showLoading = true;

@@ -10,25 +10,22 @@
 
   dataMgr.setScopeAssociatedFirms( function ( data )
   {
-    $timeout( function ()
+    $scope.aFirms = data;
+
+    dataMgr.setScopeCountries( function ( listOfCountries )
     {
-      $scope.aFirms = data;
-
-      dataMgr.setScopeCountries( function ( listOfCountries )
+      var tempCountry = 0;
+      for ( var i = 0; i < data.length; i++ )
       {
-        var tempCountry = 0;
-        for ( var i = 0; i < data.length; i++ )
+        if ( tempCountry != parseInt( data[i].cid ) )
         {
-          if ( tempCountry != parseInt( data[i].cid ) )
-          {
-            $scope.countries.push( { n: data[i].c, id: data[i].cid } );
-            tempCountry = parseInt( data[i].cid );
-          }
+          $scope.countries.push( { n: data[i].c, id: data[i].cid } );
+          tempCountry = parseInt( data[i].cid );
         }
-        $scope.helpers.showLoading = false;
+      }
+      $scope.helpers.showLoading = false;
 
-      } )
-    }, $scope.helpers.renderDelay );;
+    } )
 
   } );
 

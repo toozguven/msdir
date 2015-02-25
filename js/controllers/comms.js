@@ -5,13 +5,8 @@
   $scope.comms = []; //set as empty array
 
   dataMgr.setScopeComms( function ( data ) { 
-    $timeout( function ()
-    {
-      $scope.comms = data;
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
-    
+    $scope.comms = data;
+    $scope.helpers.showLoading = false;    
   } );
 
 

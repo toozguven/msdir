@@ -10,42 +10,24 @@
 
   dataMgr.setScopeCorrespondentFirms( function ( data )
   {
-    $timeout( function ()
+    $scope.cFirms = data;
+
+    dataMgr.setScopeCountries( function ( listOfCountries )
     {
-      //console_log( JSON.stringify( data ) )
-
-      $scope.cFirms = data;
-
-      dataMgr.setScopeCountries( function ( listOfCountries )
+      var tempCountry = 0;
+      for ( var i = 0; i < data.length; i++ )
       {
-        var tempCountry = 0;
-        for ( var i = 0; i < data.length; i++ )
+        if ( tempCountry != parseInt( data[i].cid ) )
         {
-          if ( tempCountry != parseInt(data[i].cid) )
-          {
-            $scope.countries.push( { n: data[i].c, id: data[i].cid } );
-            tempCountry = parseInt( data[i].cid );
-            //console_log( "Found new country: " + data[i].c + " - " + data[i].cid )
-          }
+          $scope.countries.push( { n: data[i].c, id: data[i].cid } );
+          tempCountry = parseInt( data[i].cid );
         }
-        //console_log( JSON.stringify( $scope.countries ) )
-        $scope.helpers.showLoading = false;
+      }
+      $scope.helpers.showLoading = false;
 
-      } )
-    }, $scope.helpers.renderDelay );;
+    } )
 
   } );
-
-  //dataMgr.setScopePageContents( function ( data )
-  //{
-  //  $timeout( function ()
-  //  {
-  //    $scope.pageContent = dataMgr.filterByField( data, "id", "CorrespInfo" )[0];
-  //    $scope.helpers.showLoading = false;
-
-  //  }, $scope.helpers.renderDelay );
-
-  //} );
 
   $anchorScroll();
 } );

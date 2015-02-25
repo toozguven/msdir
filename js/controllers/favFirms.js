@@ -19,12 +19,8 @@
 
   dataMgr.setScopeFavFirms( function ( data )
   {
-    $timeout( function ()
-    {
-      $scope.firms = data;
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
+    $scope.firms = data;
+    $scope.helpers.showLoading = false;
   } );
 
   $anchorScroll();

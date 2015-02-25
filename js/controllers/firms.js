@@ -31,7 +31,6 @@
   //async load other data
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 1 );
   $timeout( function () { globalDataMgr.setScopeContacts( function ( data ) { } );}, 11 );
-  //$timeout( function () { globalDataMgr.setScopeComms( function ( data ) { } );}, 22 );
   $timeout( function () { globalDataMgr.setScopeREOs( function ( data ) { } ); }, 33 );
 
   

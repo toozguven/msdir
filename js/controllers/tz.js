@@ -45,16 +45,9 @@
 
   dataMgr.setScopeSingleFirm( $routeParams.id, function ( data )
   {
-    $timeout( function ()
-    {
-      $scope.firm = data;
-
-      processTimeZone( data.tz );
-
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
-
+    $scope.firm = data;
+    processTimeZone( data.tz );
+    $scope.helpers.showLoading = false;
   } );
 
   function processTimeZone( tz )

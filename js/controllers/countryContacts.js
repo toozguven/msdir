@@ -49,10 +49,7 @@
     return true;
   }
 
-  //
-
   $scope.positiveIdsOnly = function ( item ) { return item.id > 0 };
-
 
   dataMgr.setScopeCountries( function ( data )
   {

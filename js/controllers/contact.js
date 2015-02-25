@@ -5,13 +5,8 @@
   
   dataMgr.setScopeContacts( function ( data )
   {
-    $timeout( function ()
-    {
-      $scope.contact = dataMgr.getContact( data, $routeParams.id );
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
-
+    $scope.contact = dataMgr.getContact( data, $routeParams.id );
+    $scope.helpers.showLoading = false;
   } );
   
   $anchorScroll();

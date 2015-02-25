@@ -6,14 +6,10 @@
   
   
   dataMgr.setScopeREOs( function ( data ) { 
-    $timeout( function ()
-    {
-      $scope.reos = data;
-      $scope.helpers.showLoading = false;
-      
-      setTimeout( dealWithHistory, 1 );
+    $scope.reos = data;
+    $scope.helpers.showLoading = false;
 
-    }, $scope.helpers.renderDelay );
+    setTimeout( dealWithHistory, 1 );
     
   } );
   

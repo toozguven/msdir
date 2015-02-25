@@ -5,9 +5,6 @@
   $scope.similarPhrases = [];
   $scope.similarPhrasesFound = false;
 
-  //$scope.$apply();
-  //return;
-
   $scope.search = $routeParams.phrase;
   $scope.searchDelayed = $routeParams.phrase;
   $scope.helpers.delayModelSetting( $scope, $timeout, "search", function ( val ) { 

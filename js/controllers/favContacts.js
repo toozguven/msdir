@@ -19,12 +19,8 @@
 
   dataMgr.setScopeFavContacts( function ( data )
   {
-    $timeout( function ()
-    {
-      $scope.contacts = data;
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
+    $scope.contacts = data;
+    $scope.helpers.showLoading = false;
   } );
 
   $anchorScroll();
