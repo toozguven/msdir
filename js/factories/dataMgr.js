@@ -1,7 +1,8 @@
 ﻿var months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var localCache = {};
 
 
-ngapp.factory( "dataMgr", function ( $http, $route )
+ngapp.factory( "dataMgr", function ( $http, $route, $rootScope )
 {
   /*constants*/
 
@@ -34,6 +35,9 @@ ngapp.factory( "dataMgr", function ( $http, $route )
   var CONTACTS_API_URL = "https://s3-eu-west-1.amazonaws.com/msil-international-directory/contacts.json";
   var CONTACTS_LOCAL_STORAGE_KEY = "mstphDirContacts3";
 
+  var SIMILAR_PHRASES_FOR_CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/contacts/GetSimilarPhrases?txt=";
+  var SIMILAR_PHRASES_FOR_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/firms/GetSimilarPhrases?txt=";
+
   if ( true || document.location.href.indexOf( "cdn.moorestephens.org" ) > -1 )
   {
     REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/reos.json";
@@ -45,16 +49,6 @@ ngapp.factory( "dataMgr", function ( $http, $route )
     CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/correspondentFirms.json";
     ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/associatedFirms.json";
     CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/json/contacts.json";
-
-    //REO_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/reos";
-    //COMMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/committees";
-    //COUNTRIES_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/countries";
-    //MENU_ITEMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/menuItems";
-    //PAGE_CONTENTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/pageContents";
-    //FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/firms";
-    //CORRESPONDENT_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/correspondentFirms";
-    //ASSOCIATED_FIRMS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/associatedFirms";
-    //CONTACTS_API_URL = "https://cdn.moorestephens.org/InternationalDirectory/api/contacts";
   }
 
   var resetLocalData = function ()
@@ -69,8 +63,9 @@ ngapp.factory( "dataMgr", function ( $http, $route )
     localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
     localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
 
-    //localStorage.removeItem( "MStphLastUpdated");
+    localCache = {};
 
+    //localStorage.removeItem( "MStphLastUpdated");
     //localStorage.removeItem( "MStphFav_contact" );
     //localStorage.removeItem( "MStphFav_firm" );
   };
@@ -230,11 +225,21 @@ ngapp.factory( "dataMgr", function ( $http, $route )
     //console_log( "saving to localStorage: " + key );
     localStorage.setItem( key, JSON.stringify( value ) );
     localStorage.setItem( "MStphLastUpdated", value.lastUpdated );
+
+    //also memmory:localCache
+    localCache[key] = JSON.stringify( value );
   }
 
   factory.readDataFromLocalStorage = function ( key ) //this function expects the data (to be read) to have a property called lastUpdated
   {
-    var localData = localStorage.getItem( key );
+    var localData = "";
+    //before localstorage, check memory:localCache
+    try {
+      localData = localCache[key];
+    } catch ( e ) { }
+
+    if (!localData && localData != "")
+      localData = localStorage.getItem( key );
 
     if ( ALWAYS_USE_WEB == false && localData != null )
     {
@@ -243,13 +248,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
       var jsonData = JSON.parse( localData );
       if ( jsonData.lastUpdated > getDateOfWeekAgoAsInt() )
         return jsonData;
-      else  //deliberately return empty as cached data is old
-        return { "lastUpdated": 0, "d": [] };
+      else
+      {
+        if ( jsonData.d.length > 0 && !( $rootScope.isOnline > 0 ) )
+        {
+          return jsonData;
+        }
+
+        return { "lastUpdated": 0, "d": [] }; //deliberately return empty as cached data is old
+      }
     }
     else
-    {
       return { "lastUpdated": 0, "d": [] };
-    }
   }
 
   factory.getApiPromise = function ( url )
@@ -261,7 +271,8 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
   factory.getCacheBuster = function ()
   {
-    return (new Date()).getTime();
+    var dt = new Date();
+    return dt.getYear() + dt.getMonth() + dt.getDay() + "sdfsdfsdfsdf";
   }
 
   factory.filterByField = function ( arr, fieldName, fieldValue )
@@ -279,18 +290,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
    
 
   /*#region REOs*/
-  factory.setScopeREOs = function ( callback )
+  factory.setScopeREOs = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localREOs = factory.readDataFromLocalStorage( REO_LOCAL_STORAGE_KEY ); //read from localStorage
-    
-    if ( localREOs.d.length == 0 )
+    if ( mustGoOnline == true || localREOs.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( REO_API_URL ).success( function ( data )
       {
         //console_log( "got some reos from web" );
         factory.persistJsonToLocalStorage( REO_LOCAL_STORAGE_KEY, data );  //persist locally
         callback( data.d );
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -303,11 +314,11 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
 
   /*#region Comms
-  factory.setScopeComms = function ( callback )
+  factory.setScopeComms = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localComms = factory.readDataFromLocalStorage( COMMS_LOCAL_STORAGE_KEY ); //read from localStorage
-
-    if ( localComms.d.length == 0 )
+    if ( mustGoOnline == true || localComms.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( COMMS_API_URL ).success( function ( data )
       {
@@ -328,17 +339,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
 
   /*#region Countries*/
-  factory.setScopeCountries = function ( callback )
+  factory.setScopeCountries = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( COUNTRIES_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( COUNTRIES_API_URL ).success( function ( data )
       {
         //console_log( "got some countries from web" );
         factory.persistJsonToLocalStorage( COUNTRIES_LOCAL_STORAGE_KEY, data );  //persist locally
         callback(data.d);
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -377,17 +389,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
 
   /*#region MenuItems*/
-  factory.setScopeMenuItems = function ( callback )
+  factory.setScopeMenuItems = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( MENU_ITEMS_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( MENU_ITEMS_API_URL ).success( function ( data )
       {
         //console_log( "got some menu items from web" );
         factory.persistJsonToLocalStorage( MENU_ITEMS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback( data.d );
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -398,17 +411,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
 
   /*#region PageContent*/
-  factory.setScopePageContents = function ( callback )
+  factory.setScopePageContents = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( PAGE_CONTENTS_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( PAGE_CONTENTS_API_URL ).success( function ( data )
       {
         //console_log( "got some menu items from web" );
         factory.persistJsonToLocalStorage( PAGE_CONTENTS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback( data.d );
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -419,17 +433,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
 
   /*#region CorrespondentFirms */
-  factory.setScopeCorrespondentFirms = function ( callback )
+  factory.setScopeCorrespondentFirms = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( CORRESPONDENT_FIRMS_API_URL ).success( function ( data )
       {
         //console_log( "got some cfirms from web" );
         factory.persistJsonToLocalStorage( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback( data.d );
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -438,10 +453,11 @@ ngapp.factory( "dataMgr", function ( $http, $route )
   }
 
   /*#region AssociatedFirms */
-  factory.setScopeAssociatedFirms = function ( callback )
+  factory.setScopeAssociatedFirms = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( ASSOCIATED_FIRMS_API_URL )
         .success( function ( data )
@@ -459,17 +475,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
   }
 
   /*#region Firms*/
-  factory.setScopeFirms = function ( callback )
+  factory.setScopeFirms = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( FIRMS_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( FIRMS_API_URL ).success( function ( data )
       {
         //console_log( "got some Firms from web" );        
         factory.persistJsonToLocalStorage( FIRMS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback(data.d);
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -613,17 +630,18 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
 
   /*#region Contacts*/
-  factory.setScopeContacts = function ( callback )
+  factory.setScopeContacts = function ( callback, mustGoOnline )
   {
+    if ( !mustGoOnline ) mustGoOnline = false;
     var localData = factory.readDataFromLocalStorage( CONTACTS_LOCAL_STORAGE_KEY ); //read from localStorage
-    if ( localData.d.length == 0 )
+    if ( mustGoOnline == true || localData.d.length == 0 )
     { //if localStorage empty, go to web
       factory.getApiPromise( CONTACTS_API_URL ).success( function ( data )
       {
         //console_log( "got some Contacts from web" );
         factory.persistJsonToLocalStorage( CONTACTS_LOCAL_STORAGE_KEY, data );  //persist locally
         callback(data.d);
-      } );
+      } ).error( function ( data, status, headers, config ) { alert( "error" ); } );
     }
     else //great there is cached data
     {
@@ -720,17 +738,7 @@ ngapp.factory( "dataMgr", function ( $http, $route )
 
   factory.updateDataNow = function (callback)
   {
-    resetLocalData();
-
-    localStorage.removeItem( REO_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( COMMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( COUNTRIES_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( MENU_ITEMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( PAGE_CONTENTS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( FIRMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( CORRESPONDENT_FIRMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( ASSOCIATED_FIRMS_LOCAL_STORAGE_KEY );
-    localStorage.removeItem( CONTACTS_LOCAL_STORAGE_KEY );
+    //resetLocalData();
 
     factory.setScopeMenuItems( function ()  {
       factory.setScopeCountries( function () {
@@ -740,16 +748,31 @@ ngapp.factory( "dataMgr", function ( $http, $route )
               factory.setScopeCorrespondentFirms( function () {
                 factory.setScopeAssociatedFirms( function () {
                   callback( true );
-                });
-              });
-            });
-          });
-        });
-      });
-    });
+                }, true );
+              }, true );
+            }, true );
+          }, true );
+        }, true );
+      }, true );
+    }, true);
 
   }
 
+  factory.getSimilarPhrasesForContacts = function (searchPhrase, callback)
+  {
+    factory.getApiPromise( SIMILAR_PHRASES_FOR_CONTACTS_API_URL + searchPhrase ).success( function ( data )
+    {
+      callback( data.d );
+    } );
+  }
+
+  factory.getSimilarPhrasesForFirms = function ( searchPhrase, callback )
+  {
+    factory.getApiPromise( SIMILAR_PHRASES_FOR_FIRMS_API_URL + searchPhrase ).success( function ( data )
+    {
+      callback( data.d );
+    } );
+  }
 
   return factory;
 } );

@@ -1,12 +1,12 @@
 &nbsp;
 <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+    <!--<div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
       <span class="icn prevIcn">&nbsp;</span>
-    </div>
+    </div>-->
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Bookmarks</h4>
+    <h5>Bookmarks</h5>
   </div>
 </div>
 
@@ -38,9 +38,9 @@
 
   <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
     <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:'n' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div ng-bind-html="firm.n" class="boldBlue"></div><br />
-      <span once-html="firm.l"></span>
+      <div ng-bind-html="firm.n" class="boldBlue"></div>
       <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
+      <span once-html="firm.l"></span>
     </li>
   </ul>
 
@@ -50,5 +50,5 @@
 
 </div>
 
-<div class="bottomSpace"></div>
+
 

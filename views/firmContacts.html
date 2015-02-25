@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Contacts</h4>
+    <h5>Contacts</h5>
   </div>
 </div>
 
@@ -18,7 +18,7 @@
 
   <div class="subHeader">
     <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <h4 once-html="firm.l"></h4>
+    <div once-html="firm.l"></div>
     <span class="frmStatus"  ng-show="helpers.hasValueFunc(firm.st)" ng-bind-html="helpers.getFirmStatus(firm)"></span>
   </div>
 
@@ -28,14 +28,20 @@
     </li>
   </ul>
 
+  <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cm)">
+    <li>
+      <p class="pad10Sides" ng-bind-html="firm.cm"></p>
+    </li>
+  </ul>
+
   <ul class="topcoat-list__container list contactList" ng-show="internationalContacts.length > 0">
     <li>
       <h2 class="topcoat-list__header town">International Liaison{{internationalContacts.length > 1 ? "s" : ""}}</h2>
     </li>
 
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in internationalContacts">
+      <div once-html="contact.n"></div>
       <div class="blue" ng-show="helpers.hasValueFunc(contact.r)" once-html="contact.r"></div>
-      <div once-html="contact.n + '<br/>'"></div>
     </li>
   </ul>
 
@@ -52,13 +58,12 @@
     </li>
 
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts">
+      <div once-html="contact.n"></div>
       <div class="blue" ng-show="helpers.hasValueFunc(contact.r) && contacts.length > 1" once-html="contact.r"></div>
-      <div once-html="contact.n"></div> <!--<br />     
-      <span ng-show="helpers.hasValueFunc(contact.r)">{{contact.r}}<br /></span>-->
     </li>
   </ul>
   
 </div>
 
-<div class="bottomSpace"></div>
+
 

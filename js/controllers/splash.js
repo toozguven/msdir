@@ -2,8 +2,8 @@
 
 ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout, $window )
 {
-  if (dataMgr.isFirstUse())
-    $window.location.href = "init.html";
+  //if (dataMgr.isFirstUse())
+  //  $window.location.href = "init.html";
 
   //set global var so we can call it from setTimeout
   globalDataMgr = dataMgr;
@@ -12,6 +12,23 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
   $scope.helpers.showLoading = false;
   $scope.currentYear = new Date().getFullYear();
 
+  $scope.favPath = '';
+
+  dataMgr.setScopeFavContacts( function ( data )
+  {
+    if ( data.length > 0 )
+      $scope.favPath = '/favContacts';
+
+    else
+    {
+      dataMgr.setScopeFavFirms( function ( data )
+      {
+        if ( data.length > 0 )
+          $scope.favPath = '/favFirms';
+      } );
+    }
+  } );
+
   //async load other data
   $timeout( function () { globalDataMgr.setScopeMenuItems( function ( data ) { } ); }, 1 );
   $timeout( function () { globalDataMgr.setScopeCorrespondentFirms( function ( data ) { } ); }, 33 );
@@ -19,6 +36,8 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
   $timeout( function () { globalDataMgr.setScopeCountries( function ( data ) { } ); }, 1 );
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 11 );
   $timeout( function () { globalDataMgr.setScopeContacts( function ( data ) { } ); }, 22 );
+
+  
 
   $scope.removeSearch = function ()
   {

@@ -16,29 +16,31 @@
 
 <div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
-
-    <h3 class="blue" style="display: inline-block">Local time in {{firm.l}}</h3>
-    
+    <h3 class="blue" style="display: inline-block">Local time in {{firm.l}}</h3>    
     <h4>{{localTime}}</h4>
-
     <p>The time above is calcuated based on the following details.</p>
-
-    <div class="blue">Time zone in {{firm.l}}</div>
-    <div>{{'GMT ' + firm.tz}}</div>
-     <br />
-
-    <div class="blue">Time on your device</div>
-    <div>{{deviceTime}}</div>
-    <br />
-
-    <div class="blue">Time zone detected on your device</div>
-    <div>{{'GMT ' + deviceGmtOffsetAsString}}</div>
-    
-    
   </div>
+
+  <ul class="topcoat-list__container list firmList">
+    <li class="topcoat-list__item">
+      <div class="blue">Time zone in {{firm.l}}</div>
+      <div>{{'GMT ' + firm.tz}}</div>
+    </li>
+
+    <li class="topcoat-list__item">
+      <div class="blue">Time on your device</div>
+      <div>{{deviceTime}}</div>
+    </li>
+
+    <li class="topcoat-list__item">
+      <div class="blue">Time zone detected on your device</div>
+      <div>{{'GMT ' + deviceGmtOffsetAsString}}</div>
+    </li>
+
+  </ul>
 </div>
 
 
-<div class="bottomSpace"></div>
+
 
 

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>{{helpers.getCountryName(country.n)}}</h4>
+    <h4 ng-bind="helpers.getCountryName(country.n)"></h4>
   </div>
 </div>
 
@@ -32,7 +32,7 @@
 
   <ul class="topcoat-list__container list firmList">
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div>{{contact.n}}</div>
+      <div ng-bind="contact.n"></div>
       <div once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>
       <span class="lstSpan" once-html="contact.f + contact.l"></span>
     </li>

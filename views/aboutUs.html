@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h5>{{pageContent.t1}}</h5>
+    <h5>About MSIL</h5>
   </div>
 </div>
 
@@ -17,17 +17,14 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
   <div class="pad10">
 
-    <h3 class="blue" style="display: inline-block">{{pageContent.t2}}</h3>
+    <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
     
-    <p ng-repeat="p in pageContent.ps">
-      <span once-html="p.t" ng-show="p.t.length > 0"></span>
-      <span once-html="p.b"></span>
-    </p>
-    
+    <p>A wide range of professional services has been developed by the member firms over the 100 years since Moore Stephens was first founded to assist clients in meeting their cross-border commercial objectives. These are complemented by local services in each country to the same high standard of personal service that is the Moore Stephens tradition. Services are provided in compliance with relevant national legislation and professional regulation.</p>
+    <p>For more information, please visit <span class="blue bold"  ng-click="helpers.gotoWeb('http://www.moorestephens.com');">www.moorestephens.com</span>.</p>
   </div>
 </div>
 
 
-<div class="bottomSpace"></div>
+
 
 

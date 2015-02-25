@@ -3,19 +3,20 @@
   $scope.helpers = factory.getHelpers();
   $scope.dataMgr = dataMgr;
   
-  dataMgr.setScopePageContents( function ( data )
-  {
-    $timeout( function ()
-    {
-      $scope.pageContent = dataMgr.filterByField( data, "id", "AppInfo" )[0];
-      $scope.helpers.showLoading = false;
+  //dataMgr.setScopePageContents( function ( data )
+  //{
+  //  $timeout( function ()
+  //  {
+  //    $scope.pageContent = dataMgr.filterByField( data, "id", "AppInfo" )[0];
+  //    $scope.helpers.showLoading = false;
 
-    }, $scope.helpers.renderDelay );
+  //  }, $scope.helpers.renderDelay );
 
-  } );
+  //} );
 
   $scope.LastUpdatedOn = dataMgr.getLastUpdatedDateAsString();
   $scope.AppVersion = $scope.helpers.AppVersion;
+  $scope.helpers.showLoading = false;
 
   $scope.updateData = function ()
   {
@@ -36,4 +37,6 @@
     });
     
   }
+
+  $anchorScroll();
 } );

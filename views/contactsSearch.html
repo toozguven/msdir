@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Contacts Search</h4>
+    <h5>Contacts Search</h5>
   </div>
 </div>
 
@@ -14,7 +14,7 @@
   <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
 </p>
 
-<div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
+<div ng-show="helpers.showLoading == false" class="firstContent">
 
   <div class="pad10">
     <div class="mstphCFRadioDiv">
@@ -39,23 +39,28 @@
       </div>
     </div>
   </div>
-    
+
+  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
+    No results found for <span class="blue">{{search}}</span>. 
+  </p>
+  
   <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
   <div>
     <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
       <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
         <div once-html="contact.n" class="boldBlue"></div>
-        <div once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
+        <div class="blue" once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
         <span once-html="contact.f"></span>
-        <span once-text="contact.l"></span>
+        <span once-html="'<br/>' + contact.l"></span>
       </li>
     </ul>
   </div>
 
-  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
-    No contacts found mathing the search criteria.
-  </p>
+  <div ng-show="similarPhrasesFound && (contacts|filter:searchDelayedFunc).length < 3 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10 similarSearches">
+    Other similar searches:<br />
+    <span ng-repeat="phrase in similarPhrases" once-html="phrase + '<br/>'" class="miniBtn" ng-click="helpers.g('/findContacts/' + phrase );"></span>
+  </div>
 
   <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
     Search term must be at least three characters.
@@ -63,5 +68,5 @@
 
 </div>
 
-<div class="bottomSpace"></div>
+
 

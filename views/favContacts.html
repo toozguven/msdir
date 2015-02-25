@@ -1,12 +1,12 @@
 ﻿&nbsp;
 <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+    <!--<div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
       <span class="icn prevIcn">&nbsp;</span>
-    </div>
+    </div>-->
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Bookmarks</h4>
+    <h5>Bookmarks</h5>
   </div>
 </div>
 
@@ -40,7 +40,7 @@
     <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
       <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
         <div once-html="contact.n" class="boldBlue"></div>
-        <div once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
+        <div class="blue" once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
         <span once-html="contact.f"></span>
         <span once-text="contact.l"></span>
       </li>
@@ -53,5 +53,5 @@
 
 </div>
 
-<div class="bottomSpace"></div>
+
 

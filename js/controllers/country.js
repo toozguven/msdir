@@ -32,6 +32,11 @@
     $timeout( function ()
     {
       $scope.country = dataMgr.getCountry( data, $routeParams.id );
+      if ( !( $scope.country ) )
+      {
+        $scope.helpers.showLoading = false;
+        return;
+      }
       $scope.towns = $scope.country.towns;
 
       try

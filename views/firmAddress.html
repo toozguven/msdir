@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Firm Address</h4>
+    <h5>Firm Address</h5>
   </div>
 </div>
 
@@ -28,19 +28,18 @@
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.mad)">
         <div class="blue">Mailing Address</div>
-        <div ng-bind-html="firm.mad"></div>     
+        <span ng-bind-html="firm.mad"></span>     
     </li>
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.f)">
       <div class="blue">Facsimile</div>
-      <div once-html="firm.f"></div>      
+      <span once-html="firm.f"></span>      
     </li>
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
-      <div ng-bind-html="firm.cm"></div>      
+      <span ng-bind-html="firm.cm"></span>      
     </li>
 
   </ul>
 </div>
 
-<div class="bottomSpace"></div>

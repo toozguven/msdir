@@ -1,8 +1,9 @@
 ﻿ngapp.controller( 'FindContactsCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
-
   $scope.contacts = [];
+  $scope.similarPhrases = [];
+  $scope.similarPhrasesFound = false;
 
   //$scope.$apply();
   //return;
@@ -11,6 +12,21 @@
   $scope.searchDelayed = $routeParams.phrase;
   $scope.helpers.delayModelSetting( $scope, $timeout, "search", function ( val ) { 
     $scope.searchDelayed = val; 
+
+    dataMgr.getSimilarPhrasesForContacts( val, function ( data )
+    {
+      if ( data.length > 0 )
+      {
+        $scope.similarPhrases = data;
+        $scope.similarPhrasesFound = true;
+      }
+      else
+      {
+        $scope.similarPhrases = [];
+        $scope.similarPhrasesFound = false;
+      }
+    } );
+
   } );
 
   $scope.removeSearch = function ()
@@ -61,11 +77,20 @@
 
   $scope.relevanceFunc = function ( contact )
   {
-    if ( contact.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 || ( contact.nfs && contact.nfs.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 ) )
+    if ( contact.fn.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) == 0 )
       return 1;
 
+    if ( contact.ln.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) == 0 )
+      return 1;
+
+    if ( contact.n.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1  )
+      return 3;
+
+    if (contact.nfs && contact.nfs.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
+      return 4;
+
     if ( contact.l.toLowerCase().indexOf( $scope.searchDelayed.toLowerCase() ) > -1 )
-      return 2;
+      return 5;
 
     return 999;
   }

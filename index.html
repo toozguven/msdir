@@ -14,37 +14,12 @@
   <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <title>MSIL Directory</title>
-  <script>
-    //localStorage.removeItem( "MStphIsFirstUse" );
-    var sIsFirstUse = localStorage.getItem( "MStphIsFirstUse" );
-    if ( sIsFirstUse && sIsFirstUse == "false" )
-    {
-      
-    }
-    else {
-      window.location.href = "init.html";
-    }
-
-    function openUrl( url )
-    {
-      if ( ngRootScope.menuVisible )
-        ngRootScope.doMenuClick();
-
-      window.open( url, '_blank', 'location=yes' );
-
-    }
-  </script>
 </head>
 <body>
-  
-<!--  <div raw-ajax-busy-indicator="" class="centAlign renderingIndic" ng-show="showLoading"><br /><br /><br /><br /><br /><br />LOADING</div>-->
+  <form><div ng-view class="app" ng-class="slide" onclick="if ( ngRootScope && ngRootScope.menuVisible ) ngRootScope.doMenuClick()"></div></form>
 
-  <form><div ng-view class="app" onclick="if ( ngRootScope && ngRootScope.menuVisible ) ngRootScope.doMenuClick()"></div></form>
-
-  <div id="con" style="display: none"></div>
-  <button class="help-btn" onclick="doIt()" style="display: none">Help</button>
-  
-  <!--<br />-->
+  <!--<div id="con" style="display: none"></div>
+  <button class="help-btn" onclick="doIt()" style="display: none">Help</button>-->
 
   <div id="bottom-nav" ng-controller="MenuCtrl" >
     <div id="mstphMenu" class="slideable">
@@ -119,6 +94,9 @@
   <script src="js/factories/factory.js"></script>
   <script src="js/factories/dataMgr.js"></script>
   
+  <!--preload templates-->
+
   
+      
 </body>
 </html>

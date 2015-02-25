@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Firms Search</h4>
+    <h5>Firms Search</h5>
   </div>
 </div>
 
@@ -17,19 +17,20 @@
 <div ng-show="helpers.showLoading == false" class="firstContent">
 
   <div class="pad10">
-    <label class="topcoat-radio-button" ng-click="helpers.g('/findContacts/' + search)">
-      <input type="radio" name="topcoat">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Contacts
-    </label>
-    &nbsp;&nbsp;
-    <label class="topcoat-radio-button">
-      <input type="radio" name="topcoat" checked="checked">
-      <div class="topcoat-radio-button__checkmark"></div>
-      Firms
-    </label>
+    <div class="mstphCFRadioDiv">
+      <label class="topcoat-radio-button" ng-click="helpers.g('/findContacts/' + search)">
+        <input type="radio" name="topcoat">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Contacts
+      </label>
+      &nbsp;&nbsp;
+      <label class="topcoat-radio-button">
+        <input type="radio" name="topcoat" checked="checked">
+        <div class="topcoat-radio-button__checkmark"></div>
+        Firms
+      </label>
 
-    <br /><br />
+    </div>
 
     <div class="mstphInputFieldBordered">        
       <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
@@ -41,17 +42,22 @@
   
   <div class="prevNextBtnDiv" ng-show="(firms | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(firms | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
+  <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
+    No results found for <span class="blue">{{search}}</span>. 
+  </p>
+
   <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
     <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:[relevanceFunc, 'n', 'l'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div ng-bind-html="firm.n" class="boldBlue"></div><br />
-      <span once-html="firm.l"></span>
+      <div ng-bind-html="firm.n" class="boldBlue"></div>
       <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
+      <span once-html="firm.l"></span>
     </li>
   </ul>
 
-  <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
-    No firms found mathing the search criteria.
-  </p>
+  <div ng-show="similarPhrasesFound && (firms|filter:searchDelayedFunc).length < 3 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10 similarSearches">
+    Did you mean any of the below?<br />
+    <span ng-repeat="phrase in similarPhrases" once-html="phrase + '<br/>'" class="miniBtn" ng-click="helpers.g('/findFirms/' + phrase );"></span>
+  </div>
 
   <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
     Search term must be at least three characters.
@@ -59,5 +65,5 @@
 
 </div>
 
-<div class="bottomSpace"></div>
+
 

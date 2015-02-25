@@ -38,7 +38,8 @@
 
   $scope.redirectToCountry = function ()
   {
-    $scope.helpers.showLoading = true;
+    //$scope.helpers.showLoading = true;
+    
 
     if ( $scope.selectedCountryId == "210" )
       $scope.helpers.g("/countryWithStateContacts/" + $scope.selectedCountryId + "/0" );

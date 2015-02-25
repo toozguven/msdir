@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4>Contact Details</h4>
+    <h5>Contact Details</h5>
   </div>
 </div>
 
@@ -19,9 +19,9 @@
     <div class="fRight contactImg">
       <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" />
     </div>
-    <h3 class="boldBlue" once-html="contact.n"></h3>
-    <span class="bold" once-html="contact.r"></span> <br />
-    <span ng-bind="contact.l + '&nbsp;'"></span> <br />
+    <h3 class="boldBlue" once-html="contact.n" ng-show="helpers.hasValueFunc(contact.n)"></h3>
+    <div class="blue" once-html="contact.r" ng-show="helpers.hasValueFunc(contact.r)"></div> 
+    <div ng-bind="contact.l + '&nbsp;'"></div> 
     <span class="miniBtnWithIcon" ng-click="dataMgr.toggleFavourite(contact.id, 'contact')">
       <i class="fa fa-star"></i>
       {{dataMgr.getFavLabel(contact.id, 'contact')}}
@@ -33,7 +33,7 @@
 
      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.t)">
       <a href="tel:{{helpers.getTel(contact.t)}}" ng-click="helpers.closeMenu()">
-        <div>Call Office</div>
+        <div class="blue">Call Office</div>
         <span class="lstSpan" once-html="contact.t"></span>
         <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
       </a>
@@ -42,7 +42,7 @@
 
     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
       <a href="tel:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
-        <div>Call Mobile</div>
+        <div class="blue">Call Mobile</div>
         <span class="lstSpan" once-html="contact.m"></span>
         <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
       </a>
@@ -50,7 +50,7 @@
 
      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
       <a href="sms:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
-        <div>SMS / Text</div>
+        <div class="blue">SMS / Text</div>
         <span class="lstSpan" once-html="contact.m"></span>
         <span class="icn smsIcn">&nbsp;&nbsp;&nbsp;</span>
       </a>
@@ -58,39 +58,31 @@
 
      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.eml)">
       <a href="mailto:{{contact.eml}}" ng-click="helpers.closeMenu()">
-        <div>Email</div>
+        <div class="blue">Email</div>
         <span class="lstSpan" once-html="contact.eml"></span>
         <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
       </a>
     </li>
 
      <li class="topcoat-list__item chevronLi" ng-click="helpers.g('/f/' + contact.fid)">
-      <span>
-        <div>Primary Firm</div>
+        <div class="blue">Primary Firm</div>
         <span once-html="contact.f" class="lstSpan"></span>
-        
-      </span>
     </li>
 
     <li class="topcoat-list__item" ng-show="contact.tz != '0'" ng-click="helpers.g('/tz/' + contact.fid);">
-      <span>
-        <div>Time Zone</div>
-        <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + contact.tz.toString()"></span>
-        <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
-      </span>
+      <div class="blue">Time Zone</div>
+      <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + contact.tz.toString()"></span>
+      <span class="icn timezoneIcn"></span>       
     </li>
 
      <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnContactProfileUrl', true, true);" ng-show="helpers.isOnline()">
-      <span>
-        <div>More Information</div>
+        <div class="blue">More Information</div>
         <span class="lstSpan">View more information about this person on www.moorestephens.com</span>
-        <span class="icn headIcn">&nbsp;&nbsp;&nbsp;</span>
+        <span class="icn urlIcn"></span>
         <input type="hidden" id="hdnContactProfileUrl" ng-value="helpers.getContactProfileUrl(contact.id)" />
-      </span>
     </li>
 
    </ul>
 
 </div>
 
-<div class="bottomSpace"></div>

@@ -2,11 +2,30 @@
 {
   $scope.helpers = factory.getHelpers();
   $scope.firms = [];
+  $scope.similarPhrases = [];
+  $scope.similarPhrasesFound = false;
   
   $scope.searchDelayed = $routeParams.phrase;
   $scope.search = $routeParams.phrase;
   
-  $scope.helpers.delayModelSetting( $scope, $timeout, "search", function ( val ) { $scope.searchDelayed = val; } );
+  $scope.helpers.delayModelSetting( $scope, $timeout, "search", function ( val ) { 
+    $scope.searchDelayed = val; 
+
+    dataMgr.getSimilarPhrasesForFirms( val, function ( data )
+    {
+      if ( data.length > 0 )
+      {
+        $scope.similarPhrases = data;
+        $scope.similarPhrasesFound = true;
+      }
+      else
+      {
+        $scope.similarPhrases = [];
+        $scope.similarPhrasesFound = false;
+      }
+    } );
+
+  } );
 
   $scope.searchDelayedFunc = function ( item )
   {
@@ -72,6 +91,8 @@
     $timeout( function ()
     {
       $scope.firms = data;
+      $scope.fuzzyFirms = data;
+      $scope.fuzzyResultsFound = true;
       $scope.helpers.showLoading = false;
 
     }, $scope.helpers.renderDelay );

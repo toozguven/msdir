@@ -1,4 +1,4 @@
-﻿ngapp.factory( "factory", function ( $http, $rootScope, $location, $route, $window )
+﻿ngapp.factory( "factory", function ( $http, $rootScope, $location, $route, $window, $timeout )
 {
   ngRootScope = $rootScope;
   ngRootScope.isOnline = -1;
@@ -23,6 +23,14 @@
       hasValueFunc: function ( val )
       {
         return ( val && val.length > 2 && val != "0" && val != "666" );
+      },
+      getContactLocation: function ( contact, countryName )
+      {
+        var rtnVal = contact.f + ', ' + contact.l.replace( ', ' + countryName, '' )
+        if ( rtnVal.length < 5 )
+          return "";
+
+        return rtnVal;
       },
       getGmtString: function(gmtoffset) {
         try {
@@ -57,39 +65,13 @@
       {
         return "https://onlineforms.moorestephens.org/Firm2/IntDirDirections?daddr=" + firm.lat + "," + firm.lon + "&saddr=" + ngRootScope.lat + "," + ngRootScope.lon;
       },
-
       getTel: function(telNo) {
         try {
           return telNo.replace(/\s/g, '').replace('(0)', '');
         }
         catch ( e ) { return telNo; }
       },      
-
-      f: function ( fid ) { 
-        if ( $rootScope.menuVisible )
-          $rootScope.doMenuClick();
-
-        this.g( "/f/" + fid );        
-      },
-
-      c: function ( cid ) { 
-        if ( $rootScope.menuVisible )
-          $rootScope.doMenuClick(); 
-        this.g( "/c/" + cid );
-      },
-      
-      g: function ( path )
-      {        
-        if ( $rootScope.menuVisible )
-          $rootScope.doMenuClick();
-        
-        this.showLoading = true; 
-        $location.path( path ); 
-
-      },
-
-      getFirmStatus: function ( f )
-      {
+      getFirmStatus: function ( f ) {
         if ( f && f.st )
         {
           return f.st;
@@ -106,34 +88,67 @@
 
         return f.st;
       },
-
-      gotoTerms: function() {
-        $window.location.href = "init.html";
-      },
-
-      gotoApp: function ()
-      {
-        $window.location.href = "index.html";
-      },
-
-      goBack: function (step) {
+      /*NAV METHODS*/
+      f: function ( fid ) { 
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick();
 
-        javascript:history.go(step);
-      },
+        $rootScope.slide = 'slide-left';
+        //$rootScope.apply();
 
+        this.g( "/f/" + fid, 1 );
+      },
+      c: function ( cid ) { 
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick(); 
+
+        $rootScope.slide = 'slide-left';
+        //$rootScope.apply();
+
+        this.g( "/c/" + cid, 1 );
+      },
+      g: function ( path, step )
+      { 
+        //if (step && step == -1)
+        //  ngRootScope.slide = 'slide-right';
+        //else
+        //  ngRootScope.slide = 'slide-left';
+        if ( step && step == -1 )
+          $rootScope.slide = 'slide-right';
+        else
+          $rootScope.slide = 'slide-left';
+
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+        
+        //this.showLoading = true; 
+        $location.path( path );
+
+      },
+      goBack: function (step) {
+        $rootScope.slide = 'slide-right';
+        //$rootScope.apply();
+
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
+        javascript: history.go( step );
+
+        //$rootScope.slide = 'slide-left';
+      },
       goBack: function () {
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick();
 
+        $rootScope.slide = 'slide-right';
+        //$rootScope.apply();
+
         history.back( -1 );
       },
-
-      gotoById: function(id) {
+      gotoByIdXXXXX: function(id) {
         $location.hash( id );
       },
-
+      /*END NAV*/
       getNavSelectedCss: function(path) {
         if ( path == "#" && $location.path() == "/" )
           return "bottomNavSelected";       
@@ -159,7 +174,7 @@
         return ngRootScope.isPhone;
       },
       showLoading: true,
-      renderDelay: 999,
+      renderDelay: 1,
       paging: { 
         pageSize: 10, 
         currentPage: 0, 
@@ -190,7 +205,8 @@
           $rootScope.doMenuClick();
 
         var url = document.getElementById( hiddenFieldId ).value;
-        window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
+        //window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
+        this.gotoWeb( url );
 
       },
       openWebPage2: function ( url, isNewWindow, isShowLocation )
@@ -198,7 +214,18 @@
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick();
 
-        window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
+        //window.open( url, isNewWindow ? '_blank' : '_self', isShowLocation ? 'location=yes' : 'location=no' );
+        this.gotoWeb( url );
+      },
+      gotoWeb: function(url) {
+        if ( this.isOnline() == false )
+          alert( "Your device seems to be offline. Try again when you have an internet connection." );
+        else
+        {
+          var response = confirm( "You are about to exit this app and go to a web page. Please confirm or cancel.", function ( btnIndex ) { if ( btnIndex == 1 ) window.open( url, '_system' ); }, ['Confirm', 'Cancel'] );
+          if ( response == true )
+            window.open( url, '_blank', 'location=yes' );
+        }
       },
       closeMenu: function() {
         if ( $rootScope.menuVisible )
@@ -229,9 +256,7 @@
           }, 555 );
         } );
       },
-
       blockSearchBlur: false,
-
       doSearchBlur: function() {
         if ( this.blockSearchBlur == false )
           setTimeout( function () { jQuery( 'html, body' ).animate( { scrollTop: 0 }, 500 ); }, 11 );

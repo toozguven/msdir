@@ -1,16 +1,17 @@
 ﻿ngapp.controller( 'CorrespondentFirmsInfoCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
-  
-  dataMgr.setScopePageContents( function ( data )
-  {
-    $timeout( function ()
-    {
-      $scope.pageContent = dataMgr.filterByField( data, "id", "CorrespInfo" )[0];
-      $scope.helpers.showLoading = false;
+  $scope.helpers.showLoading = false;
 
-    }, $scope.helpers.renderDelay );
+  //dataMgr.setScopePageContents( function ( data )
+  //{
+  //  $timeout( function ()
+  //  {
+  //    $scope.pageContent = dataMgr.filterByField( data, "id", "CorrespInfo" )[0];
+  //    $scope.helpers.showLoading = false;
 
-  } );
+  //  }, $scope.helpers.renderDelay );
+
+  //} );
 
 } );

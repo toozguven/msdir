@@ -1,4 +1,5 @@
-﻿&nbsp;
+﻿<!--<div class="slideView" ng-class="slide-left">  -->
+  &nbsp;
   <p ng-show="helpers.showLoading == true" class="centAlign firstContent">
     <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
@@ -22,11 +23,18 @@
           </div>-->
 
           <div class="centAlign" style="font-size: 1rem">
-            <div class="mstphInputFieldBordered" style="display: inline-block; text-align: left; width: 220px;">        
-              <input class="mstphSearchbox" style="width: 165px" ng-model="search" placeholder="Quick find" type="search"  ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()">
-              <div class="splashCross" style="margin-left: 15px; position: relative; display: inline-block">
+            <div class="mstphInputFieldBordered" style="display: inline-block; text-align: left; width: 220px;">        <!-- ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()" -->
+              <input class="mstphSearchbox" style="width: 165px" ng-model="search" placeholder="Quick find" type="search" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false"  >
+              <div class="splashCross" style="margin-left: 20px; position: relative; display: inline-block; top: 1px;">
                 <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
               </div>
+            </div>
+
+            <div>
+              <span class="miniBtnWithIcon frmBkmrkBtn" ng-click="helpers.g(favPath)" ng-show="favPath != ''">
+                <i class="fa fa-star"></i>
+                BOOKMARKS
+              </span>
             </div>
             <!--<span style="padding: 11px 6px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
               <input ng-model="search" class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()" />
@@ -51,7 +59,7 @@
             </span>
           </div>-->
 
-        </xdiv>
+<!--        </xdiv>-->
 
         
 
@@ -69,16 +77,8 @@
     </div>  
 
   </div>
-
+  </div>
   
-
-
-
-
-
-
-
-<div class="bottomSpace"></div>
-
+<!--</div>-->
 
 

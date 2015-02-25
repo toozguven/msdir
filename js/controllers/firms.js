@@ -39,8 +39,6 @@
 
   $scope.redirectToCountry = function ()
   {
-    $scope.helpers.showLoading = true;
-
     if ( $scope.selectedCountryId == "210" )
       $scope.helpers.g("/countryWithState/" + $scope.selectedCountryId + "/0" );
     else

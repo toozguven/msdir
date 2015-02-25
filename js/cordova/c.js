@@ -39,6 +39,13 @@ var app = {
   // function, we must explicity call 'app.receivedEvent(...);'
   onDeviceReady: function ()
   {
+    //init fastclick (avoids )
+    try
+    {
+      FastClick.attach( document.body );
+    }
+    catch ( e ) { alert( e ) }
+
     //console_log( 'onDeviceReady' );
     if ( parseFloat( window.device.version ) === 7.0 )
     {
@@ -59,15 +66,13 @@ var app = {
                                      'OK'        // buttonName
                                      );
       };
+
+      window.confirm = function ( message, callback, btnLabels )
+      {
+        navigator.notification.confirm( message, callback, "MSIL Directory", btnLabels );
+      };
     }
     //app.receivedEvent( 'deviceready' );
-
-    //init fastclick (avoids )
-    try
-    {
-      FastClick.attach( document.body );
-    }
-    catch ( e ) { }
 
     //setTimeout( "checkLocation();", 1 );
     setTimeout( "checkConnection();", 1 );

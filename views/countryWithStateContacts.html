@@ -1,12 +1,12 @@
 &nbsp;
 <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
   <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.g('/contacts')">
+    <div class="prevIcnDiv" ng-click="helpers.g('/contacts', -1)">
       <span class="icn prevIcn">&nbsp;</span>
     </div>
   </div>
   <div class="topcoat-navigation-bar__item center half">
-    <h4 once-html="helpers.getCountryName(country.n)"></h4>
+    <h5 once-html="helpers.getCountryName(country.n)"></h5>
   </div>
 </div>
 
@@ -37,8 +37,8 @@
   <ul class="topcoat-list__container list firmList">
     <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
       <div once-text="contact.n" class="boldBlue"></div>
-      <div class="bold" once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>
-      <span class="lstSpan" once-html="contact.f + contact.l.replace(', ' + country.n, '')"></span>
+      <div class="blue" once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>
+      <span class="lstSpan" once-html="contact.f + ', ' + contact.l.replace(', ' + country.n, '')"></span>
     </li>
   </ul>
 
@@ -48,5 +48,5 @@
 
 </div>
 
-<div class="bottomSpace"></div>
+
 
