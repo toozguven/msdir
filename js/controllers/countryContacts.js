@@ -53,59 +53,56 @@
 
   dataMgr.setScopeCountries( function ( data )
   {
-    $timeout( function ()
+    $scope.country = dataMgr.getCountry( data, $routeParams.id );
+    $scope.towns = $scope.country.towns;
+
+    try
     {
-      $scope.country = dataMgr.getCountry( data, $routeParams.id );
-      $scope.towns = $scope.country.towns;
+      $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid == 0 ? 1 : $routeParams.sid );
+    } catch ( e ) { }
 
-      try
-      {
-        $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid == 0 ? 1 : $routeParams.sid );
-      } catch ( e ) { }
+    if ( $scope.state )
+    {
+      $scope.selectedStateId = $scope.state.id;
+    }
 
-      if ( $scope.state )
+    dataMgr.setScopeContacts( function ( data )
+    {
+      $scope.contacts = dataMgr.filterByField( data, "cid", $scope.countryId );
+      if ( $scope.contacts.length == 0 )
       {
-        $scope.selectedStateId = $scope.state.id;
-      }
-
-      dataMgr.setScopeContacts( function ( data )
-      {
-        $scope.contacts = dataMgr.filterByField( data, "cid", $scope.countryId );
-        if ( $scope.contacts.length == 0 )
+        dataMgr.setScopeFirms( function ( firmsData )
         {
-          dataMgr.setScopeFirms( function ( firmsData ) { 
-            var firms = dataMgr.filterByField( firmsData, "cid", $scope.countryId );
-            var countryContacts = [];
-            for ( var i = 0; i < firms.length; i++ )
-            {
-              if ( firms[i].cm && firms[i].cm.length > 5 )
-                $scope.notes = firms[i].cm;
+          var firms = dataMgr.filterByField( firmsData, "cid", $scope.countryId );
+          var countryContacts = [];
+          for ( var i = 0; i < firms.length; i++ )
+          {
+            if ( firms[i].cm && firms[i].cm.length > 5 )
+              $scope.notes = firms[i].cm;
 
-              countryContacts.push( { "firm": firms[i], "cs": firms[i].cs } );
+            countryContacts.push( { "firm": firms[i], "cs": firms[i].cs } );
+          }
+
+          for ( var i = 0; i < countryContacts.length; i++ )
+          {
+            for ( var j = 0; j < countryContacts[i].cs.length; j++ )
+            {
+              var tempContact = dataMgr.getContact( data, countryContacts[i].cs[j].id );
+              tempContact.cid = $scope.countryId;
+              tempContact.l = "";
+              tempContact.f = "";
+              $scope.contacts.push( tempContact );
             }
 
-            for ( var i = 0; i < countryContacts.length; i++ )
-            {
-              for ( var j = 0; j < countryContacts[i].cs.length; j++ )
-              {
-                var tempContact = dataMgr.getContact( data, countryContacts[i].cs[j].id );
-                tempContact.cid = $scope.countryId;
-                tempContact.l = "";
-                tempContact.f = "";
-                $scope.contacts.push( tempContact );
-              }
-              
-            }
-            $scope.helpers.showLoading = false;
-          } );
-        }
-        else
-        {
+          }
           $scope.helpers.showLoading = false;
-        }
-      } );
-
-    }, $scope.helpers.renderDelay );
+        } );
+      }
+      else
+      {
+        $scope.helpers.showLoading = false;
+      }
+    } );
 
   } );
 

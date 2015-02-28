@@ -50,6 +50,7 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
   
   $scope.gotoSearch = function ( phrase )
   {
+    $timeout( function () { document.getElementsByClassName( "mstphSearchbox" )[0].blur(); }, 111 );
     if ( phrase )
     {
       if ( phrase.length <= 2 )

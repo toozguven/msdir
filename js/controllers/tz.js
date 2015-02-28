@@ -70,9 +70,7 @@
     var firmsTimeZoneTime = gmtTime.addHours( parseFloat( tz == "" ? 0 : tz ) );
     $scope.localTime = firmsTimeZoneTime.getHourAndMinute();
 
-    $scope.$apply();
-
-    setTimeout( function () { processTimeZone( tz ) }, 1000 * 60 );
+    setTimeout( function () { processTimeZone( tz ); $scope.$apply(); }, 1000 * 60 );
   }
 
 

@@ -29,39 +29,36 @@
 
   dataMgr.setScopeCountries( function ( data )
   {
-    $timeout( function ()
+    $scope.country = dataMgr.getCountry( data, $routeParams.id );
+    if ( !( $scope.country ) )
     {
-      $scope.country = dataMgr.getCountry( data, $routeParams.id );
-      if ( !( $scope.country ) )
-      {
-        $scope.helpers.showLoading = false;
-        return;
-      }
-      $scope.towns = $scope.country.towns;
+      $scope.helpers.showLoading = false;
+      return;
+    }
+    $scope.towns = $scope.country.towns;
 
-      try
-      {
-        $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid );
-      } catch ( e ) { }
+    try
+    {
+      $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid );
+    } catch ( e ) { }
 
-      if ( $scope.state )
-        $scope.selectedStateId = $scope.state.id;
+    if ( $scope.state )
+      $scope.selectedStateId = $scope.state.id;
 
-      dataMgr.setScopeFirms( function ( data )
-      {
-        $scope.firms = dataMgr.filterByField( data, "cid", $scope.countryId );
+    dataMgr.setScopeFirms( function ( data )
+    {
+      $scope.firms = dataMgr.filterByField( data, "cid", $scope.countryId );
 
-        $scope.helpers.showLoading = false;
-      } );
-
-    }, $scope.helpers.renderDelay );
+      $scope.helpers.showLoading = false;
+    } );
 
   } );
     
   $scope.redirectToState = function ()
   {
-    $scope.helpers.showLoading = true;
+    //$scope.helpers.showLoading = true;
     $scope.helpers.g("/countryWithState/" + $scope.countryId + "/" + $scope.selectedStateId );
+
   }
 
   $anchorScroll();

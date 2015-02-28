@@ -156,10 +156,10 @@
         if ( $location.path().indexOf( path ) > -1 )
           return "bottomNavSelected";
 
-        if ( ( $location.path().indexOf( "/c/" ) > -1 || $location.path().indexOf( "/countryContacts/" ) > -1 || $location.path().indexOf( "/countryWithStateContacts/" ) > -1 || $location.path().indexOf( "/findContacts/" ) > -1 || $location.path().indexOf( "/fc/" ) > -1 ) && path == "/contacts" )
+        if ( ( $location.path().indexOf( "/c/" ) > -1 || $location.path().indexOf( "/countryContacts/" ) > -1 || $location.path().indexOf( "/countryWithStateContacts/" ) > -1 || $location.path().indexOf( "/findContacts/" ) > -1 ) && path == "/contacts" )
           return "bottomNavSelected";
 
-        if ( ( $location.path().indexOf( "/f/" ) > -1 || $location.path().indexOf( "/country/" ) > -1 || $location.path().indexOf( "/countryWithState/" ) > -1 || $location.path().indexOf( "/findFirms/" ) > -1 || $location.path().indexOf( "/fa/" ) > -1 ) && path == "/firms" )
+        if ( ( $location.path().indexOf( "/f/" ) > -1 || $location.path().indexOf( "/country/" ) > -1 || $location.path().indexOf( "/countryWithState/" ) > -1 || $location.path().indexOf( "/findFirms/" ) > -1 || $location.path().indexOf( "/fc/" ) > -1 || $location.path().indexOf( "/fa/" ) > -1 ) && path == "/firms" )
           return "bottomNavSelected";
 
         return "";
@@ -219,7 +219,7 @@
       },
       gotoWeb: function(url) {
         if ( this.isOnline() == false )
-          alert( "Your device seems to be offline. Try again when you have an internet connection." );
+          alert( "Your device seems to be offline. Please try again when you have an internet connection." );
         else
         {
           var response = confirm( "You are about to exit this app and go to a web page. Please confirm or cancel.", function ( btnIndex ) { if ( btnIndex == 1 ) window.open( url, '_system' ); }, ['Confirm', 'Cancel'] );

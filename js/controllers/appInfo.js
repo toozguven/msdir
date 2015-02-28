@@ -9,6 +9,12 @@
 
   $scope.updateData = function ()
   {
+    if ( $scope.helpers.isOnline() == false )
+    {
+      alert( "Your device seems to be offline. Please try again when you have an internet connection." );
+      return;
+    }
+
     $scope.helpers.showLoading = true;
 
     var prevUpdatedDate = $scope.LastUpdatedOn;

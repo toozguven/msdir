@@ -693,21 +693,26 @@ ngapp.factory( "dataMgr", function ( $http, $route, $rootScope )
     
     for ( var i = 0; i < firm.cs.length; i++ )
     {
-      var contact = factory.getContact( allContacts, firm.cs[i].id );
-      if ( contact )
+      var existingItemInArr = factory.filterByField( rtnVal, "id", firm.cs[i].id );
+      if ( existingItemInArr.length == 0 )
       {
-        var toBeExcluded = false;
-        for ( var j = 0; j < contactsToExclude.length; j++ )
-          if ( contactsToExclude[j].id == contact.id )
-            toBeExcluded = true;
 
-        if ( toBeExcluded == false )
+        var contact = factory.getContact( allContacts, firm.cs[i].id );
+        if ( contact )
         {
-          //overwrite role
-          contact.r = firm.cs[i].r;
-          //overwrite location
-          contact.l = firm.cs[i].l;
-          rtnVal.push( contact );
+          var toBeExcluded = false;
+          for ( var j = 0; j < contactsToExclude.length; j++ )
+            if ( contactsToExclude[j].id == contact.id )
+              toBeExcluded = true;
+
+          if ( toBeExcluded == false )
+          {
+            //overwrite role
+            contact.r = firm.cs[i].r;
+            //overwrite location
+            contact.l = firm.cs[i].l;
+            rtnVal.push( contact );
+          }
         }
       }
     }
@@ -720,16 +725,20 @@ ngapp.factory( "dataMgr", function ( $http, $route, $rootScope )
 
     for ( var i = 0; i < firm.ics.length; i++ )
     {
-      var contact = factory.getContact( allContacts, firm.ics[i].id );
-
-      if ( firm.ics[i].r && firm.ics[i].r != "" )
+      var existingItemInArr = factory.filterByField( rtnVal, "id", firm.ics[i].id );
+      if ( existingItemInArr.length == 0 )
       {
-        //overwrite role
-        contact.r = firm.ics[i].r;
+        var contact = factory.getContact( allContacts, firm.ics[i].id );
+
+        if ( firm.ics[i].r && firm.ics[i].r != "" )
+        {
+          //overwrite role
+          contact.r = firm.ics[i].r;
+        }
+        //overwrite location
+        contact.l = firm.ics[i].l;
+        rtnVal.push( contact );
       }
-      //overwrite location
-      contact.l = firm.ics[i].l;
-      rtnVal.push( contact );
     }
     return rtnVal;
   }

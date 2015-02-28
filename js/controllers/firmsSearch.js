@@ -88,14 +88,10 @@
 
   dataMgr.setScopeFirms( function ( data )
   {
-    $timeout( function ()
-    {
-      $scope.firms = data;
-      $scope.fuzzyFirms = data;
-      $scope.fuzzyResultsFound = true;
-      $scope.helpers.showLoading = false;
-
-    }, $scope.helpers.renderDelay );
+    $scope.firms = data;
+    $scope.fuzzyFirms = data;
+    $scope.fuzzyResultsFound = true;
+    $scope.helpers.showLoading = false;
   } );
 
   $anchorScroll();

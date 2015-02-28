@@ -126,6 +126,9 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     redirectTo: '/splash'
   } );
 } )
+ .config( function ( $anchorScrollProvider ) {
+   $anchorScrollProvider.disableAutoScrolling();
+ })
 .config( ['$compileProvider', function ( $compileProvider )
 {
   $compileProvider.aHrefSanitizationWhitelist( /^\s*(https?|file|tel|sms|mailto):/ );
@@ -379,60 +382,3 @@ ngapp.directive( 'slideToggle', function ( $rootScope )
     }
   }
 } );
-
-
-/*
-// Compute the edit distance between the two given strings
-String.prototype.getEditDistance = function ( b )
-{
-  if ( this.length === 0 ) return b.length;
-  if ( b.length === 0 ) return this.length;
-
-  var matrix = [];
-
-  // increment along the first column of each row
-  var i;
-  for ( i = 0; i <= b.length; i++ )
-  {
-    matrix[i] = [i];
-  }
-
-  // increment each column in the first row
-  var j;
-  for ( j = 0; j <= this.length; j++ )
-  {
-    matrix[0][j] = j;
-  }
-
-  // Fill in the rest of the matrix
-  for ( i = 1; i <= b.length; i++ )
-  {
-    for ( j = 1; j <= this.length; j++ )
-    {
-      if ( b.charAt( i - 1 ) == this.charAt( j - 1 ) )
-      {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else
-      {
-        matrix[i][j] = Math.min( matrix[i - 1][j - 1] + 1, // substitution
-                                Math.min( matrix[i][j - 1] + 1, // insertion
-                                         matrix[i - 1][j] + 1 ) ); // deletion
-      }
-    }
-  }
-
-  return matrix[b.length][this.length];
-};
-
-String.prototype.fuzzyContains = function ( what )
-{
-
-  var arr = this.split( " " );
-  for ( var i = 0; i < arr.length; i++ )
-  {
-    if ( arr[i].getEditDistance( what ) < 2 )
-      return true;
-  }
-  return false;
-}
-*/

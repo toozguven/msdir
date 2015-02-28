@@ -4,8 +4,8 @@
     <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
-  <div ng-show="helpers.showLoading == false" style="">
-    <div class="mstphSplashBg" style="" ng-style="style()">
+  <div ng-show="helpers.showLoading == false">
+    <div class="mstphSplashBg" ng-style="style()">
   
       <div class="centAlign splashLogoDiv">
         <img src="img/logo/MSLogoTransparent.png" onclick="alert(jQuery( window ).height() + ' X ' + jQuery( window ).width())"/>
@@ -30,7 +30,7 @@
               </div>
             </div>
 
-            <div>
+            <div class="topMar20">
               <span class="miniBtnWithIcon frmBkmrkBtn" ng-click="helpers.g(favPath)" ng-show="favPath != ''">
                 <i class="fa fa-star"></i>
                 BOOKMARKS
