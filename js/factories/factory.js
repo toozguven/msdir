@@ -19,7 +19,7 @@
   factory.getHelpers = function ()
   {
     var rtnVal = {
-      AppVersion: "1.0",
+      AppVersion: "0.9 (Build 7)",
       hasValueFunc: function ( val )
       {
         return ( val && val.length > 2 && val != "0" && val != "666" );
