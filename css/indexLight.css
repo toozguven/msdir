@@ -159,6 +159,9 @@ p {
 
   .details .icn { margin-right: 15px; }
 
+  .chevronLi {
+    background-position: right 22px center !important;
+  }
 }
 
 /* TABLET and (max-aspect-ratio: 1/1) => Portrait*/
@@ -195,6 +198,10 @@ p {
   }
 
   .details .icn { margin-right: 15px; }
+
+  .chevronLi {
+    background-position: right 22px center !important;
+  }
 }
 
 
