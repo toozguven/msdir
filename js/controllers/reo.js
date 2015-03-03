@@ -8,14 +8,14 @@
   dataMgr.setScopeREOs( function ( data ) { 
     $scope.reos = data;
     $scope.helpers.showLoading = false;
-
-    setTimeout( dealWithHistory, 1 );
+    $anchorScroll();
+    //setTimeout( dealWithHistory, 1 );
     
   } );
   
-  $scope.currentlyOpenFirms = "{0}";
+  //$scope.currentlyOpenFirms = "{0}";
 
-  $scope.toggleFirm = function (fid)
+  /*$scope.toggleFirm = function (fid)
   {
     if ( $scope.currentlyOpenFirms.indexOf( "{" + fid + "}" ) > -1 )
     {
@@ -43,8 +43,6 @@
     return $scope.currentlyOpenFirms.indexOf( "{" + fid + "}" ) > -1;
   }
 
-  $anchorScroll();
-
   function dealWithHistory()
   {
     if ( history.state )
@@ -66,4 +64,21 @@
       }
     }
   }
+  */
+} );
+
+ngapp.controller( 'ReoCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $timeout )
+{
+  $scope.helpers = factory.getHelpers();
+  $scope.dataMgr = dataMgr;
+
+  $scope.firm = {};
+
+  dataMgr.setScopeREOs( function ( data )
+  {
+    $scope.firm = dataMgr.filterByField( data, "id", $routeParams.id )[0];
+    $scope.helpers.showLoading = false;
+  } );
+
+  $anchorScroll();
 } );

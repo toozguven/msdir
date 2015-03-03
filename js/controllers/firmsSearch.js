@@ -86,13 +86,15 @@
     return 999;
   }
 
-  dataMgr.setScopeFirms( function ( data )
+  $timeout( function ()
   {
-    $scope.firms = data;
-    $scope.fuzzyFirms = data;
-    $scope.fuzzyResultsFound = true;
-    $scope.helpers.showLoading = false;
-  } );
-
-  $anchorScroll();
+    dataMgr.setScopeFirms( function ( data )
+    {
+      $scope.firms = data;
+      $anchorScroll();
+      //$scope.fuzzyFirms = data;
+      //$scope.fuzzyResultsFound = true;
+      $scope.helpers.showLoading = false;
+    } );
+  }, 444 );
 } );

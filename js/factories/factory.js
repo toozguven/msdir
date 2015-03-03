@@ -98,12 +98,20 @@
 
         this.g( "/f/" + fid, 1 );
       },
+      reo: function ( fid )
+      {
+        if ( $rootScope.menuVisible )
+          $rootScope.doMenuClick();
+
+        $rootScope.slide = 'slide-left';
+
+        this.g( "/reo/" + fid, 1 );
+      },
       c: function ( cid ) { 
         if ( $rootScope.menuVisible )
           $rootScope.doMenuClick(); 
 
         $rootScope.slide = 'slide-left';
-        //$rootScope.apply();
 
         this.g( "/c/" + cid, 1 );
       },

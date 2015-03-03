@@ -22,7 +22,7 @@ var app = {
 
   onOrientationChange: function ()
   {
-    ngRootScope.reLoadCurrentPage();
+    //ngRootScope.reLoadCurrentPage();
     /*switch ( window.orientation )
     {
       case -90:

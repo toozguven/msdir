@@ -35,7 +35,7 @@ body {
 }
 
 .app {
-  /*-webkit-transform: translate3d(0,0,0);*/
+  -webkit-transform: translate3d(0,0,0);
 }
 
 /* Landscape layout (with min-width) */
@@ -491,33 +491,15 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
   padding-top: 10px;
 }
 
-.loadSpinner
-{
-    margin-top: 65px !important;
-}
-
 .topFixedBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 444;
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 444;
+  --background: #19779A !important;
+  --background: #00AEEF !important;
+  --background: #777 !important;
   background: -webkit-linear-gradient(#444, #666) !important;
   background: -o-linear-gradient(#444, #666) !important;
   background: -moz-linear-gradient(#444, #666) !important;
   background: linear-gradient(#444, #666) !important;
-}
-
-.topFixedBarGhost {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height:4.375rem;
-    background: -webkit-linear-gradient(#444, #666) !important;
-    background: -o-linear-gradient(#444, #666) !important;
-    background: -moz-linear-gradient(#444, #666) !important;
-    background: linear-gradient(#444, #666) !important;
 }
 
 .topcoat-button--cta {
@@ -708,6 +690,7 @@ select
 }
 .topcoat-tab-bar {
   width: 100%;
+  border-top: 1px solid #888;
 }
 
 .topcoat-tab-bar button {
@@ -1115,110 +1098,88 @@ display: block !important;
   top: 0;
   width: 100%;
   --height: 100%;
-  -webkit-transition: -webkit-transform 300ms linear;
-  -moz-transition: -moz-transform 300ms linear;
-  -o-transition: -o-transform 300ms linear;
-  transition: transform 300ms linear;
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  transition: all 400ms ease;
 }
 
-.app.ng-enter  .topFixedBar .topcoat-navigation-bar__item.full,
-.app.ng-leave  .topFixedBar .topcoat-navigation-bar__item.full {
-
+.app.ng-enter  .topFixedBar .topcoat-navigation-bar__item, 
+.app.ng-leave  .topFixedBar .topcoat-navigation-bar__item {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  --height: 100%;
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  transition: all 400ms ease;
+  z-index:8888;
 }
 
 .app.slide-left.ng-enter
 {
-  --left: 100%;
-  -webkit-transform: translateX(100%);
-  -moz-transform: translateX(100%);
-  -o-transform: translateX(100%);
-  transform: translateX(100%);
+  left: 100%;
 }
-.app.slide-left.ng-enter .topFixedBar .topcoat-navigation-bar__item.full
+.app.slide-left.ng-enter .topFixedBar .topcoat-navigation-bar__item
 {
-  
-  
+  left: 100%;
 }
   .app.slide-left.ng-enter.ng-enter-active
   {
-    --left: 0;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
+    left: 0;
   }
-  .app.slide-left.ng-enter.ng-enter-active .topFixedBar .topcoat-navigation-bar__item.full {
-    
+  .app.slide-left.ng-enter.ng-enter-active .topFixedBar .topcoat-navigation-bar__item {
+    left: 0;
   }
 
 
 
 .app.slide-left.ng-leave
 {
-  --left: 0;
-  -webkit-transform: translateX(0);
-  -moz-transform: translateX(0);
-  -o-transform: translateX(0);
-  transform: translateX(0);
+  left: 0;
 }
-.app.slide-left.ng-leave .topFixedBar .topcoat-navigation-bar__item.full {
-
+.app.slide-left.ng-leave .topFixedBar .topcoat-navigation-bar__item {
+  left: 0;
 }
   .app.slide-left.ng-leave.ng-leave-active
   {
-    --left: -100%;
-    -webkit-transform: translateX(-100%);
-    -moz-transform: translateX(-100%);
-    -o-transform: translateX(-100%);
-    transform: translateX(-100%);
+    left: -100%;
   }
-  .app.slide-left.ng-leave.ng-leave-active .topFixedBar .topcoat-navigation-bar__item.full {
+  .app.slide-left.ng-leave.ng-leave-active .topFixedBar .topcoat-navigation-bar__item {
+    left: -100%;
   }
 
 
 .app.slide-right.ng-enter
 {
-  --left: -100%;
-  -webkit-transform: translateX(-100%);
-  -moz-transform: translateX(-100%);
-  -o-transform: translateX(-100%);
-  transform: translateX(-100%);
+  left: -100%;
 }
-.app.slide-right.ng-enter .topFixedBar .topcoat-navigation-bar__item.full {
-
+.app.slide-right.ng-enter .topFixedBar .topcoat-navigation-bar__item {
+  left: -100%;
 }
   .app.slide-right.ng-enter.ng-enter-active
   {
-    --left: 0;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
+    left: 0;
   }
-  .app.slide-right.ng-enter.ng-enter-active .topFixedBar .topcoat-navigation-bar__item.full {
-
+  .app.slide-right.ng-enter.ng-enter-active .topFixedBar .topcoat-navigation-bar__item {
+    left: 0;
   }
 
 
 .app.ng-leave
 {
-  --left: 0;
-  -webkit-transform: translateX(0);
-  -moz-transform: translateX(0);
-  -o-transform: translateX(0);
-  transform: translateX(0);
+  left: 0;
 }
-.app.ng-leave .topFixedBar .topcoat-navigation-bar__item.full
+.app.ng-leave .topFixedBar .topcoat-navigation-bar__item
 {
+  left: 0;
 }
   .app.ng-leave.ng-leave-active
   {
-    --left: 100%;
-    -webkit-transform: translateX(100%);
-    -moz-transform: translateX(100%);
-    -otransform: translateX(100%);
-    transform: translateX(100%);
+    left: 100%;
   }
-  .app.ng-leave.ng-leave-active .topFixedBar .topcoat-navigation-bar__item.full {
-      
+  .app.ng-leave.ng-leave-active .topFixedBar .topcoat-navigation-bar__item {
+    left: 100%;
   }

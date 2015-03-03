@@ -92,12 +92,13 @@
     return 999;
   }
 
-  dataMgr.setScopeContacts( function ( data )
+  $timeout(function () {dataMgr.setScopeContacts( function ( data )
   {
     $scope.contacts = data;
+    $anchorScroll();
     $scope.helpers.showLoading = false;
     
-  } );
+  } );}, 444);
   
-  $anchorScroll();
+  
 } );

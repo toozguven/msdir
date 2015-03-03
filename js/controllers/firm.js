@@ -8,7 +8,16 @@
   dataMgr.setScopeSingleFirm( $routeParams.id, function ( data )
   {
     $scope.firm = data;
-    $scope.helpers.showLoading = false;    
+    dataMgr.setScopeREOs( function ( reos ) { 
+      var reo = dataMgr.filterByField( reos, "id", $routeParams.id );
+      $scope.reoContacts = [];
+      try {
+        $scope.reoContacts = reo[0].members;
+      }
+      catch (e) {$scope.reoContacts = [];}
+      $scope.helpers.showLoading = false;
+    } );
+     
   } );
 
   $anchorScroll();

@@ -34,8 +34,15 @@ body {
     width:100%;
 }
 
-.app {
+.app
+{
   /*-webkit-transform: translate3d(0,0,0);*/
+  
+}
+
+ul {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Landscape layout (with min-width) */
@@ -116,8 +123,8 @@ p {
     position: absolute; 
     top: 0%; width: 100%; 
     height: 100%; 
+    --background-color: #d0e0ec; 
     background: url('../img/bg/Globe1-P-Small.png') no-repeat; 
-    background-color: #d0e0ec; 
     background-size: cover; 
   }
 }
@@ -158,6 +165,9 @@ p {
   }
 
   .details .icn { margin-right: 15px; }
+  .chevronLi {
+    background-position: right 22px center !important;
+  }
 
 }
 
@@ -195,6 +205,10 @@ p {
   }
 
   .details .icn { margin-right: 15px; }
+
+  .chevronLi {
+    background-position: right 22px center !important;
+  }
 }
 
 
@@ -491,9 +505,8 @@ a, h1, h2, h3, h4,h5 {color: #555; text-decoration:none; margin: 0}
   padding-top: 10px;
 }
 
-.loadSpinner
-{
-    margin-top: 65px !important;
+.loadSpinner {
+  margin-top: 65px !important;
 }
 
 .topFixedBar {
@@ -593,7 +606,7 @@ i {
   position: absolute; 
   bottom: 60px; 
   right: 0;
-  margin-bottom: -2.8px;
+  margin-bottom: -2px;
 }
 
 .subMenuItem
@@ -1115,10 +1128,10 @@ display: block !important;
   top: 0;
   width: 100%;
   --height: 100%;
-  -webkit-transition: -webkit-transform 300ms linear;
-  -moz-transition: -moz-transform 300ms linear;
-  -o-transition: -o-transform 300ms linear;
-  transition: transform 300ms linear;
+  -webkit-transition: -webkit-transform 400ms linear;
+  -moz-transition: -moz-transform 400ms linear;
+  -o-transition: -o-transform 400ms linear;
+  transition: transform 400ms linear;
 }
 
 .app.ng-enter  .topFixedBar .topcoat-navigation-bar__item.full,

@@ -15,7 +15,23 @@
     {
       $scope.internationalContacts = dataMgr.getInternationalContactsForFirm( data, $scope.firm );
       $scope.contacts = dataMgr.getMainContactsForFirm( data, $scope.firm, $scope.internationalContacts );
+      $scope.isReo = false;
 
+      if ( $scope.contacts.length == 0 )
+      {
+        dataMgr.setScopeREOs( function ( reos )
+        {
+          var reo = dataMgr.filterByField( reos, "id", $routeParams.id );
+          $scope.contacts = [];
+          try
+          {
+            $scope.contacts = reo[0].members;
+            $scope.isReo = true;
+          }
+          catch ( e ) { $scope.contacts = []; }
+          $scope.helpers.showLoading = false;
+        } );
+      }
 
       $scope.helpers.showLoading = false;
     } );

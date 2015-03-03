@@ -66,6 +66,10 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     controller: 'ReosCtrl',
     templateUrl: 'views/reos.html'
   } )
+   .when( '/reo/:id', {
+     controller: 'ReoCtrl',
+     templateUrl: 'views/reo.html'
+   } )
   .when( '/findFirms/:phrase?', {
     controller: 'FindFirmsCtrl',
     templateUrl: 'views/firmsSearch.html'

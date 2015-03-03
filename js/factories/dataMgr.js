@@ -723,6 +723,12 @@ ngapp.factory( "dataMgr", function ( $http, $route, $rootScope )
   {
     var rtnVal = [];
 
+    if ( !( firm.ics ) )
+      firm.ics = [];
+
+    if ( !( firm.cs ) )
+      firm.cs = [];
+
     for ( var i = 0; i < firm.ics.length; i++ )
     {
       var existingItemInArr = factory.filterByField( rtnVal, "id", firm.ics[i].id );

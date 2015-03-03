@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="format-detection" content="telephone=no" />
   <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!--[if lt IE 9]>
     <script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -17,272 +17,282 @@
 </head>
 <body>
   <form>
+      <div class="topFixedBarGhost">&nbsp;</div>
     <div ng-view class="app" ng-class="slide" onclick="if ( ngRootScope && ngRootScope.menuVisible ) ngRootScope.doMenuClick()">
       <!--preload templates-->
-<script type="text/ng-template" id="views/aboutUs.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>About MSIL</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10">
-
-    <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
-    
-    <p>A wide range of professional services has been developed by the member firms over the 100 years since Moore Stephens was first founded to assist clients in meeting their cross-border commercial objectives. These are complemented by local services in each country to the same high standard of personal service that is the Moore Stephens tradition. Services are provided in compliance with relevant national legislation and professional regulation.</p>
-    <p>For more information, please visit <span class="blue bold"  ng-click="helpers.gotoWeb('http://www.moorestephens.com');">www.moorestephens.com</span>.</p>
-  </div>
-</div>
-
-
-
-
-
-</script>
-<script type="text/ng-template" id="views/appInfo.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>About This App</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10">
-    <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
-    <h5 class="blue">International Directory Mobile App</h5>
-    <p>
-      This directory lists the firms and companies that are members of Moore Stephens International Limited "MSIL", and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
-    </p>
-
-    <p>
-      All the firms and companies listed are independent entities owned and managed in each location. Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them. 
-    </p>
-
-    <p>© Moore Stephens International Limited</p>
-
-    <br />
-
-  </div>
-
-  
-  <ul class="topcoat-list__container list contactList">
-    <li class="topcoat-list__item">
-      <div class="blue">Directory data last updated on</div>
-      <span class="lstSpan">{{LastUpdatedOn}}</span>
-      
-      <span class="miniBtn" style="margin-left: 0px;" ng-click="updateData()">REFRESH DATA</span>
-      <br />
-    </li>
-
-     <li class="topcoat-list__item chevronLi" ng-click="helpers.g('/disclaimer');">
-      <div class="blue">Disclaimer</div>
-    </li>
-
-    <li class="topcoat-list__item">
-      <div class="blue" class="lbl">App version</div>
-      <span style="display: block">{{AppVersion}}</span>      
-    </li>
-
-
-  </ul>
-
-</div>
-
-
-
-</script>
-<script type="text/ng-template" id="views/associatedFirms.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Associated Firms</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  
-  <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" style="display: none">
-
-  <div class="pad10">
-    Associated firms are not full member firms of Moore Stephens International Limited.
-  </div>
-
-  <div ng-repeat="country in countries | filter:searchDelayed" class="topcoat-list">
-    <h2 class="topcoat-list__header town" once-text="country.n"></h2>
-    <ul class="topcoat-list__container list firmList">
-      <li ng-click="helpers.f(firm.id, 'c')" class="topcoat-list__item chevronLi" ng-repeat="firm in aFirms | filter:searchDelayed | filter:{cid: country.id}:true">
-        <div once-html="firm.n"></div>
-      </li>
-    </ul>
-  </div>
-
-  <p ng-show="(countries|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
-    No result found mathing the search criteria.
-  </p>
-
-</div>
-
-
-</script>
-<script type="text/ng-template" id="views/comms.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Committees</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <p class="pad10">
-    Tap on a committee heading below to expand/collapse its content. 
-  </p>
-</div>
-
-<div class="commsList">
-  <div ng-repeat="comm in comms" class="topcoat-list commsListItem">
-    <h5 class="topcoat-list__header pad10" ng-click="toggleComm(comm.id);">
-      <i class="fa fa-angle-double-down fright" ng-show="!isVisible(comm.id)" style="color: #555"></i>
-      <i class="fa fa-angle-double-up fright" ng-show="isVisible(comm.id)" style="color: #555"></i>
-      {{comm.n}}
-      <br />
-      {{comm.n2}} &nbsp;
-    
-    </h5>
-
-    <div id="comm{{comm.id}}" ng-show="isVisible(comm.id)">
-    
-        <ul class="list firmList">
-          <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi commContact" ng-repeat="member in comm.members">
-            <div>{{member.n}} <span ng-show="helpers.hasValueFunc(member.r)">- <em>{{member.r}}</em></span></div>
-            <span ng-show="helpers.hasValueFunc(member.l)" class="lstSpan">{{member.l}}</span>
-            <span class="lstSpan">{{member.eml}}</span>
-            <span class="icn chevron">&nbsp;&nbsp;&nbsp;</span> 
-          </li>
-        </ul>
-    </div>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-</script>
-<script type="text/ng-template" id="views/contact.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Contact Details</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
-  <div class="subHeader contactHeader">
-    <div class="fRight contactImg">
-      <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" />
-    </div>
-    <h3 class="boldBlue" once-html="contact.n" ng-show="helpers.hasValueFunc(contact.n)"></h3>
-    <div class="blue" once-html="contact.r" ng-show="helpers.hasValueFunc(contact.r)"></div> 
-    <div ng-bind="contact.l + '&nbsp;'"></div> 
-    <span class="miniBtnWithIcon" ng-click="dataMgr.toggleFavourite(contact.id, 'contact')">
-      <i class="fa fa-star"></i>
-      {{dataMgr.getFavLabel(contact.id, 'contact')}}
-    </span>
-    <div once-html="contact.no" ng-show="helpers.hasValueFunc(contact.no)"></div>
-  </div>
-
-   <ul class="topcoat-list__container list">
-
-     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.t)">
-      <a href="tel:{{helpers.getTel(contact.t)}}" ng-click="helpers.closeMenu()">
-        <div class="blue">Call Office</div>
-        <span class="lstSpan" once-html="contact.t"></span>
-        <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
-      </a>
-    </li>
-
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
-      <a href="tel:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
-        <div class="blue">Call Mobile</div>
-        <span class="lstSpan" once-html="contact.m"></span>
-        <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
-      </a>
-    </li>
-
-     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
-      <a href="sms:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
-        <div class="blue">SMS / Text</div>
-        <span class="lstSpan" once-html="contact.m"></span>
-        <span class="icn smsIcn">&nbsp;&nbsp;&nbsp;</span>
-      </a>
-    </li>
-
-     <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.eml)">
-      <a href="mailto:{{contact.eml}}" ng-click="helpers.closeMenu()">
-        <div class="blue">Email</div>
-        <span class="lstSpan" once-html="contact.eml"></span>
-        <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
-      </a>
-    </li>
-
-     <li class="topcoat-list__item chevronLi" ng-click="helpers.g('/f/' + contact.fid)">
-        <div class="blue">Primary Firm</div>
-        <span once-html="contact.f" class="lstSpan"></span>
-    </li>
-
-    <li class="topcoat-list__item" ng-show="contact.tz != '0'" ng-click="helpers.g('/tz/' + contact.fid);">
-      <div class="blue">Time Zone</div>
-      <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + contact.tz.toString()"></span>
-      <span class="icn timezoneIcn"></span>       
-    </li>
-
-     <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnContactProfileUrl', true, true);" ng-show="helpers.isOnline()">
-        <div class="blue">More Information</div>
-        <span class="lstSpan">View more information about this person on www.moorestephens.com</span>
-        <span class="icn urlIcn"></span>
-        <input type="hidden" id="hdnContactProfileUrl" ng-value="helpers.getContactProfileUrl(contact.id)" />
-    </li>
-
-   </ul>
-
-</div>
-
-</script>
-<script type="text/ng-template" id="views/contacts.html"><!--<div class="slideView" ng-class="slide">-->
+<script type="text/ng-template" id="views/aboutUs.html"><div class="appInner">
   &nbsp;
-  <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>About MSIL</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10">
+
+      <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
+    
+      <p>A wide range of professional services has been developed by the member firms over the 100 years since Moore Stephens was first founded to assist clients in meeting their cross-border commercial objectives. These are complemented by local services in each country to the same high standard of personal service that is the Moore Stephens tradition. Services are provided in compliance with relevant national legislation and professional regulation.</p>
+      <p>For more information, please visit <span class="blue bold"  ng-click="helpers.gotoWeb('http://www.moorestephens.com');">www.moorestephens.com</span>.</p>
+    </div>
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+
+
+</script>
+<script type="text/ng-template" id="views/appInfo.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>About This App</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10">
+      <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
+      <h5 class="blue">International Directory Mobile App</h5>
+      <p>
+        This directory lists the firms and companies that are members of Moore Stephens International Limited "MSIL", and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
+      </p>
+
+      <p>
+        All the firms and companies listed are independent entities owned and managed in each location. Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them. 
+      </p>
+
+      <p>© Moore Stephens International Limited</p>
+
+      <br />
+
+    </div>
+
+  
+    <ul class="topcoat-list__container list contactList">
+      <li class="topcoat-list__item">
+        <div class="blue">Directory data last updated on</div>
+        <span class="lstSpan">{{LastUpdatedOn}}</span>
+      
+        <span class="miniBtn" style="margin-left: 0px;" ng-click="updateData()">REFRESH DATA</span>
+        <br />
+      </li>
+
+       <li class="topcoat-list__item chevronLi" ng-click="helpers.g('/disclaimer');">
+        <div class="blue">Disclaimer</div>
+      </li>
+
+      <li class="topcoat-list__item">
+        <div class="blue" class="lbl">App version</div>
+        <span style="display: block">{{AppVersion}}</span>      
+      </li>
+
+
+    </ul>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+
+
+</script>
+<script type="text/ng-template" id="views/associatedFirms.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Associated Firms</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+  
+    <input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter the list" style="display: none">
+
+    <div class="pad10">
+      Associated firms are not full member firms of Moore Stephens International Limited.
+    </div>
+
+    <div ng-repeat="country in countries | filter:searchDelayed" class="topcoat-list">
+      <h2 class="topcoat-list__header town" once-text="country.n"></h2>
+      <ul class="topcoat-list__container list firmList">
+        <li ng-click="helpers.f(firm.id, 'c')" class="topcoat-list__item chevronLi" ng-repeat="firm in aFirms | filter:searchDelayed | filter:{cid: country.id}:true">
+          <div once-html="firm.n"></div>
+        </li>
+      </ul>
+    </div>
+
+    <p ng-show="(countries|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
+      No result found mathing the search criteria.
+    </p>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/comms.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Committees</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <p class="pad10">
+      Tap on a committee heading below to expand/collapse its content. 
+    </p>
+  </div>
+
+  <div class="commsList">
+    <div ng-repeat="comm in comms" class="topcoat-list commsListItem">
+      <h5 class="topcoat-list__header pad10" ng-click="toggleComm(comm.id);">
+        <i class="fa fa-angle-double-down fright" ng-show="!isVisible(comm.id)" style="color: #555"></i>
+        <i class="fa fa-angle-double-up fright" ng-show="isVisible(comm.id)" style="color: #555"></i>
+        {{comm.n}}
+        <br />
+        {{comm.n2}} &nbsp;
+    
+      </h5>
+
+      <div id="comm{{comm.id}}" ng-show="isVisible(comm.id)">
+    
+          <ul class="list firmList">
+            <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi commContact" ng-repeat="member in comm.members">
+              <div>{{member.n}} <span ng-show="helpers.hasValueFunc(member.r)">- <em>{{member.r}}</em></span></div>
+              <span ng-show="helpers.hasValueFunc(member.l)" class="lstSpan">{{member.l}}</span>
+              <span class="lstSpan">{{member.eml}}</span>
+              <span class="icn chevron">&nbsp;&nbsp;&nbsp;</span> 
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/contact.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Contact Details</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
+    <div class="subHeader contactHeader">
+      <div class="fRight contactImg">
+        <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" />
+      </div>
+      <h3 class="boldBlue" once-html="contact.n" ng-show="helpers.hasValueFunc(contact.n)"></h3>
+      <div class="blue" once-html="contact.r" ng-show="helpers.hasValueFunc(contact.r)"></div> 
+      <div ng-bind="contact.l + '&nbsp;'"></div> 
+      <span class="miniBtnWithIcon" ng-click="dataMgr.toggleFavourite(contact.id, 'contact')">
+        <i class="fa fa-star"></i>
+        {{dataMgr.getFavLabel(contact.id, 'contact')}}
+      </span>
+      <div once-html="contact.no" ng-show="helpers.hasValueFunc(contact.no)"></div>
+    </div>
+
+     <ul class="topcoat-list__container list">
+
+       <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.t)">
+        <a href="tel:{{helpers.getTel(contact.t)}}" ng-click="helpers.closeMenu()">
+          <div class="blue">Call Office</div>
+          <span class="lstSpan" once-html="contact.t"></span>
+          <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
+        </a>
+      </li>
+
+
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
+        <a href="tel:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
+          <div class="blue">Call Mobile</div>
+          <span class="lstSpan" once-html="contact.m"></span>
+          <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>
+        </a>
+      </li>
+
+       <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.m)">
+        <a href="sms:{{helpers.getTel(contact.m)}}" ng-click="helpers.closeMenu()">
+          <div class="blue">SMS / Text</div>
+          <span class="lstSpan" once-html="contact.m"></span>
+          <span class="icn smsIcn">&nbsp;&nbsp;&nbsp;</span>
+        </a>
+      </li>
+
+       <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(contact.eml)">
+        <a href="mailto:{{contact.eml}}" ng-click="helpers.closeMenu()">
+          <div class="blue">Email</div>
+          <span class="lstSpan" once-html="contact.eml"></span>
+          <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
+        </a>
+      </li>
+
+       <li class="topcoat-list__item chevronLi" ng-click="helpers.g('/f/' + contact.fid)">
+          <div class="blue">Primary Firm</div>
+          <span once-html="contact.f" class="lstSpan"></span>
+      </li>
+
+      <li class="topcoat-list__item" ng-show="contact.tz != '0'" ng-click="helpers.g('/tz/' + contact.fid);">
+        <div class="blue">Time Zone</div>
+        <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + contact.tz.toString()"></span>
+        <span class="icn timezoneIcn"></span>       
+      </li>
+
+       <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnContactProfileUrl', true, true);" ng-show="helpers.isOnline()">
+          <div class="blue">More Information</div>
+          <span class="lstSpan">View more information about this person on www.moorestephens.com</span>
+          <span class="icn urlIcn"></span>
+          <input type="hidden" id="hdnContactProfileUrl" ng-value="helpers.getContactProfileUrl(contact.id)" />
+      </li>
+
+     </ul>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/contacts.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
     <div class="topcoat-navigation-bar__item center full">
       <h5>Find People</h5>
     </div>
   </div>
 
   
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
     <i class="fa fa-circle-o-notch fa-spin"></i> Loading1...
   </p>
 
@@ -311,180 +321,181 @@
     </div>
   </div>
 
-  
-<!--</div>--></script>
-<script type="text/ng-template" id="views/contactsSearch.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Contacts Search</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-
-  <div class="pad10">
-    <div class="mstphCFRadioDiv">
-      <label class="topcoat-radio-button">
-        <input type="radio" name="topcoat" checked="checked">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Contacts
-      </label>
-      &nbsp;&nbsp;
-      <label class="topcoat-radio-button" ng-click="helpers.g('/findFirms/' + search)">
-        <input type="radio" name="topcoat">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Firms
-      </label>
-
-    </div>
-
-    <div class="mstphInputFieldBordered">        
-      <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
-      <div class="mstphBtnArrow absPos">
-        <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/contactsSearch.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
       </div>
     </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Contacts Search</h5>
+    </div>
   </div>
 
-  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
-    No results found for <span class="blue">{{search}}</span>. 
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
-  
-  <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
-  <div>
-    <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
-      <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
-        <div once-html="contact.n" class="boldBlue"></div>
-        <div class="blue" once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
-        <span once-html="contact.f"></span>
-        <span once-html="'<br/>' + contact.l"></span>
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+
+    <div class="pad10">
+      <div class="mstphCFRadioDiv">
+        <label class="topcoat-radio-button">
+          <input type="radio" name="topcoat" checked="checked">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Contacts
+        </label>
+        &nbsp;&nbsp;
+        <label class="topcoat-radio-button" ng-click="helpers.g('/findFirms/' + search)">
+          <input type="radio" name="topcoat">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Firms
+        </label>
+
+      </div>
+
+      <div class="mstphInputFieldBordered">        
+        <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+        <div class="mstphBtnArrow absPos">
+          <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+        </div>
+      </div>
+    </div>
+
+    <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
+      No results found for <span class="blue">{{search}}</span>. 
+    </p>
+  
+    <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+
+    <div>
+      <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
+        <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
+          <div once-html="contact.n" class="boldBlue"></div>
+          <div class="blue" once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
+          <span once-html="contact.f"></span>
+          <span once-html="'<br/>' + contact.l"></span>
+        </li>
+      </ul>
+    </div>
+
+    <div ng-show="similarPhrasesFound && (contacts|filter:searchDelayedFunc).length < 3 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10 similarSearches">
+      Other similar searches:<br />
+      <span ng-repeat="phrase in similarPhrases" once-html="phrase + '<br/>'" class="miniBtn" ng-click="helpers.g('/findContacts/' + phrase );"></span>
+    </div>
+
+    <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
+      Search term must be at least three characters.
+    </p>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+</script>
+<script type="text/ng-template" id="views/contactUs.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack()">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Contact Us</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent pad10">
+    <h3 class="blue">Contacting Moore Stephens</h3>
+    Some content here...
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+
+</script>
+<script type="text/ng-template" id="views/correspondentFirms.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Correspondent Firms</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="pad10Sides paragDiv firstContent">
+
+      <div>Correspondent firms are not full member firms of Moore Stephens International Limited.</div>
+      <span class="miniBtn" ng-click="helpers.g('/cFirmsInfo')">MORE INFO</span>
+      <div style="clear: both"></div>
+  </div>
+
+  <div ng-repeat="country in countries | filter:searchDelayed" class="topcoat-list">
+    <h2 class="topcoat-list__header town" once-text="country.n"></h2>
+    <ul class="topcoat-list__container list firmList">
+      <li ng-click="helpers.f(firm.id, 'c')" class="topcoat-list__item chevronLi" ng-repeat="firm in cFirms | filter:searchDelayed | filter:{cid: country.id}:true">
+        <div once-html="firm.n"></div>
       </li>
     </ul>
   </div>
 
-  <div ng-show="similarPhrasesFound && (contacts|filter:searchDelayedFunc).length < 3 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10 similarSearches">
-    Other similar searches:<br />
-    <span ng-repeat="phrase in similarPhrases" once-html="phrase + '<br/>'" class="miniBtn" ng-click="helpers.g('/findContacts/' + phrase );"></span>
-  </div>
-
-  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
-    Search term must be at least three characters.
+  <p ng-show="(countries|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
+    No result found mathing the search criteria.
   </p>
 
-</div>
-
-
-
-</script>
-<script type="text/ng-template" id="views/contactUs.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack()">
-      <span class="icn prevIcn">&nbsp;</span>
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/correspondentFirmsInfo.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack()">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Correspondent Firms</h5>
+    </div>
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      &nbsp;
     </div>
   </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Contact Us</h5>
-  </div>
-</div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
 
-<div ng-show="helpers.showLoading == false" class="firstContent pad10">
-  <h3 class="blue">Contacting Moore Stephens</h3>
-  Some content here...
-</div>
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10 paragDiv">
+      <h3 class="blue">Correspondent Firms Information</h3>
+      <p>Correspondent firms are not full member firms of Moore Stephens International Limited.</p>
+      <p><span>Firms may be designated as correspondent or associated firms where:</span></p>
 
-
-
-
-</script>
-<script type="text/ng-template" id="views/correspondentFirms.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Correspondent Firms</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="pad10Sides paragDiv firstContent">
-
-    <div>Correspondent firms are not full member firms of Moore Stephens International Limited.</div>
-    <span class="miniBtn" ng-click="helpers.g('/cFirmsInfo')">MORE INFO</span>
-    <div style="clear: both"></div>
-</div>
-
-<div ng-repeat="country in countries | filter:searchDelayed" class="topcoat-list">
-  <h2 class="topcoat-list__header town" once-text="country.n"></h2>
-  <ul class="topcoat-list__container list firmList">
-    <li ng-click="helpers.f(firm.id, 'c')" class="topcoat-list__item chevronLi" ng-repeat="firm in cFirms | filter:searchDelayed | filter:{cid: country.id}:true">
-      <div once-html="firm.n"></div>
-    </li>
-  </ul>
-</div>
-
-<p ng-show="(countries|filter:searchDelayed).length == 0 && helpers.showLoading == false" class="pad10">
-  No result found mathing the search criteria.
-</p>
-
-
-
-</script>
-<script type="text/ng-template" id="views/correspondentFirmsInfo.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack()">
-      <span class="icn prevIcn">&nbsp;</span>
+      <ul class="saneUl">
+        <li><span class="undoBlue">the firm does not represent Moore Stephens International Limited exclusively; or</span></li>
+        <li><span class="undoBlue">the firm does not wish to comply with one or more of the other administrative criteria necessary for full membership; or</span></li>
+        <li><span class="undoBlue">the firm is in a development phase to seeking full membership of Moore Stephens International Limited.</span></li>
+      </ul>
     </div>
   </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Correspondent Firms</h5>
-  </div>
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    &nbsp;
-  </div>
-</div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/country.html"><div class="appInner">
 
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10 paragDiv">
-    <h3 class="blue">Correspondent Firms Information</h3>
-    <p>Correspondent firms are not full member firms of Moore Stephens International Limited.</p>
-    <p><span>Firms may be designated as correspondent or associated firms where:</span></p>
-
-    <ul class="saneUl">
-      <li><span class="undoBlue">the firm does not represent Moore Stephens International Limited exclusively; or</span></li>
-      <li><span class="undoBlue">the firm does not wish to comply with one or more of the other administrative criteria necessary for full membership; or</span></li>
-      <li><span class="undoBlue">the firm is in a development phase to seeking full membership of Moore Stephens International Limited.</span></li>
-    </ul>
-
-  
-
-
-  </div>
-</div>
-
-
-</script>
-<script type="text/ng-template" id="views/country.html">  &nbsp;
+  &nbsp;
   <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
     <div class="topcoat-navigation-bar__item left quarter h100pc">
       <div class="prevIcnDiv" ng-click="helpers.g('/firms', -1)">
@@ -496,7 +507,7 @@
     </div>
   </div>
 
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
     <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
@@ -533,8 +544,9 @@
 
   </div>
 
-</script>
-<script type="text/ng-template" id="views/countryContacts.html"><!--<div class="slideView" ng-class="slide">-->
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/countryContacts.html"><div class="appInner">
   &nbsp;
   <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
     <div class="topcoat-navigation-bar__item left quarter h100pc">
@@ -547,7 +559,7 @@
     </div>
   </div>
 
-  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
     <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
@@ -591,668 +603,691 @@
   </div>
 
   
-<!--</div>-->
-</script>
-<script type="text/ng-template" id="views/countryWithState.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.g('/firms', -1)">
-      <span class="icn prevIcn">&nbsp;</span>
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/countryWithState.html"><div class="appInner">
+  &nbsp;
+  <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.g('/firms', -1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack" once-html="helpers.getCountryName(country.n)"></h5>
     </div>
   </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack" once-html="helpers.getCountryName(country.n)"></h5>
-  </div>
-</div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
 
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10Sides">
-    <div class="mstphInputFieldBordered">
-      <select id="ddlState" ng-options="state.id as (state.id < 0 ? ' - Pick a state - ' : (state.id == selectedStateId ? state.n : state.n)) for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()"></select>
-    </div>
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10Sides">
+      <div class="mstphInputFieldBordered">
+        <select id="ddlState" ng-options="state.id as (state.id < 0 ? ' - Pick a state - ' : (state.id == selectedStateId ? state.n : state.n)) for state in country.states" ng-model="selectedStateId" ng-change="redirectToState()"></select>
+      </div>
 
-    <div class="pad10" once-html="state.no" ng-show="helpers.hasValueFunc(state.no)"></div>
+      <div class="pad10" once-html="state.no" ng-show="helpers.hasValueFunc(state.no)"></div>
 
-    <div ng-show="(towns|filter:{sid: state.id}:true).length > 1">
-      <div class="mstphInputFieldBordered">        
-        <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
-        <div class="mstphBtnArrow absPos">
-          <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+      <div ng-show="(towns|filter:{sid: state.id}:true).length > 1">
+        <div class="mstphInputFieldBordered">        
+          <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+          <div class="mstphBtnArrow absPos">
+            <i class="fa fa-times fa-times1" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div ng-show="helpers.showLoading == false">
-  <div ng-repeat="town in towns | filter:searchDelayed | filter:{sid: state.id}:true | orderBy:'n'" class="topcoat-list">
-      <h2 class="topcoat-list__header town" once-text="town.n"></h2>
-      <ul class="topcoat-list__container list firmList">
-        <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayed | filter:{tid: town.id}:true | orderBy:'n'">
-          <div once-html="firm.n"></div>
-          <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
+  <div ng-show="helpers.showLoading == false">
+    <div ng-repeat="town in towns | filter:searchDelayed | filter:{sid: state.id}:true | orderBy:'n'" class="topcoat-list">
+        <h2 class="topcoat-list__header town" once-text="town.n"></h2>
+        <ul class="topcoat-list__container list firmList">
+          <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:searchDelayed | filter:{tid: town.id}:true | orderBy:'n'">
+            <div once-html="firm.n"></div>
+            <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
+          </li>
+        </ul>
+    </div>
+
+    <p ng-show="(towns|filter:searchDelayed | filter:{sid: state.id}:true).length == 0 && helpers.showLoading == false" class="pad10">
+      No result found mathing the search criteria.
+    </p>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/countryWithStateContacts.html"><div class="appInner">
+  &nbsp;
+  <div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.g('/contacts', -1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack" once-html="helpers.getCountryName(country.n)"></h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10Sides">
+      <div class="mstphInputFieldBordered">
+        <select id="ddlState" ng-options="state.id as state.n for state in country.states | filter:positiveIdsOnly" ng-model="selectedStateId" ng-change="redirectToState()"></select>
+      </div>
+
+      <div class="mstphInputFieldBordered" style="margin-top: 5px;" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc ).length > 1">       
+        <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
+        <div class="mstphBtnArrow absPos">
+          <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+         </div> 
+      </div>
+
+      <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+
+
+    </div>  
+  </div>  
+
+  <div ng-show="helpers.showLoading == false">
+    <ul class="topcoat-list__container list firmList">
+      <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
+        <div once-text="contact.n" class="boldBlue"></div>
+        <div class="blue" once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>
+        <span class="lstSpan" once-html="contact.f + ', ' + contact.l.replace(', ' + country.n, '')"></span>
+      </li>
+    </ul>
+
+    <p ng-show="(contacts|filter:searchDelayedFunc | filter:customStateFilterFunc).length == 0 && helpers.showLoading == false" class="pad10">
+      No result found mathing the search criteria.
+    </p>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+</script>
+<script type="text/ng-template" id="views/disclaimer.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)" ng-show="dataMgr.isFirstUse() == false">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Disclaimer</h5>
+    </div>
+  </div>
+
+
+  <div class="firstContent">
+    <div class="pad10">
+      <h3 class="blue">Moore Stephens International Limited</h3>
+      <br />
+      <span class="blue">Disclaimer</span>
+      <br />
+      <p>
+        This app lists the firms and companies that are members of Moore Stephens International Limited, and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
+      </p>
+      <p>
+        All the firms and companies listed are independent entities owned and managed in each location. 
+        Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them.
+      </p>
+    </div>
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/favContacts.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Bookmarks</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
+
+    <div class="pad10">
+      <div class="mstphCFRadioDiv">
+        <label class="topcoat-radio-button">
+          <input type="radio" name="topcoat" checked="checked">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Contacts
+        </label>
+        &nbsp;&nbsp;
+        <label class="topcoat-radio-button" ng-click="helpers.g('/favFirms/' + search)">
+          <input type="radio" name="topcoat">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Firms
+        </label>
+      </div>
+    </div>
+
+    <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->
+  
+    <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+
+    <div>
+      <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
+        <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
+          <div once-html="contact.n" class="boldBlue"></div>
+          <div class="blue" once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
+          <span once-html="contact.f"></span>
+          <span once-text="contact.l"></span>
         </li>
       </ul>
+    </div>
+
+    <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false" class="pad10">
+      You have no bookmarked contacts.
+    </p>
+
   </div>
 
-  <p ng-show="(towns|filter:searchDelayed | filter:{sid: state.id}:true).length == 0 && helpers.showLoading == false" class="pad10">
-    No result found mathing the search criteria.
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+</script>
+<script type="text/ng-template" id="views/favFirms.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Bookmarks</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
-</div>
+  <div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
 
-</script>
-<script type="text/ng-template" id="views/countryWithStateContacts.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.g('/contacts', -1)">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack" once-html="helpers.getCountryName(country.n)"></h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10Sides">
-    <div class="mstphInputFieldBordered">
-      <select id="ddlState" ng-options="state.id as state.n for state in country.states | filter:positiveIdsOnly" ng-model="selectedStateId" ng-change="redirectToState()"></select>
+    <div class="pad10">
+      <div class="mstphCFRadioDiv">
+        <label class="topcoat-radio-button" ng-click="helpers.g('/favContacts/' + search)">
+          <input type="radio" name="topcoat">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Contacts
+        </label>
+        &nbsp;&nbsp;
+        <label class="topcoat-radio-button">
+          <input type="radio" name="topcoat" checked="checked">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Firms
+        </label>
+      </div>
     </div>
 
-    <div class="mstphInputFieldBordered" style="margin-top: 5px;" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc ).length > 1">       
-      <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
-      <div class="mstphBtnArrow absPos">
-        <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
-       </div> 
-    </div>
+    <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->
 
-    <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+    <div class="prevNextBtnDiv" ng-show="(firms | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(firms | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
-
-  </div>  
-</div>  
-
-<div ng-show="helpers.showLoading == false">
-  <ul class="topcoat-list__container list firmList">
-    <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts | filter:searchDelayedFunc | filter:{cid: country.id}:true | filter:customStateFilterFunc | orderBy:[relevanceFunc, 'ln'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div once-text="contact.n" class="boldBlue"></div>
-      <div class="blue" once-show="helpers.hasValueFunc(contact.r)" once-html="contact.r + '<br/>'"></div>
-      <span class="lstSpan" once-html="contact.f + ', ' + contact.l.replace(', ' + country.n, '')"></span>
-    </li>
-  </ul>
-
-  <p ng-show="(contacts|filter:searchDelayedFunc | filter:customStateFilterFunc).length == 0 && helpers.showLoading == false" class="pad10">
-    No result found mathing the search criteria.
-  </p>
-
-</div>
-
-
-
-</script>
-<script type="text/ng-template" id="views/disclaimer.html">&nbsp;
-<div class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)" ng-show="dataMgr.isFirstUse() == false">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Disclaimer</h5>
-  </div>
-</div>
-
-
-<div class="firstContent">
-  <div class="pad10">
-    <h3 class="blue">Moore Stephens International Limited</h3>
-    <br />
-    <span class="blue">Disclaimer</span>
-    <br />
-    <p>
-      This app lists the firms and companies that are members of Moore Stephens International Limited, and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
-    </p>
-    <p>
-      All the firms and companies listed are independent entities owned and managed in each location. 
-      Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them.
-    </p>
-  </div>
-</div>
-</script>
-<script type="text/ng-template" id="views/favContacts.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Bookmarks</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
-
-  <div class="pad10">
-    <div class="mstphCFRadioDiv">
-      <label class="topcoat-radio-button">
-        <input type="radio" name="topcoat" checked="checked">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Contacts
-      </label>
-      &nbsp;&nbsp;
-      <label class="topcoat-radio-button" ng-click="helpers.g('/favFirms/' + search)">
-        <input type="radio" name="topcoat">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Firms
-      </label>
-    </div>
-  </div>
-
-  <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->
-  
-  <div class="prevNextBtnDiv" ng-show="(contacts | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(contacts | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
-
-  <div>
-    <ul class="topcoat-list__container list firmList" ng-show="(contacts | filter:searchDelayedFunc).length > 0">
-      <li ng-repeat="contact in contacts | filter:searchDelayedFunc | orderBy:'ln' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize" ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi">
-        <div once-html="contact.n" class="boldBlue"></div>
-        <div class="blue" once-show="helpers.hasValue(contact.r)" once-html="contact.r + '<br/>'"></div><br />
-        <span once-html="contact.f"></span>
-        <span once-text="contact.l"></span>
+    <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
+      <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:'n' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
+        <div ng-bind-html="firm.n" class="boldBlue"></div>
+        <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
+        <span once-html="firm.l"></span>
       </li>
+    </ul>
+
+    <p ng-show="!((firms|filter:searchDelayedFunc).length > 0)" class="pad10">
+      You have no bookmarked firms.
+    </p>
+
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div>
+</script>
+<script type="text/ng-template" id="views/firm.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Firm Details</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
+
+    <div class="subHeader">
+      <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
+      <div once-html="firm.l"></div>  
+      <span class="frmStatus"  ng-show="helpers.hasValueFunc(firm.st)" ng-bind-html="helpers.getFirmStatus(firm)"></span>
+      <span class="miniBtnWithIcon frmBkmrkBtn" ng-click="dataMgr.toggleFavourite(firm.id, 'firm')">
+        <i class="fa fa-star"></i>
+        {{dataMgr.getFavLabel(firm.id, 'firm')}}
+      </span>
+    
+      <div once-html="firm.no" ng-show="helpers.hasValueFunc(firm.no)"></div>
+    </div>
+
+    <ul class="topcoat-list__container list">
+    
+      <!--<li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)" ng-click="helpers.c(firm.ilid);">
+          <div>International Liaison</div>
+          <span class="lstItmDesc lstSpan" once-html="firm.il"></span>
+
+      </li>-->
+
+      <li class="topcoat-list__item chevronLi" ng-show="firm.cs.length > 0 || firm.ics.length > 0 || reoContacts.length > 0" ng-click="helpers.g('/fc/' + firm.id);">
+        <div class="blue">Contacts</div>
+        <span class="lstItmDesc lstSpan">View the list of partners/directors</span>  
+      </li>
+
+
+      <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.ad)" ng-click="helpers.g('/fa/' + firm.id);">
+        <div class="blue">Address Details</div>
+        <span class="lstItmDesc lstSpan">View address details for this firm</span>     
+      </li>
+
+      <li class="topcoat-list__item" ng-show="firm.tz != '0'" ng-click="helpers.g('/tz/' + firm.id);">
+        <div class="blue">Time Zone</div>
+        <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + firm.tz"></span>
+        <span class="icn timezoneIcn"></span>       
+      </li>
+        
+
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
+        <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
+          <div class="blue">Call Office</div>
+          <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
+          <span class="icn phoneIcn"></span>        
+        </a>
+      </li>
+
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
+        <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
+          <div class="blue">Email</div>
+          <span class="lstItmDesc lstSpan" once-html="firm.eml"></span>
+          <span class="icn emailIcn"></span>
+        </a>
+      </li>
+
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage('hdnFirmWebUrl', true, true);">
+        <div class="blue">Website</div>
+        <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
+        <span class="icn urlIcn"></span>
+        <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
+      </li>
+        
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.lat)" ng-click="helpers.openWebPage('hdnMapUrl', true, true);">
+        <div class="blue">Map</div>
+        <span class="lstItmDesc lstSpan">View location on map</span>
+        <span class="icn locationIcn"></span>
+        <input type="hidden" id="hdnMapUrl" ng-value="helpers.getMapUrl(firm)" />
+      </li>
+    
+      <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnFirmProfileUrl', true, true);">
+        <div class="blue">More Information</div>
+        <span class="lstItmDesc lstSpan">View more information about this firm on www.moorestephens.com</span>
+        <span class="icn urlIcn"></span>
+        <input type="hidden" id="hdnFirmProfileUrl" ng-value="helpers.getFirmProfileUrl(firm.id)" />
+      </li>
+
     </ul>
   </div>
 
-  <p ng-show="(contacts|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false" class="pad10">
-    You have no bookmarked contacts.
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/firmAddress.html"><div class="appInner">
+  &nbsp; 
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Firm Address</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
-</div>
+  <div class="details" ng-show="helpers.showLoading == false">
+    <div class="subHeader firstContent">
+      <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
+      <div once-html="firm.l"></div> 
+    </div>
 
+    <ul class="topcoat-list__container list firmList">
 
+      <li class="topcoat-list__item">
+        <span ng-bind-html="firm.ad"></span>     
+      </li>
 
-</script>
-<script type="text/ng-template" id="views/favFirms.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Bookmarks</h5>
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.mad)">
+          <div class="blue">Mailing Address</div>
+          <span ng-bind-html="firm.mad"></span>     
+      </li>
+
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.f)">
+        <div class="blue">Facsimile</div>
+        <div once-html="firm.f"></div>      
+      </li>
+
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
+        <span ng-bind-html="firm.cm"></span>      
+      </li>
+
+    </ul>
   </div>
-</div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent" extend-height>
-
-  <div class="pad10">
-    <div class="mstphCFRadioDiv">
-      <label class="topcoat-radio-button" ng-click="helpers.g('/favContacts/' + search)">
-        <input type="radio" name="topcoat">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Contacts
-      </label>
-      &nbsp;&nbsp;
-      <label class="topcoat-radio-button">
-        <input type="radio" name="topcoat" checked="checked">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Firms
-      </label>
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/firmContacts.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Firm Contacts</h5>
     </div>
   </div>
 
-  <!--<input type="search" ng-model="search" class="topcoat-search-input--large" placeholder="Type text to filter results">-->
-
-  <div class="prevNextBtnDiv" ng-show="(firms | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(firms | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
-
-  <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
-    <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:'n' | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div ng-bind-html="firm.n" class="boldBlue"></div>
-      <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
-      <span once-html="firm.l"></span>
-    </li>
-  </ul>
-
-  <p ng-show="!((firms|filter:searchDelayedFunc).length > 0)" class="pad10">
-    You have no bookmarked firms.
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
-</div>
+  <div ng-show="helpers.showLoading == false" class="firstContent">
 
-
-
-</script>
-<script type="text/ng-template" id="views/firm.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
+    <div class="subHeader">
+      <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
+      <div once-html="firm.l"></div>
+      <span class="frmStatus"  ng-show="helpers.hasValueFunc(firm.st)" ng-bind-html="helpers.getFirmStatus(firm)"></span>
     </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Firm Details</h5>
-  </div>
-</div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
+    <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cmp)">
+      <li>
+        <p class="pad10Sides" ng-bind-html="firm.cmp"></p>
+      </li>
+    </ul>
 
-<div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
+    <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cm)">
+      <li>
+        <p class="pad10Sides" ng-bind-html="firm.cm"></p>
+      </li>
+    </ul>
 
-  <div class="subHeader">
-    <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <div once-html="firm.l"></div>  
-    <span class="frmStatus"  ng-show="helpers.hasValueFunc(firm.st)" ng-bind-html="helpers.getFirmStatus(firm)"></span>
-    <span class="miniBtnWithIcon frmBkmrkBtn" ng-click="dataMgr.toggleFavourite(firm.id, 'firm')">
-      <i class="fa fa-star"></i>
-      {{dataMgr.getFavLabel(firm.id, 'firm')}}
-    </span>
-    
-    <div once-html="firm.no" ng-show="helpers.hasValueFunc(firm.no)"></div>
-  </div>
+    <ul class="topcoat-list__container list contactList" ng-show="internationalContacts.length > 0">
+      <li>
+        <h2 class="topcoat-list__header town">International Liaison{{internationalContacts.length > 1 ? "s" : ""}}</h2>
+      </li>
 
-  <ul class="topcoat-list__container list">
-    
-    <!--<li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.il)" ng-click="helpers.c(firm.ilid);">
-        <div>International Liaison</div>
-        <span class="lstItmDesc lstSpan" once-html="firm.il"></span>
+      <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in internationalContacts">
+        <div once-html="contact.n"></div>
+        <div class="blue" ng-show="helpers.hasValueFunc(contact.r)" once-html="contact.r"></div>
+      </li>
+    </ul>
 
-    </li>-->
-
-    <li class="topcoat-list__item chevronLi" ng-show="firm.cs.length > 0 || firm.ics.length > 0" ng-click="helpers.g('/fc/' + firm.id);">
-      <div class="blue">Contacts</div>
-      <span class="lstItmDesc lstSpan">View the list of partners/directors</span>  
-    </li>
+    <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cml)">
+      <li>
+        <p class="pad10Sides" ng-bind-html="firm.cml"></p>
+      </li>
+    </ul>
 
 
-    <li class="topcoat-list__item chevronLi" ng-show="helpers.hasValueFunc(firm.ad)" ng-click="helpers.g('/fa/' + firm.id);">
-      <div class="blue">Address Details</div>
-      <span class="lstItmDesc lstSpan">View address details for this firm</span>     
-    </li>
+    <ul class="topcoat-list__container list contactList" ng-show="contacts.length > 0">
+      <li>
+        <h2 class="topcoat-list__header town">{{contacts.length > 1 ? (isReo ? "Contacts" : "Partners/Directors") : contacts[0].r}}</h2>
+      </li>
 
-    <li class="topcoat-list__item" ng-show="firm.tz != '0'" ng-click="helpers.g('/tz/' + firm.id);">
-      <div class="blue">Time Zone</div>
-      <span class="lstItmDesc lstSpan" ng-bind="'GMT ' + firm.tz"></span>
-      <span class="icn timezoneIcn"></span>       
-    </li>
-        
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
-      <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
-        <div class="blue">Call Office</div>
-        <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
-        <span class="icn phoneIcn"></span>        
-      </a>
-    </li>
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
-      <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
-        <div class="blue">Email</div>
-        <span class="lstItmDesc lstSpan" once-html="firm.eml"></span>
-        <span class="icn emailIcn"></span>
-      </a>
-    </li>
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage('hdnFirmWebUrl', true, true);">
-      <div class="blue">Website</div>
-      <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
-      <span class="icn urlIcn"></span>
-      <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
-    </li>
-        
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.lat)" ng-click="helpers.openWebPage('hdnMapUrl', true, true);">
-      <div class="blue">Map</div>
-      <span class="lstItmDesc lstSpan">View location on map</span>
-      <span class="icn locationIcn"></span>
-      <input type="hidden" id="hdnMapUrl" ng-value="helpers.getMapUrl(firm)" />
-    </li>
-    
-    <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnFirmProfileUrl', true, true);">
-      <div class="blue">More Information</div>
-      <span class="lstItmDesc lstSpan">View more information about this firm on www.moorestephens.com</span>
-      <span class="icn urlIcn"></span>
-      <input type="hidden" id="hdnFirmProfileUrl" ng-value="helpers.getFirmProfileUrl(firm.id)" />
-    </li>
-
-  </ul>
-</div>
-
-</script>
-<script type="text/ng-template" id="views/firmAddress.html">&nbsp; 
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Firm Address</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div class="details" ng-show="helpers.showLoading == false">
-  <div class="subHeader firstContent">
-    <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <h4 once-html="firm.l"></h4>
-  </div>
-
-  <ul class="topcoat-list__container list firmList">
-
-    <li class="topcoat-list__item">
-      <span ng-bind-html="firm.ad"></span>     
-    </li>
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.mad)">
-        <div class="blue">Mailing Address</div>
-        <span ng-bind-html="firm.mad"></span>     
-    </li>
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.f)">
-      <div class="blue">Facsimile</div>
-      <span once-html="firm.f"></span>      
-    </li>
-
-    <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
-      <span ng-bind-html="firm.cm"></span>      
-    </li>
-
-  </ul>
-</div>
-
-</script>
-<script type="text/ng-template" id="views/firmContacts.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Firm Contacts</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-
-  <div class="subHeader">
-    <h3 class="boldBlue" ng-bind-html="firm.n"></h3>
-    <div once-html="firm.l"></div>
-    <span class="frmStatus"  ng-show="helpers.hasValueFunc(firm.st)" ng-bind-html="helpers.getFirmStatus(firm)"></span>
-  </div>
-
-  <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cmp)">
-    <li>
-      <p class="pad10Sides" ng-bind-html="firm.cmp"></p>
-    </li>
-  </ul>
-
-  <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cm)">
-    <li>
-      <p class="pad10Sides" ng-bind-html="firm.cm"></p>
-    </li>
-  </ul>
-
-  <ul class="topcoat-list__container list contactList" ng-show="internationalContacts.length > 0">
-    <li>
-      <h2 class="topcoat-list__header town">International Liaison{{internationalContacts.length > 1 ? "s" : ""}}</h2>
-    </li>
-
-    <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in internationalContacts">
-      <div once-html="contact.n"></div>
-      <div class="blue" ng-show="helpers.hasValueFunc(contact.r)" once-html="contact.r"></div>
-    </li>
-  </ul>
-
-  <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cml)">
-    <li>
-      <p class="pad10Sides" ng-bind-html="firm.cml"></p>
-    </li>
-  </ul>
-
-
-  <ul class="topcoat-list__container list contactList" ng-show="contacts.length > 0">
-    <li>
-      <h2 class="topcoat-list__header town">{{contacts.length > 1 ? "Partners/Directors" : contacts[0].r}}</h2>
-    </li>
-
-    <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts">
-      <div once-html="contact.n"></div>
-      <div class="blue" ng-show="helpers.hasValueFunc(contact.r) && contacts.length > 1" once-html="contact.r"></div>
-    </li>
-  </ul>
+      <li ng-click="helpers.c(contact.id)" class="topcoat-list__item chevronLi" ng-repeat="contact in contacts">
+        <div once-html="contact.n"></div>
+        <div class="blue" ng-show="helpers.hasValueFunc(contact.r) && contacts.length > 1" once-html="contact.r"></div>
+      </li>
+    </ul>
   
-</div>
-
-
-
-</script>
-<script type="text/ng-template" id="views/firms.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Find Firms</h5>
   </div>
+
+  <div class="bottomSpace">&nbsp;</div>
 </div>
+</script>
+<script type="text/ng-template" id="views/firms.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Find Firms</h5>
+    </div>
+  </div>
 
   
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
 
 
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10Sides">
-    <div class="paragDiv">Please either pick a country, or type in the search box and click on 'Find' button below.</div>
-    <div class="pageInnerPanel">    
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10Sides">
+      <div class="paragDiv">Please either pick a country, or type in the search box and click on 'Find' button below.</div>
+      <div class="pageInnerPanel">    
 
-      <div class="mstphInputFieldBordered">
-        <select id="ddlCountry" ng-options="country.id as country.n for country in countries" ng-model="selectedCountryId" ng-change="redirectToCountry()">
-          <option value="">Pick a country...</option>
-        </select>
+        <div class="mstphInputFieldBordered">
+          <select id="ddlCountry" ng-options="country.id as country.n for country in countries" ng-model="selectedCountryId" ng-change="redirectToCountry()">
+            <option value="">Pick a country...</option>
+          </select>
+        </div>
+
+        <div class="mstphInputFieldBordered">        <!--  onfocus="jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" -->
+          <input class="mstphSearchbox" ng-model="search" type="search" placeholder="Or, just search" ng-keypress=" $event.keyCode == 13 ? gotoFirmSearch(search) : false" />
+          <div class="mstphBtnArrow absPos">
+            <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
+            <!--<span class="inlineFindBtn" ng-click="gotoFirmSearch(search)">FIND</span>-->
+          </div>
+        </div>
+
       </div>
 
-      <div class="mstphInputFieldBordered">        <!--  onfocus="jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" -->
-        <input class="mstphSearchbox" ng-model="search" type="search" placeholder="Or, just search" ng-keypress=" $event.keyCode == 13 ? gotoFirmSearch(search) : false" />
+    
+    </div>
+  </div>
+
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/firmsSearch.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Firms Search</h5>
+    </div>
+  </div>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+
+    <div class="pad10">
+      <div class="mstphCFRadioDiv">
+        <label class="topcoat-radio-button" ng-click="helpers.g('/findContacts/' + search)">
+          <input type="radio" name="topcoat">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Contacts
+        </label>
+        &nbsp;&nbsp;
+        <label class="topcoat-radio-button">
+          <input type="radio" name="topcoat" checked="checked">
+          <div class="topcoat-radio-button__checkmark"></div>
+          Firms
+        </label>
+
+      </div>
+
+      <div class="mstphInputFieldBordered">        
+        <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
         <div class="mstphBtnArrow absPos">
           <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
-          <!--<span class="inlineFindBtn" ng-click="gotoFirmSearch(search)">FIND</span>-->
         </div>
       </div>
-
     </div>
-
-    
-  </div>
-</div>
-
-</script>
-<script type="text/ng-template" id="views/firmsSearch.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
-    </div>
-  </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Firms Search</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-
-  <div class="pad10">
-    <div class="mstphCFRadioDiv">
-      <label class="topcoat-radio-button" ng-click="helpers.g('/findContacts/' + search)">
-        <input type="radio" name="topcoat">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Contacts
-      </label>
-      &nbsp;&nbsp;
-      <label class="topcoat-radio-button">
-        <input type="radio" name="topcoat" checked="checked">
-        <div class="topcoat-radio-button__checkmark"></div>
-        Firms
-      </label>
-
-    </div>
-
-    <div class="mstphInputFieldBordered">        
-      <input class="mstphSearchbox" ng-model="search" placeholder="Type text to filter results" type="search" onkeypress="if ( event === true || event.keyCode === 13 ) this.blur();">
-      <div class="mstphBtnArrow absPos">
-        <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
-      </div>
-    </div>
-  </div>
   
-  <div class="prevNextBtnDiv" ng-show="(firms | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(firms | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
+    <div class="prevNextBtnDiv" ng-show="(firms | filter:searchDelayedFunc).length > helpers.paging.pageSize" mstph-paginate mstph-paginate-total-item-count="{{(firms | filter:searchDelayedFunc).length}}" mstph-paginate-page-size="{{helpers.paging.pageSize}}"></div>
 
-  <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
-    No results found for <span class="blue">{{search}}</span>. 
-  </p>
+    <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10">
+      No results found for <span class="blue">{{search}}</span>. 
+    </p>
 
-  <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
-    <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:[relevanceFunc, 'n', 'l'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
-      <div ng-bind-html="firm.n" class="boldBlue"></div>
-      <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
-      <span once-html="firm.l"></span>
-    </li>
-  </ul>
+    <ul class="topcoat-list__container list firmList" ng-show="(firms|filter:searchDelayedFunc).length > 0">
+      <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi" ng-repeat="firm in firms | filter:(searchDelayedFunc) | orderBy:[relevanceFunc, 'n', 'l'] | startFrom: helpers.paging.startFrom | limitTo: helpers.paging.pageSize">
+        <div ng-bind-html="firm.n" class="boldBlue"></div>
+        <span class="frmStatus" once-html="helpers.getFirmStatus(firm)" ng-show="helpers.hasValueFunc(firm.st)"></span>
+        <span once-html="firm.l"></span>
+      </li>
+    </ul>
 
-  <div ng-show="similarPhrasesFound && (firms|filter:searchDelayedFunc).length < 3 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10 similarSearches">
-    Did you mean any of the below?<br />
-    <span ng-repeat="phrase in similarPhrases" once-html="phrase + '<br/>'" class="miniBtn" ng-click="helpers.g('/findFirms/' + phrase );"></span>
+    <div ng-show="similarPhrasesFound && (firms|filter:searchDelayedFunc).length < 3 && helpers.showLoading == false && searchDelayed.length >= 3" class="pad10 similarSearches">
+      Did you mean any of the below?<br />
+      <span ng-repeat="phrase in similarPhrases" once-html="phrase + '<br/>'" class="miniBtn" ng-click="helpers.g('/findFirms/' + phrase );"></span>
+    </div>
+
+    <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
+      Search term must be at least three characters.
+    </p>
+
   </div>
 
-  <p ng-show="(firms|filter:searchDelayedFunc).length == 0 && helpers.showLoading == false && searchDelayed.length < 3" class="pad10">
-    Search term must be at least three characters.
-  </p>
-
+  <div class="bottomSpace">&nbsp;</div>
 </div>
-
-
-
 </script>
-<script type="text/ng-template" id="views/reos.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item center full">
-    <h5>Regional Offices</h5>
-  </div>
-</div>
-
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p> 
-
-<div class="reoList firstContent" ng-show="helpers && helpers.showLoading == false">
-
-  <div class="pad10Sides">
-    <div class="paragDiv">
-      Tap on a region heading below to expand/collapse the details of a regional executive office and its contacts. 
+<script type="text/ng-template" id="views/reos.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item center full">
+      <h5>Regional Offices</h5>
     </div>
   </div>
-  <!--<input value="{{currentlyOpenFirms}}" />-->
-  <div ng-repeat="firm in reos" class="topcoat-list reoListItem">
-    <h3 class="topcoat-list__header pad10" ng-click="toggleFirm(firm.reoid);">
-      <a id="{{firm.reoid}}"></a>
-      {{firm.sn}}
-      <i class="fa fa-angle-double-down fright" ng-show="!isVisible(firm.reoid)"></i>
-      <i class="fa fa-angle-double-up fright" ng-show="isVisible(firm.reoid)"></i>
-    </h3>
 
-    <div  class="details reoDetailsDiv reoDetailsDiv{{firm.reoid}}" style="display: none">
-      <div class="pad1_25rem">
-        <div class="reon boldBlue" once-html="firm.reon"></div><br />
-        <span ng-bind-html="firm.ad" once-html="firm.ad"></span>
-        <br /><br />
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p> 
 
-        <div ng-show="helpers.hasValueFunc(firm.f)">
-          <div once-html="'Facsimile: ' + firm.f"></div>
+  <div class="reoList firstContent" ng-show="helpers && helpers.showLoading == false">
+
+    <div class="pad10Sides">
+      <div class="paragDiv">
+        Tap on a region heading below to expand/collapse the details of a regional executive office and its contacts. 
+      </div>
+    </div>
+    <!--<input value="{{currentlyOpenFirms}}" />-->
+    <ul class="topcoat-list__container list firmList">
+      <li ng-click="helpers.f(firm.id)" class="topcoat-list__item chevronLi"  ng-repeat="firm in reos">
+        <div once-html="firm.sn" class="blue"></div>
+      </li>
+    </ul>
+    <!--<div ng-repeat="firm in reos" class="topcoat-list reoListItem">
+      <h3 class="topcoat-list__header pad10" ng-click="toggleFirm(firm.reoid);">
+        <a id="{{firm.reoid}}"></a>
+        {{firm.sn}}
+        <i class="fa fa-angle-double-down fright" ng-show="!isVisible(firm.reoid)"></i>
+        <i class="fa fa-angle-double-up fright" ng-show="isVisible(firm.reoid)"></i>
+      </h3>
+
+      <div  class="details reoDetailsDiv reoDetailsDiv{{firm.reoid}}" style="display: none">
+        <div class="pad1_25rem">
+          <div class="reon boldBlue" once-html="firm.reon"></div><br />
+          <span ng-bind-html="firm.ad" once-html="firm.ad"></span>
+          <br /><br />
+
+          <div ng-show="helpers.hasValueFunc(firm.f)">
+            <div once-html="'Facsimile: ' + firm.f"></div>
+          </div>
+
+          <div once-html="firm.reon" ng-show="helpers.hasValueFunc(firm.no)"></div>
+
         </div>
 
-        <div once-html="firm.reon" ng-show="helpers.hasValueFunc(firm.no)"></div>
+        <ul class="topcoat-list__container list firmList">
+          <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
+            <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
+              <div class="blue">Call Office</div>
+              <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
+              <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
+            </a>
+          </li>
 
+          <li class="topcoat-list__item" ng-show="firm.tz != '0'" ng-click="helpers.g('/tz/' + firm.id);">
+            <span>
+              <div class="blue">Time Zone</div>
+              <span class="lstItmDesc lstSpan" once-html="'GMT ' + firm.tz"></span>
+              <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
+            </span>
+          </li>
+
+          <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
+            <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
+              <div class="blue">Email</div>
+              <span class="lstItmDesc lstSpan" once-html="firm.eml"></span>
+              <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
+            </a>
+          </li>
+
+          <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
+            <span>
+              <div class="blue">Website</div>
+              <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
+              <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
+              <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
+            </span>
+          </li>
+        </ul>
+
+        <h5 class="topcoat-list__header town2">CONTACTS</h5>
+        <ul class="topcoat-list__container list firmList">
+          <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi" ng-repeat="member in firm.members">
+            <div class="blue" once-html="member.n"></div>
+            <span class="lstSpan" once-html="member.r"></span>
+          </li>
+        </ul>
       </div>
-
-      <ul class="topcoat-list__container list firmList">
-        <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.t)">
-          <a href="tel:{{helpers.getTel(firm.t)}}" ng-click="helpers.closeMenu()">
-            <div class="blue">Call Office</div>
-            <span class="lstItmDesc lstSpan" once-html="firm.t"></span>
-            <span class="icn phoneIcn">&nbsp;&nbsp;&nbsp;</span>        
-          </a>
-        </li>
-
-        <li class="topcoat-list__item" ng-show="firm.tz != '0'" ng-click="helpers.g('/tz/' + firm.id);">
-          <span>
-            <div class="blue">Time Zone</div>
-            <span class="lstItmDesc lstSpan" once-html="'GMT ' + firm.tz"></span>
-            <span class="icn timezoneIcn">&nbsp;&nbsp;&nbsp;</span>       
-          </span>
-        </li>
-
-        <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.eml)">
-          <a href="mailto:{{firm.eml}}" ng-click="helpers.closeMenu()">
-            <div class="blue">Email</div>
-            <span class="lstItmDesc lstSpan" once-html="firm.eml"></span>
-            <span class="icn emailIcn">&nbsp;&nbsp;&nbsp;</span>
-          </a>
-        </li>
-
-        <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
-          <span>
-            <div class="blue">Website</div>
-            <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
-            <span class="icn urlIcn">&nbsp;&nbsp;&nbsp;</span>
-            <input type="hidden" id="hdnFirmWebUrl" ng-value="helpers.getUrl(firm.u)" />
-          </span>
-        </li>
-      </ul>
-
-      <h5 class="topcoat-list__header town2">CONTACTS</h5>
-      <ul class="topcoat-list__container list firmList">
-        <li ng-click="helpers.c(member.id)" class="topcoat-list__item chevronLi" ng-repeat="member in firm.members">
-          <div class="blue" once-html="member.n"></div>
-          <span class="lstSpan" once-html="member.r"></span>
-        </li>
-      </ul>
-    </div>
+    </div>-->
   </div>
-</div>
 
 
-</script>
-<script type="text/ng-template" id="views/splash.html"><!--<div class="slideView" ng-class="slide-left">  -->
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
+<script type="text/ng-template" id="views/splash.html"><div class="appInner">
   &nbsp;
-  <p ng-show="helpers.showLoading == true" class="centAlign firstContent">
+  <p ng-show="helpers.showLoading == true" class="centAlign firstContent loadSpinner">
     <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
   </p>
 
   <div ng-show="helpers.showLoading == false">
-    <div class="mstphSplashBg" ng-style="style()">
+    <div class="mstphSplashBg">
   
       <div class="centAlign splashLogoDiv">
-        <img src="img/logo/MSLogoTransparent.png" onclick="alert(jQuery( window ).height() + ' X ' + jQuery( window ).width())"/>
+        <img src="img/logo/MSLogoTransparent.png"/>
       </div>
 
       <div class="centAlign splashTitleDiv">
@@ -1323,62 +1358,60 @@
   </div>
   </div>
   
-<!--</div>-->
-
+  <div class="bottomSpace">&nbsp;</div>
+</div>
 
 </script>
-<script type="text/ng-template" id="views/tz.html">&nbsp;
-<div ng-show="helpers.showLoading == false" class="topcoat-navigation-bar topFixedBar">
-  <div class="topcoat-navigation-bar__item left quarter h100pc">
-    <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
-      <span class="icn prevIcn">&nbsp;</span>
+<script type="text/ng-template" id="views/tz.html"><div class="appInner">
+  &nbsp;
+  <div class="topcoat-navigation-bar topFixedBar">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+      <h5 class="h5MargLeftHack">Time Zone</h5>
     </div>
   </div>
-  <div class="topcoat-navigation-bar__item center half">
-    <h5 class="h5MargLeftHack">Time Zone</h5>
+
+  <p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent loadSpinner">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+  </p>
+
+  <div ng-show="helpers.showLoading == false" class="firstContent">
+    <div class="pad10">
+      <h3 class="blue" style="display: inline-block">Local time in {{firm.l}}</h3>    
+      <h4>{{localTime}}</h4>
+      <p>The time above is calcuated based on the following details.</p>
+    </div>
+
+    <ul class="topcoat-list__container list firmList">
+      <li class="topcoat-list__item">
+        <div class="blue">Time zone in {{firm.l}}</div>
+        <div>{{'GMT ' + firm.tz}}</div>
+      </li>
+
+      <li class="topcoat-list__item">
+        <div class="blue">Time on your device</div>
+        <div>{{deviceTime}}</div>
+      </li>
+
+      <li class="topcoat-list__item">
+        <div class="blue">Time zone detected on your device</div>
+        <div>{{'GMT ' + deviceGmtOffsetAsString}}</div>
+      </li>
+
+    </ul>
   </div>
-</div>
 
-<p ng-show="helpers.showLoading == true" class="pad10 centAlign firstContent">
-  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-</p>
-
-<div ng-show="helpers.showLoading == false" class="firstContent">
-  <div class="pad10">
-    <h3 class="blue" style="display: inline-block">Local time in {{firm.l}}</h3>    
-    <h4>{{localTime}}</h4>
-    <p>The time above is calcuated based on the following details.</p>
-  </div>
-
-  <ul class="topcoat-list__container list firmList">
-    <li class="topcoat-list__item">
-      <div class="blue">Time zone in {{firm.l}}</div>
-      <div>{{'GMT ' + firm.tz}}</div>
-    </li>
-
-    <li class="topcoat-list__item">
-      <div class="blue">Time on your device</div>
-      <div>{{deviceTime}}</div>
-    </li>
-
-    <li class="topcoat-list__item">
-      <div class="blue">Time zone detected on your device</div>
-      <div>{{'GMT ' + deviceGmtOffsetAsString}}</div>
-    </li>
-
-  </ul>
-</div>
-
-
-
-
-
-</script>
+  <div class="bottomSpace">&nbsp;</div>
+</div></script>
 
     </div>
   </form>
-
-  <div id="bottom-nav" ng-controller="MenuCtrl" >
+  
+  <div id="bottom-nav" ng-controller="MenuCtrl">
     <div id="mstphMenu" class="slideable">
       <div ng-repeat="item in menuItems">
         <span class="topcoat-tab-bar__button subMenuItem {{helpers.getNavSelectedCss(item.u)}}" ng-click="helpers.g(item.u)">
