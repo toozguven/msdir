@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'FirmCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $timeout )
+﻿ngapp.controller( 'FirmCtrl', ['$scope', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   $scope.dataMgr = dataMgr;
@@ -21,4 +21,4 @@
   } );
 
   $anchorScroll();
-} );
+} ] );

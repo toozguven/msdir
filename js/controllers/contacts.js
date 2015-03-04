@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'ContactsCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'ContactsCtrl', ['$scope', 'factory', 'dataMgr', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
 {
   //set global var so we can call it from setTimeout
   globalDataMgr = dataMgr;
@@ -78,5 +78,5 @@
   }
   
   $anchorScroll();
-} );
+} ] );
 

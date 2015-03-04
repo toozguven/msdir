@@ -4,14 +4,9 @@
   <meta charset="utf-8" />
   <meta name="format-detection" content="telephone=no" />
   <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!--[if lt IE 9]>
-    <script src="https://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-    <meta http-equiv="X-UA-Compatible" content="IE=8" />
-  <![endif]-->
-  <link rel="stylesheet" type="text/css" href="css/indexLight.css" />
-  <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+  <link rel="stylesheet" type="text/css" href="css/indexLight.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.min.css" />
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <title>MSIL Directory</title>
 </head>
@@ -212,9 +207,9 @@
   <div class="details firstContent" ng-show="helpers && helpers.showLoading == false">
     <div class="subHeader contactHeader">
       <div class="fRight contactImg">
-        <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" />
+        <img ng-show="helpers.isOnline()" ng-src="https://api.moorestephens.org/i/msdirImg.ashx?cid={{contact.id}}" onclick="prompt('aaa: ', 'xxx')"/>
       </div>
-      <h3 class="boldBlue" once-html="contact.n" ng-show="helpers.hasValueFunc(contact.n)"></h3>
+      <h3 class="boldBlue copyable" once-html="contact.n" ng-show="helpers.hasValueFunc(contact.n)"></h3>
       <div class="blue" once-html="contact.r" ng-show="helpers.hasValueFunc(contact.r)"></div> 
       <div ng-bind="contact.l + '&nbsp;'"></div> 
       <span class="miniBtnWithIcon" ng-click="dataMgr.toggleFavourite(contact.id, 'contact')">
@@ -270,7 +265,7 @@
         <span class="icn timezoneIcn"></span>       
       </li>
 
-       <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnContactProfileUrl', true, true);" ng-show="helpers.isOnline()">
+       <li class="topcoat-list__item" ng-click="helpers.openWebPage('hdnContactProfileUrl', true, true);">
           <div class="blue">More Information</div>
           <span class="lstSpan">View more information about this person on www.moorestephens.com</span>
           <span class="icn urlIcn"></span>
@@ -1197,7 +1192,7 @@
 
     <div class="pad10Sides">
       <div class="paragDiv">
-        Tap on a region heading below to expand/collapse the details of a regional executive office and its contacts. 
+        Tap on a region heading below to view the details of a regional executive office and its contacts. 
       </div>
     </div>
     <!--<input value="{{currentlyOpenFirms}}" />-->
@@ -1253,7 +1248,7 @@
             </a>
           </li>
 
-          <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
+          <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
             <span>
               <div class="blue">Website</div>
               <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
@@ -1292,17 +1287,11 @@
 
       <div class="centAlign splashTitleDiv">
         <div>
-          <span class="splashTitleLine1">International</span>
-          <br />
-          <span class="splashTitleLine2">Directory</span>
-          <br /><br />
-          <!--<div>
-            <input class="mstphSearchbox mstphInputFieldBordered" ng-model="search" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
-            <span class="miniBtn splashIcnBtn" ng-click="gotoSearch(search)"><i class="fa fa-search"></i></span>
-          </div>-->
+          <span class="splashTitleLine1">International</span> <br />
+          <span class="splashTitleLine2">Directory</span> <br /><br />
 
           <div class="centAlign" style="font-size: 1rem">
-            <div class="mstphInputFieldBordered" style="display: inline-block; text-align: left; width: 220px;">        <!-- ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()" -->
+            <div class="mstphInputFieldBordered" style="display: inline-block; text-align: left; width: 220px;">
               <input class="mstphSearchbox" style="width: 165px" ng-model="search" placeholder="Quick find" type="search" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false"  >
               <div class="splashCross" style="margin-left: 20px; position: relative; display: inline-block; top: 1px;">
                 <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
@@ -1315,44 +1304,8 @@
                 BOOKMARKS
               </span>
             </div>
-            <!--<span style="padding: 11px 6px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
-              <input ng-model="search" class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" ng-focus="helpers.doSearchFocus()" ng-blur="helpers.doSearchBlur()" />
-              <div class="mstphBtnArrow splashCross">
-                <i class="fa fa-times fa-times2" ng-show="search.length > 0" ng-click="removeSearch()"></i>
-                <!--<span class="inlineFindBtn" ng-click="gotoSearch(search)" style="background: #00AEEF; padding: 4px 6px 4px 9px; border-radius: 4px; color: #fff">
-                  FIND
-                </span>-->
-              <!--</div>
-            </span>-->
           </div>
-
-          <!--<div class="centAlign">
-            <span style="padding: 13px 7px 10px 8px; border:1px solid #ddd; font-size: 16px; background: #eee">
-              <input ng-model="search" class="mstphSearchbox" style="width: 50%; background: #eee" type="search" placeholder="Quick find" ng-keypress=" $event.keyCode == 13 ? gotoSearch(search) : false" onfocus="if (jQuery( window ).height() < 700) jQuery('html, body').animate({scrollTop: (jQuery(this).offset().top - 50)},500);" onblur="jQuery('html, body').animate({scrollTop: 0},500);" />
-              <div style="display: inline-block">
-                <i class="fa fa-times fa-times2 ng-hide" ng-show="search.length > 0" ng-click="search=''"></i>
-                <span class="inlineFindBtn" ng-click="gotoSearch(search)" style="background: #00AEEF; padding: 6px 5px 4px 6px; border-radius: 4px; color: #fff">
-                  <i class="fa fa-search"></i>
-                </span>
-              </div>
-            </span>
-          </div>-->
-
-<!--        </xdiv>-->
-
-        
-
-        <!--<div class="splashQuickFindDiv">
-          <span class="midBtnWithIcon" ng-click="helpers.g('/appInfo')">
-            <i class="fa fa-info-circle"></i>
-            <span class="midBtnWithIcon-innerLabel">APP INFO</span>
-          </span>
-        </div>-->
-
-
-      </div>
-
-      
+      </div>      
     </div>  
 
   </div>
@@ -1452,37 +1405,37 @@
 
   
   <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="js/lib/fastclick.js"></script>
+  <script type="text/javascript" src="js/lib/fastclick.min.js"></script>
   <script type="text/javascript" src="js/lib/angular.min.js"></script>
   <script type="text/javascript" src="js/lib/angular-route.min.js"></script>  
   <script type="text/javascript" src="js/lib/angular-animate.min.js"></script>  
-  <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
-  <script type="text/javascript" src="js/lib/angular-once.js"></script>
+  <script type="text/javascript" src="js/lib/angular-sanitize.min.js"></script>
+  <script type="text/javascript" src="js/lib/angular-once.min.js"></script>
   <script src="js/lib/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="js/dir.js"></script>
-  <script type="text/javascript" src="js/controllers/firstTime.js"></script>
-  <script type="text/javascript" src="js/controllers/splash.js"></script>
-  <script type="text/javascript" src="js/controllers/firms.js"></script>
-  <script type="text/javascript" src="js/controllers/contacts.js"></script>
-  <script type="text/javascript" src="js/controllers/favContacts.js"></script>
-  <script type="text/javascript" src="js/controllers/favFirms.js"></script>
-  <script type="text/javascript" src="js/controllers/appInfo.js"></script>
-  <script type="text/javascript" src="js/controllers/tz.js"></script>
-  <script type="text/javascript" src="js/controllers/aboutUs.js"></script>
-  <script type="text/javascript" src="js/controllers/contactUs.js"></script>
-  <script type="text/javascript" src="js/controllers/correspondentFirms.js"></script>
-  <script type="text/javascript" src="js/controllers/correspondentFirmsInfo.js"></script>
-  <script type="text/javascript" src="js/controllers/country.js"></script>
-  <script type="text/javascript" src="js/controllers/countryContacts.js"></script>
-  <script type="text/javascript" src="js/controllers/firmsSearch.js"></script>
-  <script type="text/javascript" src="js/controllers/contactsSearch.js"></script>
-  <script type="text/javascript" src="js/controllers/contact.js"></script>
-  <script type="text/javascript" src="js/controllers/firm.js"></script>
-  <script type="text/javascript" src="js/controllers/firmContacts.js"></script>
-  <script type="text/javascript" src="js/controllers/reo.js"></script>
-  <script type="text/javascript" src="js/cordova/c.js"></script>
-  <script src="js/factories/factory.js"></script>
-  <script src="js/factories/dataMgr.js"></script>
+  <script type="text/javascript" src="js/dir.min.js"></script>
+  <script type="text/javascript" src="js/controllers/splash.min.js"></script>
+  <script type="text/javascript" src="js/controllers/disclaimer.min.js"></script>
+  <script type="text/javascript" src="js/controllers/firms.min.js"></script>
+  <script type="text/javascript" src="js/controllers/contacts.min.js"></script>
+  <script type="text/javascript" src="js/controllers/favContacts.min.js"></script>
+  <script type="text/javascript" src="js/controllers/favFirms.min.js"></script>
+  <script type="text/javascript" src="js/controllers/appInfo.min.js"></script>
+  <script type="text/javascript" src="js/controllers/tz.min.js"></script>
+  <script type="text/javascript" src="js/controllers/aboutUs.min.js"></script>
+  <script type="text/javascript" src="js/controllers/contactUs.min.js"></script>
+  <script type="text/javascript" src="js/controllers/correspondentFirms.min.js"></script>
+  <script type="text/javascript" src="js/controllers/correspondentFirmsInfo.min.js"></script>
+  <script type="text/javascript" src="js/controllers/country.min.js"></script>
+  <script type="text/javascript" src="js/controllers/countryContacts.min.js"></script>
+  <script type="text/javascript" src="js/controllers/firmsSearch.min.js"></script>
+  <script type="text/javascript" src="js/controllers/contactsSearch.min.js"></script>
+  <script type="text/javascript" src="js/controllers/contact.min.js"></script>
+  <script type="text/javascript" src="js/controllers/firm.min.js"></script>
+  <script type="text/javascript" src="js/controllers/firmContacts.min.js"></script>
+  <script type="text/javascript" src="js/controllers/reo.min.js"></script>
+  <script type="text/javascript" src="js/cordova/c.min.js"></script>
+  <script src="js/factories/factory.min.js"></script>
+  <script src="js/factories/dataMgr.min.js"></script>
   
   
 

@@ -1,4 +1,4 @@
-﻿ngapp.factory( "factory", function ( $http, $rootScope, $location, $route, $window, $timeout )
+﻿ngapp.factory( "factory", ['$http', '$rootScope', '$location', '$route', '$window', '$timeout', function ( $http, $rootScope, $location, $route, $window, $timeout )
 {
   ngRootScope = $rootScope;
   ngRootScope.isOnline = -1;
@@ -182,7 +182,7 @@
         return ngRootScope.isPhone;
       },
       showLoading: true,
-      renderDelay: 1,
+      renderDelay: 555,
       paging: { 
         pageSize: 10, 
         currentPage: 0, 
@@ -287,5 +287,5 @@
   }
 
   return factory;
-} );
+} ] );
 

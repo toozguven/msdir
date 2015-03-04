@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'FavFirmsCtrl', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'FavFirmsCtrl', ['$scope', '$filter', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   $scope.firms = [];
@@ -24,4 +24,4 @@
   } );
 
   $anchorScroll();
-} );
+} ] );

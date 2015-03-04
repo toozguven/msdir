@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'TimeZoneCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'TimeZoneCtrl', ['$scope', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   
@@ -75,4 +75,4 @@
 
 
   $anchorScroll();
-} );
+} ] );

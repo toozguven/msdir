@@ -3,19 +3,13 @@
 var app = {
 
   connType: -1,
-  // Application Constructor
+
   initialize: function ()
   {
-    //console_log( 'initialize' );
     this.bindEvents();
   },
-  // Bind Event Listeners
-  //
-  // Bind any events that are required on startup. Common events are:
-  // 'load', 'deviceready', 'offline', and 'online'.
   bindEvents: function ()
   {
-    //console_log( 'bindEvents' );
     document.addEventListener( 'deviceready', this.onDeviceReady, false );
     window.addEventListener( 'orientationchange', this.onOrientationChange );
   },
@@ -23,38 +17,18 @@ var app = {
   onOrientationChange: function ()
   {
     //ngRootScope.reLoadCurrentPage();
-    /*switch ( window.orientation )
-    {
-      case -90:
-      case 90:
-        break;
-      default:
-        break;
-    }*/
   },
 
-  // deviceready Event Handler
-  //
-  // The scope of 'this' is the event. In order to call the 'receivedEvent'
-  // function, we must explicity call 'app.receivedEvent(...);'
   onDeviceReady: function ()
   {
-    //init fastclick (avoids )
     try
     {
       FastClick.attach( document.body );
     }
     catch ( e ) { alert( e ) }
 
-    //console_log( 'onDeviceReady' );
-    if ( parseFloat( window.device.version ) === 7.0 )
-    {
-      //document.body.style.marginTop = "20px";
-    }
-
     //ngRootScope.isPhone = device.name.indexOf("iPad") == -1;
 
-    //override alert method
     if ( navigator.notification )
     {
       window.alert = function ( message )
@@ -74,9 +48,7 @@ var app = {
     }
     //app.receivedEvent( 'deviceready' );
 
-    //setTimeout( "checkLocation();", 1 );
     setTimeout( "checkConnection();", 1 );
-    //setTimeout( "checkDatePattern();", 1 );
   },
   // Update DOM on a Received Event
   receivedEvent: function ( id )
@@ -87,8 +59,6 @@ var app = {
 
     listeningElement.setAttribute( 'style', 'display:none;' );
     receivedElement.setAttribute( 'style', 'display:block;' );
-
-    //console_log( 'Received Event: ' + id );
   }
 };
 
@@ -105,52 +75,26 @@ function console_log( msg )
   catch ( e ) { }
 }
 
-function doIt()
-{
-  try
-  {
-    //alert( app.connType );
-  }
-  catch ( e )
-  {
-    alert( e );
-  }
-
-  try
-  {
-    //checkLocation();
-  }
-  catch ( e )
-  {
-    alert( e );
-  }
-}
-
-function checkDatePattern()
-{
-  navigator.globalization.getDatePattern(
-                                         function ( date ) { /*alert( 'dst_offset: ' + date.dst_offset + '\n' );*/ },
-                                         function () { alert( 'Error getting pattern\n' ); }
-                                         );
-}
-
 function checkConnection()
 {
-  var networkState = navigator.connection.type;
+  try {
+    var networkState = navigator.connection.type;
 
-  if ( networkState == Connection.NONE )
-    ngRootScope.isOnline = 0;
-  else if ( networkState != Connection.UNKNOWN )
-    ngRootScope.isOnline = 1;
+    if ( networkState == Connection.NONE )
+      ngRootScope.isOnline = 0;
+    else if ( networkState != Connection.UNKNOWN )
+      ngRootScope.isOnline = 1;
 
-  /*var states = {};
-   states[Connection.UNKNOWN] = 'Unknown connection';
-   states[Connection.ETHERNET] = 'Ethernet connection';
-   states[Connection.WIFI] = 'WiFi connection';
-   states[Connection.CELL_2G] = 'Cell 2G connection';
-   states[Connection.CELL_3G] = 'Cell 3G connection';
-   states[Connection.CELL_4G] = 'Cell 4G connection';
-   states[Connection.NONE] = 'No network connection';*/
+    /*var states = {};
+     states[Connection.UNKNOWN] = 'Unknown connection';
+     states[Connection.ETHERNET] = 'Ethernet connection';
+     states[Connection.WIFI] = 'WiFi connection';
+     states[Connection.CELL_2G] = 'Cell 2G connection';
+     states[Connection.CELL_3G] = 'Cell 3G connection';
+     states[Connection.CELL_4G] = 'Cell 4G connection';
+     states[Connection.NONE] = 'No network connection';*/
+  }
+  catch (e) {}
 }
 
 function checkLocation()

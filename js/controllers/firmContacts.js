@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'FirmContactsCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'FirmContactsCtrl', ['$scope', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
 
@@ -47,4 +47,4 @@
   }
 
   $anchorScroll();
-} );
+} ] );

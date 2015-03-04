@@ -2,7 +2,7 @@
 var localCache = {};
 
 
-ngapp.factory( "dataMgr", function ( $http, $route, $rootScope )
+ngapp.factory( "dataMgr", ['$http', '$route', '$rootScope', function ( $http, $route, $rootScope )
 {
   /*constants*/
 
@@ -790,4 +790,4 @@ ngapp.factory( "dataMgr", function ( $http, $route, $rootScope )
   }
 
   return factory;
-} );
+} ] );

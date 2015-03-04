@@ -1,11 +1,6 @@
 ﻿var initialOutterHeight = 0;
-
-ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout, $window )
+ngapp.controller( 'SplashCtrl', ['$scope', 'factory', 'dataMgr', '$anchorScroll', '$location', '$timeout', '$window', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout, $window )
 {
-  //if (dataMgr.isFirstUse())
-  //  $window.location.href = "init.html";
-
-  //set global var so we can call it from setTimeout
   globalDataMgr = dataMgr;
 
   $scope.helpers = factory.getHelpers();
@@ -29,7 +24,6 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
     }
   } );
 
-  //async load other data
   $timeout( function () { globalDataMgr.setScopeMenuItems( function ( data ) { } ); }, 1 );
   $timeout( function () { globalDataMgr.setScopeCorrespondentFirms( function ( data ) { } ); }, 33 );
   $timeout( function () { globalDataMgr.setScopeREOs( function ( data ) { } ); }, 44 );
@@ -37,15 +31,12 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
   $timeout( function () { globalDataMgr.setScopeFirms( function ( data ) { } ); }, 11 );
   $timeout( function () { globalDataMgr.setScopeContacts( function ( data ) { } ); }, 22 );
 
-  
-
   $scope.removeSearch = function ()
   {
     $scope.helpers.blockSearchBlur = true;
     $scope.search = '';
     $scope.searchDelayed = '';
     setTimeout( function () { jQuery( '.mstphSearchbox' )[0].focus(); }, 1 );
-    //setTimeout( function () { $scope.helpers.blockSearchBlur = false; }, 1 );
   }
   
   $scope.gotoSearch = function ( phrase )
@@ -100,4 +91,4 @@ ngapp.controller( 'SplashCtrl', function ( $scope, factory, dataMgr, $anchorScro
 
   $anchorScroll();
 
-} );
+} ] );

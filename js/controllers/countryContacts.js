@@ -1,7 +1,7 @@
-﻿ngapp.controller( 'CountryContactsCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'CountryContactsCtrl', ['$scope', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
-
+  $scope.helpers.showLoading = true;
   $scope.countryId = parseInt( $routeParams.id );
   $scope.country = {};
   $scope.towns = [];
@@ -51,60 +51,64 @@
 
   $scope.positiveIdsOnly = function ( item ) { return item.id > 0 };
 
-  dataMgr.setScopeCountries( function ( data )
+  
+  $timeout( function ()
   {
-    $scope.country = dataMgr.getCountry( data, $routeParams.id );
-    $scope.towns = $scope.country.towns;
-
-    try
+    dataMgr.setScopeCountries( function ( data )
     {
-      $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid == 0 ? 1 : $routeParams.sid );
-    } catch ( e ) { }
+      $scope.country = dataMgr.getCountry( data, $routeParams.id );
+      $scope.towns = $scope.country.towns;
 
-    if ( $scope.state )
-    {
-      $scope.selectedStateId = $scope.state.id;
-    }
-
-    dataMgr.setScopeContacts( function ( data )
-    {
-      $scope.contacts = dataMgr.filterByField( data, "cid", $scope.countryId );
-      if ( $scope.contacts.length == 0 )
+      try
       {
-        dataMgr.setScopeFirms( function ( firmsData )
+        $scope.state = dataMgr.getState( $scope.country.states, $routeParams.sid == 0 ? 1 : $routeParams.sid );
+      } catch ( e ) { }
+
+      if ( $scope.state )
+      {
+        $scope.selectedStateId = $scope.state.id;
+      }
+
+      dataMgr.setScopeContacts( function ( data )
+      {
+        $scope.contacts = dataMgr.filterByField( data, "cid", $scope.countryId );
+        if ( $scope.contacts.length == 0 )
         {
-          var firms = dataMgr.filterByField( firmsData, "cid", $scope.countryId );
-          var countryContacts = [];
-          for ( var i = 0; i < firms.length; i++ )
+          dataMgr.setScopeFirms( function ( firmsData )
           {
-            if ( firms[i].cm && firms[i].cm.length > 5 )
-              $scope.notes = firms[i].cm;
-
-            countryContacts.push( { "firm": firms[i], "cs": firms[i].cs } );
-          }
-
-          for ( var i = 0; i < countryContacts.length; i++ )
-          {
-            for ( var j = 0; j < countryContacts[i].cs.length; j++ )
+            var firms = dataMgr.filterByField( firmsData, "cid", $scope.countryId );
+            var countryContacts = [];
+            for ( var i = 0; i < firms.length; i++ )
             {
-              var tempContact = dataMgr.getContact( data, countryContacts[i].cs[j].id );
-              tempContact.cid = $scope.countryId;
-              tempContact.l = "";
-              tempContact.f = "";
-              $scope.contacts.push( tempContact );
+              if ( firms[i].cm && firms[i].cm.length > 5 )
+                $scope.notes = firms[i].cm;
+
+              countryContacts.push( { "firm": firms[i], "cs": firms[i].cs } );
             }
 
-          }
-          $scope.helpers.showLoading = false;
-        } );
-      }
-      else
-      {
-        $scope.helpers.showLoading = false;
-      }
-    } );
+            for ( var i = 0; i < countryContacts.length; i++ )
+            {
+              for ( var j = 0; j < countryContacts[i].cs.length; j++ )
+              {
+                var tempContact = dataMgr.getContact( data, countryContacts[i].cs[j].id );
+                tempContact.cid = $scope.countryId;
+                tempContact.l = "";
+                tempContact.f = "";
+                $scope.contacts.push( tempContact );
+              }
 
-  } );
+            }
+            $scope.helpers.showLoading = false;
+          } );
+        }
+        else
+        {
+          $scope.helpers.showLoading = false;
+        }
+      } );
+
+    } );
+  }, $scope.helpers.renderDelay );
 
   
   $scope.redirectToState = function ()
@@ -114,4 +118,4 @@
   }
 
   $anchorScroll();
-} );
+} ] );

@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'AppInfoCtrl', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'AppInfoCtrl', ['$scope', 'factory', 'dataMgr', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   $scope.dataMgr = dataMgr;
@@ -34,4 +34,4 @@
   }
 
   $anchorScroll();
-} );
+}] );

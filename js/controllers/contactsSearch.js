@@ -1,6 +1,7 @@
-﻿ngapp.controller( 'FindContactsCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'FindContactsCtrl', ['$scope', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
+  $scope.helpers.showLoading = true;
   $scope.contacts = [];
   $scope.similarPhrases = [];
   $scope.similarPhrasesFound = false;
@@ -98,7 +99,8 @@
     $anchorScroll();
     $scope.helpers.showLoading = false;
     
-  } );}, 444);
+  } );
+  }, $scope.helpers.renderDelay );
   
   
-} );
+} ] );

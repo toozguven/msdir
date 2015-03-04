@@ -3,7 +3,7 @@ var globalDataMgr;
 
 
 var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'] )
-.config( function ( $routeProvider )
+.config( ['$routeProvider', function ( $routeProvider )
 {
   $routeProvider
   .when( '/firms', {
@@ -26,12 +26,8 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
     controller: 'SplashCtrl',
     templateUrl: 'views/splash.html'
   } )
-  .when( '/firstTime', {
-    controller: 'FirstTimeCtrl',
-    templateUrl: 'views/firstTime.html'
-  } )
   .when( '/disclaimer', {
-    controller: 'FirstTimeCtrl',
+    controller: 'DisclaimerCtrl',
     templateUrl: 'views/disclaimer.html'
   } )
   .when( '/aboutUs', {
@@ -129,18 +125,23 @@ var ngapp = angular.module( 'dir', ['ngRoute', 'ngAnimate', 'ngSanitize', 'once'
   .otherwise( {
     redirectTo: '/splash'
   } );
-} )
- .config( function ( $anchorScrollProvider ) {
+} ] )
+ .config( ['$anchorScrollProvider', function ( $anchorScrollProvider ) {
    $anchorScrollProvider.disableAutoScrolling();
- })
+ } ])
 .config( ['$compileProvider', function ( $compileProvider )
 {
   $compileProvider.aHrefSanitizationWhitelist( /^\s*(https?|file|tel|sms|mailto):/ );
 }] )
-.run(function($rootScope, $timeout) {
+.run(['$rootScope', '$timeout', function($rootScope, $timeout) {
   $rootScope.slide = '';
-  $rootScope.$on( '$routeChangeSuccess', function () { $timeout(function() {$rootScope.slide = '';}, 333) } )
-});
+  $rootScope.$on( '$routeChangeSuccess', function () { 
+    $timeout(function() {
+      $rootScope.slide = '';
+      checkConnection(); //need to check conn status often
+    }, 333) 
+  } )
+} ]);
 
 ngapp.filter( 'startFrom', function ()
 {
@@ -340,7 +341,7 @@ function slideableFunc()
   };
 }
 
-ngapp.directive( 'slideToggle', function ( $rootScope )
+ngapp.directive( 'slideToggle', ['$rootScope', function ( $rootScope )
 {
   return {
     restrict: 'A',
@@ -385,4 +386,4 @@ ngapp.directive( 'slideToggle', function ( $rootScope )
       }
     }
   }
-} );
+} ] );

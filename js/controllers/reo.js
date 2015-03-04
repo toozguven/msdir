@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'ReosCtrl', function ( $scope, $rootScope, factory, dataMgr, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'ReosCtrl', ['$scope', '$rootScope', 'factory', 'dataMgr', '$anchorScroll', '$location', '$timeout', function ( $scope, $rootScope, factory, dataMgr, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   
@@ -65,20 +65,4 @@
     }
   }
   */
-} );
-
-ngapp.controller( 'ReoCtrl', function ( $scope, factory, dataMgr, $routeParams, $anchorScroll, $timeout )
-{
-  $scope.helpers = factory.getHelpers();
-  $scope.dataMgr = dataMgr;
-
-  $scope.firm = {};
-
-  dataMgr.setScopeREOs( function ( data )
-  {
-    $scope.firm = dataMgr.filterByField( data, "id", $routeParams.id )[0];
-    $scope.helpers.showLoading = false;
-  } );
-
-  $anchorScroll();
-} );
+} ] );

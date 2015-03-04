@@ -1,6 +1,7 @@
-﻿ngapp.controller( 'FindFirmsCtrl', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'FindFirmsCtrl', ['$scope', '$filter', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
+  $scope.helpers.showLoading = true;
   $scope.firms = [];
   $scope.similarPhrases = [];
   $scope.similarPhrasesFound = false;
@@ -96,5 +97,5 @@
       //$scope.fuzzyResultsFound = true;
       $scope.helpers.showLoading = false;
     } );
-  }, 444 );
-} );
+  }, $scope.helpers.renderDelay );
+} ] );

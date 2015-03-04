@@ -1,4 +1,4 @@
-﻿ngapp.controller( 'FavContactsCtrl', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
+﻿ngapp.controller( 'FavContactsCtrl', ['$scope', '$filter', 'factory', 'dataMgr', '$routeParams', '$anchorScroll', '$location', '$timeout', function ( $scope, $filter, factory, dataMgr, $routeParams, $anchorScroll, $location, $timeout )
 {
   $scope.helpers = factory.getHelpers();
   $scope.contacts = [];
@@ -24,4 +24,4 @@
   } );
 
   $anchorScroll();
-} );
+} ] );
