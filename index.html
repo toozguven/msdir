@@ -45,7 +45,12 @@
 <script type="text/ng-template" id="views/appInfo.html"><div class="appInner">
   &nbsp;
   <div class="topcoat-navigation-bar topFixedBar">
-    <div class="topcoat-navigation-bar__item center full">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
       <h5>About This App</h5>
     </div>
   </div>
@@ -56,34 +61,32 @@
 
   <div ng-show="helpers.showLoading == false" class="firstContent">
     <div class="pad10">
-      <h3 class="blue" style="display: inline-block">Moore Stephens International Limited</h3>
-      <h5 class="blue">International Directory Mobile App</h5>
-      <p>
-        This directory lists the firms and companies that are members of Moore Stephens International Limited "MSIL", and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
-      </p>
-
-      <p>
-        All the firms and companies listed are independent entities owned and managed in each location. Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them. 
-      </p>
-
-      <p>© Moore Stephens International Limited</p>
-
-      <br />
+      <h3 class="blue" style="display: inline-block">Moore Stephens International Directory</h3>
+      <br /><br />
 
     </div>
 
   
     <ul class="topcoat-list__container list contactList">
+      <li class="topcoat-list__item" ng-click="helpers.g('/disclaimer');">
+        <div class="blue">Disclaimer</div>
+        <p>
+          This directory lists the firms and companies that are members of Moore Stephens International Limited "MSIL", and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
+        </p>
+
+        <p>
+          All the firms and companies listed are independent entities owned and managed in each location. Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them. 
+        </p>
+
+        <p>© Moore Stephens International Limited</p>
+      </li>
+
       <li class="topcoat-list__item">
         <div class="blue">Directory data last updated on</div>
         <span class="lstSpan">{{LastUpdatedOn}}</span>
       
         <span class="miniBtn" style="margin-left: 0px;" ng-click="updateData()">REFRESH DATA</span>
         <br />
-      </li>
-
-       <li class="topcoat-list__item chevronLi" ng-click="helpers.g('/disclaimer');">
-        <div class="blue">Disclaimer</div>
       </li>
 
       <li class="topcoat-list__item">
@@ -709,42 +712,15 @@
   <div class="bottomSpace">&nbsp;</div>
 </div>
 </script>
-<script type="text/ng-template" id="views/disclaimer.html"><div class="appInner">
+<script type="text/ng-template" id="views/favContacts.html"><div class="appInner">
   &nbsp;
   <div class="topcoat-navigation-bar topFixedBar">
     <div class="topcoat-navigation-bar__item left quarter h100pc">
-      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)" ng-show="dataMgr.isFirstUse() == false">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
         <span class="icn prevIcn">&nbsp;</span>
       </div>
     </div>
     <div class="topcoat-navigation-bar__item center half">
-      <h5 class="h5MargLeftHack">Disclaimer</h5>
-    </div>
-  </div>
-
-
-  <div class="firstContent">
-    <div class="pad10">
-      <h3 class="blue">Moore Stephens International Limited</h3>
-      <br />
-      <span class="blue">Disclaimer</span>
-      <br />
-      <p>
-        This app lists the firms and companies that are members of Moore Stephens International Limited, and correspondent firms, and in the case of North America, all listed firms are members of Moore Stephens North America, which is itself a member of Moore Stephens International Limited.
-      </p>
-      <p>
-        All the firms and companies listed are independent entities owned and managed in each location. 
-        Neither their membership of Moore Stephens International Limited nor their inclusion in this directory should be construed as constituting or implying any partnership between them.
-      </p>
-    </div>
-  </div>
-
-  <div class="bottomSpace">&nbsp;</div>
-</div></script>
-<script type="text/ng-template" id="views/favContacts.html"><div class="appInner">
-  &nbsp;
-  <div class="topcoat-navigation-bar topFixedBar">
-    <div class="topcoat-navigation-bar__item center full">
       <h5>Bookmarks</h5>
     </div>
   </div>
@@ -798,7 +774,12 @@
 <script type="text/ng-template" id="views/favFirms.html"><div class="appInner">
   &nbsp;
   <div class="topcoat-navigation-bar topFixedBar">
-    <div class="topcoat-navigation-bar__item center full">
+    <div class="topcoat-navigation-bar__item left quarter h100pc">
+      <div class="prevIcnDiv" ng-click="helpers.goBack(-1)">
+        <span class="icn prevIcn">&nbsp;</span>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
       <h5>Bookmarks</h5>
     </div>
   </div>
@@ -940,6 +921,11 @@
         <input type="hidden" id="hdnFirmProfileUrl" ng-value="helpers.getFirmProfileUrl(firm.id)" />
       </li>
 
+      <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.cm)">
+        <div class="blue">Additional Notes</div>
+        <span class="lstItmDesc lstSpan" ng-bind-html="firm.cm"></span>  
+      </li>
+
     </ul>
   </div>
 
@@ -1021,12 +1007,6 @@
     <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cmp)">
       <li>
         <p class="pad10Sides" ng-bind-html="firm.cmp"></p>
-      </li>
-    </ul>
-
-    <ul class="topcoat-list__container list contactList" ng-show="helpers.hasValueFunc(firm.cm)">
-      <li>
-        <p class="pad10Sides" ng-bind-html="firm.cm"></p>
       </li>
     </ul>
 
@@ -1248,7 +1228,7 @@
             </a>
           </li>
 
-          <li class="topcoat-list__item" ng-show="helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
+          <li class="topcoat-list__item" ng-show="helpers.isOnline() && helpers.hasValueFunc(firm.u)" ng-click="helpers.openWebPage2(helpers.getUrl(firm.u), true, true);">
             <span>
               <div class="blue">Website</div>
               <span class="lstItmDesc lstSpan">Visit this firm's public website</span>
@@ -1299,11 +1279,16 @@
             </div>
 
             <div class="topMar20">
-              <span class="miniBtnWithIcon frmBkmrkBtn" ng-click="helpers.g(favPath)" ng-show="favPath != ''">
+              <span class="miniBtnWithIcon frmBkmrkBtn btnW150" ng-click="helpers.g(favPath)" ng-show="favPath != ''">
                 <i class="fa fa-star"></i>
                 BOOKMARKS
               </span>
+
+              <span class="topMar20 miniBtnWithIcon frmBkmrkBtn btnW150" ng-click="helpers.g('/appInfo')" ng-show="favPath != ''">
+                INFO & DISCLAIMER
+              </span>
             </div>
+
           </div>
       </div>      
     </div>  
@@ -1414,7 +1399,6 @@
   <script src="js/lib/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/dir.min.js"></script>
   <script type="text/javascript" src="js/controllers/splash.min.js"></script>
-  <script type="text/javascript" src="js/controllers/disclaimer.min.js"></script>
   <script type="text/javascript" src="js/controllers/firms.min.js"></script>
   <script type="text/javascript" src="js/controllers/contacts.min.js"></script>
   <script type="text/javascript" src="js/controllers/favContacts.min.js"></script>
